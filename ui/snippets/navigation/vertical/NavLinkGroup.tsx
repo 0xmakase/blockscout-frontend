@@ -49,8 +49,9 @@ const NavLinkGroup = ({ item, isCollapsed }: Props) => {
             pr={{ lg: isExpanded ? 0 : '15px', xl: isCollapsed ? '15px' : 0 }}
             aria-label={ `${ item.text } link group` }
             position="relative"
+            whiteSpace="nowrap"
           >
-            <HStack spacing={ 0 } overflow="hidden">
+            <HStack spacing={ 0 } overflow="hidden" whiteSpace="nowrap">
               <NavLinkIcon item={ item }/>
               <Text
                 { ...styleProps.textProps }

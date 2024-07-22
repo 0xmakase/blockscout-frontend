@@ -1,6 +1,7 @@
 import { Grid } from '@chakra-ui/react';
 import BigNumber from 'bignumber.js';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import config from 'configs/app';
 import useApiQuery from 'lib/api/useApiQuery';
@@ -15,6 +16,7 @@ const hasAvgBlockTime = config.UI.homepage.showAvgBlockTime;
 const rollupFeature = config.features.rollup;
 
 const Stats = () => {
+  const { t } = useTranslation();
   const [ hasGasTracker, setHasGasTracker ] = React.useState(config.features.gasTracker.isEnabled);
   const { data, isPlaceholderData, isError, dataUpdatedAt } = useApiQuery('stats', {
     queryOptions: {
@@ -85,7 +87,7 @@ const Stats = () => {
         { rollupFeature.isEnabled && rollupFeature.type === 'zkEvm' && (
           <StatsWidget
             icon="txn_batches_slim"
-            label="Latest batch"
+            label={ t('stats.latestBatch') }
             value={ (zkEvmLatestBatchQuery.data || 0).toLocaleString() }
             href={{ pathname: '/batches' }}
             isLoading={ isLoading }
@@ -94,7 +96,7 @@ const Stats = () => {
         { rollupFeature.isEnabled && rollupFeature.type === 'zkSync' && (
           <StatsWidget
             icon="txn_batches_slim"
-            label="Latest batch"
+            label={ t('stats.latestBatch') }
             value={ (zkSyncLatestBatchQuery.data || 0).toLocaleString() }
             href={{ pathname: '/batches' }}
             isLoading={ isLoading }
@@ -103,7 +105,7 @@ const Stats = () => {
         { !(rollupFeature.isEnabled && (rollupFeature.type === 'zkEvm' || rollupFeature.type === 'zkSync')) && (
           <StatsWidget
             icon="block_slim"
-            label="Total blocks"
+            label={ t('stats.totalBlocks') }
             value={ Number(data.total_blocks).toLocaleString() }
             href={{ pathname: '/blocks' }}
             isLoading={ isLoading }
@@ -112,14 +114,14 @@ const Stats = () => {
         { hasAvgBlockTime && (
           <StatsWidget
             icon="clock"
-            label="Average block time"
+            label={ t('stats.avgBlockTime') }
             value={ `${ (data.average_block_time / 1000).toFixed(1) }s` }
             isLoading={ isLoading }
           />
         ) }
         <StatsWidget
           icon="transactions_slim"
-          label="Total transactions"
+          label={ t('stats.totalTransactions') }
           value={ Number(data.total_transactions).toLocaleString() }
           href={{ pathname: '/txs' }}
           isLoading={ isLoading }
@@ -127,7 +129,7 @@ const Stats = () => {
         { rollupFeature.isEnabled && data.last_output_root_size && (
           <StatsWidget
             icon="txn_batches_slim"
-            label="Latest L1 state batch"
+            label={ t('stats.latestL1StateBatch') }
             value={ data.last_output_root_size }
             href={{ pathname: '/batches' }}
             isLoading={ isLoading }
@@ -135,7 +137,7 @@ const Stats = () => {
         ) }
         <StatsWidget
           icon="wallet"
-          label="Wallet addresses"
+          label={ t('stats.walletAddresses') }
           value={ Number(data.total_addresses).toLocaleString() }
           isLoading={ isLoading }
           _last={ isOdd ? lastItemStyle : undefined }
@@ -143,7 +145,7 @@ const Stats = () => {
         { hasGasTracker && data.gas_prices && (
           <StatsWidget
             icon="gas"
-            label="Gas tracker"
+            label={ t('stats.gasTracker') }
             value={ data.gas_prices.average ? <GasPrice data={ data.gas_prices.average }/> : 'N/A' }
             hint={ gasInfoTooltip }
             isLoading={ isLoading }
@@ -153,7 +155,7 @@ const Stats = () => {
         { data.rootstock_locked_btc && (
           <StatsWidget
             icon="coins/bitcoin"
-            label="BTC Locked in 2WP"
+            label={ t('stats.btcLocked') }
             value={ `${ BigNumber(data.rootstock_locked_btc).div(WEI).dp(0).toFormat() } RBTC` }
             isLoading={ isLoading }
             _last={ isOdd ? lastItemStyle : undefined }
