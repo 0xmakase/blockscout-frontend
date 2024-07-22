@@ -44,8 +44,8 @@ const NavLinkGroup = ({ item, isCollapsed }: Props) => {
         <PopoverTrigger>
           <Link
             { ...styleProps.itemProps }
-            w={{ lg: isExpanded ? '200px' : '60px', xl: isCollapsed ? '60px' : '200px' }}
-            pl={{ lg: isExpanded ? 3 : '15px', xl: isCollapsed ? '15px' : 3 }}
+            w={{ lg: isExpanded ? '180px' : '60px', xl: isCollapsed ? '60px' : '180px' }}
+            pl={{ lg: isExpanded ? 2 : '15px', xl: isCollapsed ? '15px' : 2 }}
             pr={{ lg: isExpanded ? 0 : '15px', xl: isCollapsed ? '15px' : 0 }}
             aria-label={ `${ item.text } link group` }
             position="relative"
