@@ -21,13 +21,14 @@ const TransactionsHome = () => {
 
   if ((rollupFeature.isEnabled && rollupFeature.type === 'optimistic') || hasAccount) {
     const tabs = [
-      { id: 'txn', title: t('latest_txn'), component: <LatestTxs/> },
-      rollupFeature.isEnabled && rollupFeature.type === 'optimistic' && { id: 'deposits', title: t('deposits_l1_to_l2'), component: <LatestDeposits/> },
-      hasAccount && { id: 'watchlist', title: t('watch_list'), component: <LatestWatchlistTxs/> },
+      { id: 'txn', title: t('transactions.latest_txn'), component: <LatestTxs/> },
+      rollupFeature.isEnabled && rollupFeature.type === 'optimistic' &&
+      { id: 'deposits', title: t('transactions.deposits_l1_to_l2'), component: <LatestDeposits/> },
+      hasAccount && { id: 'watchlist', title: t('transactions.watch_list'), component: <LatestWatchlistTxs/> },
     ].filter(Boolean);
     return (
       <>
-        <Heading as="h4" size="sm" mb={ 3 }>{ t('transactions') }</Heading>
+        <Heading as="h4" size="sm" mb={ 3 }>{ t('transactions.transactions') }</Heading>
         <TabsWithScroll tabs={ tabs } lazyBehavior="keepMounted" tabListProps={ TAB_LIST_PROPS }/>
       </>
     );
@@ -35,7 +36,7 @@ const TransactionsHome = () => {
 
   return (
     <>
-      <Heading as="h4" size="sm" mb={ 3 }>{ t('latest_transactions') }</Heading>
+      <Heading as="h4" size="sm" mb={ 3 }>{ t('transactions.latest_transactions') }</Heading>
       <LatestTxs/>
     </>
   );
