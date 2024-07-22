@@ -10,9 +10,9 @@ import IconSvg from 'ui/shared/IconSvg';
 import ChainIndicatorChartContainer from './ChainIndicatorChartContainer';
 import ChainIndicatorItem from './ChainIndicatorItem';
 import useFetchChartData from './useFetchChartData';
-import INDICATORS from './utils/indicators';
+import Indicators from './utils/indicators';
 
-const indicators = INDICATORS
+const indicators = Indicators()
   .filter(({ id }) => config.UI.homepage.charts.includes(id))
   .sort((a, b) => {
     if (config.UI.homepage.charts.indexOf(a.id) > config.UI.homepage.charts.indexOf(b.id)) {

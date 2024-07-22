@@ -2,6 +2,7 @@ import { Box, Heading, Flex, Text, VStack, Skeleton } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence } from 'framer-motion';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { SocketMessage } from 'lib/socket/types';
 import type { Block } from 'types/api/block';
@@ -21,8 +22,8 @@ import LinkInternal from 'ui/shared/links/LinkInternal';
 import LatestBlocksItem from './LatestBlocksItem';
 
 const LatestBlocks = () => {
+  const { t } = useTranslation();
   const isMobile = useIsMobile();
-  // const blocksMaxCount = isMobile ? 2 : 3;
   let blocksMaxCount: number;
   if (config.features.rollup.isEnabled || config.UI.views.block.hiddenFields?.total_reward) {
     blocksMaxCount = isMobile ? 4 : 5;
@@ -69,7 +70,7 @@ const LatestBlocks = () => {
   let content;
 
   if (isError) {
-    content = <Text>No data. Please reload page.</Text>;
+    content = <Text>{ t('no_data') }</Text>;
   }
 
   if (data) {
@@ -89,7 +90,7 @@ const LatestBlocks = () => {
           </AnimatePresence>
         </VStack>
         <Flex justifyContent="center">
-          <LinkInternal fontSize="sm" href={ route({ pathname: '/blocks' }) }>View all blocks</LinkInternal>
+          <LinkInternal fontSize="sm" href={ route({ pathname: '/blocks' }) }>{ t('view_all_blocks') }</LinkInternal>
         </Flex>
       </>
     );
@@ -97,11 +98,11 @@ const LatestBlocks = () => {
 
   return (
     <Box width={{ base: '100%', lg: '280px' }} flexShrink={ 0 }>
-      <Heading as="h4" size="sm">Latest blocks</Heading>
+      <Heading as="h4" size="sm">{ t('latest_blocks') }</Heading>
       { statsQueryResult.data?.network_utilization_percentage !== undefined && (
         <Skeleton isLoaded={ !statsQueryResult.isPlaceholderData } mt={ 1 } display="inline-block">
           <Text as="span" fontSize="sm">
-              Network utilization:{ nbsp }
+            { t('network_utilization') }{ nbsp }
           </Text>
           <Text as="span" fontSize="sm" color="blue.400" fontWeight={ 700 }>
             { statsQueryResult.data?.network_utilization_percentage.toFixed(2) }%

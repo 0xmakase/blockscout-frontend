@@ -31,5 +31,35 @@
         "custom_abi": "カスタムABI",
         "verified_addrs": "認証済みアドレス",
         "my_profile": "マイプロフィール"
+    },
+    "stats": {
+        "latestBatch": "最新バッチ",
+        "totalBlocks": "総ブロック数",
+        "avgBlockTime": "平均ブロック時間",
+        "totalTransactions": "総トランザクション数",
+        "latestL1StateBatch": "最新のL1ステートバッチ",
+        "walletAddresses": "ウォレットアドレス",
+        "gasTracker": "ガストラッカー",
+        "btcLocked": "2WPにロックされたBTC"
+    },
+    "indicators": {
+        "dailyTxs": "日次トランザクション数",
+        "coinPrice": "{{symbol}} 価格",
+        "secondaryCoinPrice": "{{symbol}} 価格",
+        "marketCap": "時価総額",
+        "tvl": "ロックされた総価値"
+    },
+    "transactions": {
+        "latest_txn": "最新のトランザクション",
+        "deposits_l1_to_l2": "入金 (L1→L2 トランザクション)",
+        "watch_list": "ウォッチリスト",
+        "transactions": "トランザクション",
+        "latest_transactions": "最新のトランザクション"
+    },
+    "lastBlocks": {
+        "latest_blocks": "最新のブロック",
+        "network_utilization": "ネットワーク利用率：",
+        "view_all_blocks": "すべてのブロックを見る",
+        "no_data": "データがありません。ページをリロードしてください。"
     }
-}
+}      
