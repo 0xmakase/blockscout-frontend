@@ -160,7 +160,7 @@ declare module "next/router" {
         | "defaultLocale"
         | "domainLocales"
       > & {
-        defaultLocale: "en";
+        defaultLocale: "ja";
         domainLocales?: undefined;
         locale: Locale;
         locales: [

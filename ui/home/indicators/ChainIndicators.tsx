@@ -1,5 +1,6 @@
 import { Flex, Skeleton, Text, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import config from 'configs/app';
 import useApiQuery from 'lib/api/useApiQuery';
@@ -27,6 +28,7 @@ const indicators = INDICATORS
   });
 
 const ChainIndicators = () => {
+  const { t } = useTranslation();
   const [ selectedIndicator, selectIndicator ] = React.useState(indicators[0]?.id);
   const indicator = indicators.find(({ id }) => id === selectedIndicator);
 
@@ -94,7 +96,7 @@ const ChainIndicators = () => {
     >
       <Flex flexGrow={ 1 } flexDir="column">
         <Flex alignItems="center">
-          <Text fontWeight={ 500 }>{ indicator?.title }</Text>
+          <Text fontWeight={ 500 }>{ t(indicator?.title || '', { symbol: config.chain.currency.symbol || '' }) }</Text>
           { indicator?.hint && <Hint label={ indicator.hint } ml={ 1 }/> }
         </Flex>
         <Flex mb={{ base: 0, lg: 2 }} mt={ 1 } alignItems="end">
