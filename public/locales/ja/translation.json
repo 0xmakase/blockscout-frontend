@@ -80,7 +80,24 @@
         "blocksValidated": "検証済みブロック",
         "logs": "ログ",
         "contract": "コントラクト",
+        "addresse": "アドレス",
         "backToTopAccountsList": "トップアカウントリストに戻る",
         "details": "詳細"
+    },
+    "tokenTransferTable": {
+        "token": "トークン",
+        "tokenId": "トークンID",
+        "txnHash": "取引ハッシュ",
+        "fromTo": "送信者/受信者",
+        "value": "値"
+    },
+    "txsTable": {
+        "txnHash": "取引ハッシュ",
+        "type": "タイプ",
+        "method": "メソッド",
+        "block": "ブロック",
+        "fromTo": "送信者/受信者",
+        "value": "Value",
+        "fee": "手数料"
     }
 }      

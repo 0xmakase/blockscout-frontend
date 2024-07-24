@@ -80,8 +80,24 @@
         "blocksValidated": "Blocks validated",
         "logs": "Logs",
         "contract": "Contract",
+        "addresse": "Addresse",
         "backToTopAccountsList": "Back to top accounts list",
         "details": "details"
+    },
+    "tokenTransferTable": {
+        "token": "Token",
+        "tokenId": "Token ID",
+        "txnHash": "Txn hash",
+        "fromTo": "From/To",
+        "value": "Value"
+    },
+    "txsTable": {
+        "txnHash": "Txn hash",
+        "type": "Type",
+        "method": "Method",
+        "block": "Block",
+        "fromTo": "From/To",
+        "value": "Value",
+        "fee": "Fee"
     }
-      
 }
