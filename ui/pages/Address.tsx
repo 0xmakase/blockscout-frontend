@@ -1,6 +1,7 @@
 import { Box, Flex, HStack, useColorModeValue } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { EntityTag } from 'ui/shared/EntityTags/types';
 import type { RoutedTab } from 'ui/shared/Tabs/types';
@@ -53,6 +54,7 @@ const txInterpretation = config.features.txInterpretation;
 
 const AddressPageContent = () => {
   const router = useRouter();
+  const { t } = useTranslation();
   const appProps = useAppContext();
 
   const tabsScrollRef = React.useRef<HTMLDivElement>(null);
@@ -123,21 +125,21 @@ const AddressPageContent = () => {
     return [
       {
         id: 'txs',
-        title: 'Transactions',
+        title: t('addressPage.transactions'),
         count: addressTabsCountersQuery.data?.transactions_count,
         component: <AddressTxs scrollRef={ tabsScrollRef } shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
       },
       txInterpretation.isEnabled && txInterpretation.provider === 'noves' ?
         {
           id: 'account_history',
-          title: 'Account history',
+          title: t('addressPage.accountHistory'),
           component: <AddressAccountHistory scrollRef={ tabsScrollRef } shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
         } :
         undefined,
       config.features.userOps.isEnabled && Boolean(userOpsAccountQuery.data?.total_ops) ?
         {
           id: 'user_ops',
-          title: 'User operations',
+          title: t('addressPage.userOperations'),
           count: userOpsAccountQuery.data?.total_ops,
           component: <AddressUserOps shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
         } :
@@ -145,39 +147,39 @@ const AddressPageContent = () => {
       config.features.beaconChain.isEnabled && addressTabsCountersQuery.data?.withdrawals_count ?
         {
           id: 'withdrawals',
-          title: 'Withdrawals',
+          title: t('addressPage.withdrawals'),
           count: addressTabsCountersQuery.data?.withdrawals_count,
           component: <AddressWithdrawals scrollRef={ tabsScrollRef } shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
         } :
         undefined,
       {
         id: 'token_transfers',
-        title: 'Token transfers',
+        title: t('addressPage.tokenTransfers'),
         count: addressTabsCountersQuery.data?.token_transfers_count,
         component: <AddressTokenTransfers scrollRef={ tabsScrollRef } shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
       },
       {
         id: 'tokens',
-        title: 'Tokens',
+        title: t('addressPage.tokens'),
         count: addressTabsCountersQuery.data?.token_balances_count,
         component: <AddressTokens shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
         subTabs: TOKEN_TABS,
       },
       {
         id: 'internal_txns',
-        title: 'Internal txns',
+        title: t('addressPage.internalTransactions'),
         count: addressTabsCountersQuery.data?.internal_txs_count,
         component: <AddressInternalTxs scrollRef={ tabsScrollRef } shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
       },
       {
         id: 'coin_balance_history',
-        title: 'Coin balance history',
+        title: t('addressPage.coinBalanceHistory'),
         component: <AddressCoinBalance shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
       },
       config.chain.verificationType === 'validation' && addressTabsCountersQuery.data?.validations_count ?
         {
           id: 'blocks_validated',
-          title: 'Blocks validated',
+          title: t('addressPage.blocksValidated'),
           count: addressTabsCountersQuery.data?.validations_count,
           component: <AddressBlocksValidated scrollRef={ tabsScrollRef } shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
         } :
@@ -185,7 +187,7 @@ const AddressPageContent = () => {
       addressTabsCountersQuery.data?.logs_count ?
         {
           id: 'logs',
-          title: 'Logs',
+          title: t('addressPage.logs'),
           count: addressTabsCountersQuery.data?.logs_count,
           component: <AddressLogs scrollRef={ tabsScrollRef } shouldRender={ !isTabsLoading } isQueryEnabled={ areQueriesEnabled }/>,
         } :
@@ -197,13 +199,13 @@ const AddressPageContent = () => {
           if (addressQuery.data.is_verified) {
             return (
               <>
-                <span>Contract</span>
+                <span>{ t('addressPage.contract') }</span>
                 <IconSvg name="status/success" boxSize="14px" color="green.500" ml={ 1 }/>
               </>
             );
           }
 
-          return 'Contract';
+          return t('addressPage.contract');
         },
         component: (
           <AddressContract
@@ -215,7 +217,15 @@ const AddressPageContent = () => {
         subTabs: contractTabs.tabs.map(tab => tab.id),
       } : undefined,
     ].filter(Boolean);
-  }, [ addressQuery.data, contractTabs, addressTabsCountersQuery.data, userOpsAccountQuery.data, isTabsLoading, areQueriesEnabled ]);
+  }, [
+    addressQuery.data,
+    contractTabs,
+    addressTabsCountersQuery.data,
+    userOpsAccountQuery.data,
+    isTabsLoading,
+    areQueriesEnabled,
+    t,
+  ]);
 
   const tags: Array<EntityTag> = React.useMemo(() => {
     return [
@@ -232,7 +242,13 @@ const AddressPageContent = () => {
       ...formatUserTags(addressQuery.data),
       ...(addressMetadataQuery.data?.addresses?.[hash.toLowerCase()]?.tags || []),
     ].filter(Boolean).sort(sortEntityTags);
-  }, [ addressMetadataQuery.data, addressQuery.data, hash, isSafeAddress, userOpsAccountQuery.data ]);
+  }, [
+    addressMetadataQuery.data,
+    addressQuery.data,
+    hash,
+    isSafeAddress,
+    userOpsAccountQuery.data,
+  ]);
 
   const titleContentAfter = (
     <EntityTags
@@ -253,10 +269,10 @@ const AddressPageContent = () => {
     }
 
     return {
-      label: 'Back to top accounts list',
+      label: t('addressPage.backToTopAccountsList'),
       url: appProps.referrer,
     };
-  }, [ appProps.referrer ]);
+  }, [ appProps.referrer, t ]);
 
   const titleSecondRow = (
     <Flex alignItems="center" w="100%" columnGap={ 2 } rowGap={ 2 } flexWrap={{ base: 'wrap', lg: 'nowrap' }}>
@@ -302,7 +318,7 @@ const AddressPageContent = () => {
     <>
       <TextAd mb={ 6 }/>
       <PageTitle
-        title={ `${ addressQuery.data?.is_contract ? 'Contract' : 'Address' } details` }
+        title={ `${ addressQuery.data?.is_contract ? t('addressPage.contract') : t('addressPage.address') } ${ t('addressPage.details') }` }
         backLink={ backLink }
         contentAfter={ titleContentAfter }
         secondRow={ titleSecondRow }
