@@ -80,7 +80,7 @@
         "blocksValidated": "検証済みブロック",
         "logs": "ログ",
         "contract": "コントラクト",
-        "addresse": "アドレス",
+        "address": "アドレス",
         "backToTopAccountsList": "トップアカウントリストに戻る",
         "details": "詳細"
     },
@@ -99,5 +99,11 @@
         "fromTo": "送信者/受信者",
         "value": "Value",
         "fee": "手数料"
+    },
+    "tokensTable": {
+        "token": "トークン",
+        "price": "価格",
+        "onChainMarketCap": "オンチェーン時価総額",
+        "holders": "ホルダー"
     }
 }      
