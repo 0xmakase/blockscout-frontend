@@ -1,6 +1,7 @@
 import { Link, Table, Tbody, Tr, Th } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { Transaction, TransactionsSortingField, TransactionsSortingValue } from 'types/api/transaction';
 
@@ -41,6 +42,7 @@ const TxsTable = ({
   enableTimeIncrement,
   isLoading,
 }: Props) => {
+  const { t } = useTranslation();
   const { cutRef, renderedItemsNum } = useLazyRenderedList(txs, !isLoading);
 
   const feeCurrency = config.UI.views.tx.hiddenFields?.fee_currency || config.chain.hasMultipleGasCurrencies ?
@@ -53,17 +55,17 @@ const TxsTable = ({
         <TheadSticky top={ top }>
           <Tr>
             <Th width="54px"></Th>
-            <Th width="180px">Txn hash</Th>
-            <Th width="160px">Type</Th>
-            <Th width="20%">Method</Th>
-            { showBlockInfo && <Th width="18%">Block</Th> }
-            <Th width="224px">From/To</Th>
+            <Th width="180px">{ t('txsTable.txnHash') }</Th>
+            <Th width="160px">{ t('txsTable.type') }</Th>
+            <Th width="20%">{ t('txsTable.method') }</Th>
+            { showBlockInfo && <Th width="18%">{ t('txsTable.block') }</Th> }
+            <Th width="224px">{ t('txsTable.fromTo') }</Th>
             { !config.UI.views.tx.hiddenFields?.value && (
               <Th width="20%" isNumeric>
                 <Link onClick={ sort('value') } display="flex" justifyContent="end">
                   { sorting === 'value-asc' && <IconSvg boxSize={ 5 } name="arrows/east" transform="rotate(-90deg)"/> }
                   { sorting === 'value-desc' && <IconSvg boxSize={ 5 } name="arrows/east" transform="rotate(90deg)"/> }
-                  { `Value ${ currencyUnits.ether }` }
+                  { `${ t('txsTable.value') } ${ currencyUnits.ether }` }
                 </Link>
               </Th>
             ) }
@@ -72,7 +74,7 @@ const TxsTable = ({
                 <Link onClick={ sort('fee') } display="flex" justifyContent="end">
                   { sorting === 'fee-asc' && <IconSvg boxSize={ 5 } name="arrows/east" transform="rotate(-90deg)"/> }
                   { sorting === 'fee-desc' && <IconSvg boxSize={ 5 } name="arrows/east" transform="rotate(90deg)"/> }
-                  { `Fee${ feeCurrency }` }
+                  { `${ t('txsTable.fee') }${ feeCurrency }` }
                 </Link>
               </Th>
             ) }

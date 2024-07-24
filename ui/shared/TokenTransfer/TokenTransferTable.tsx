@@ -1,5 +1,6 @@
 import { Table, Tbody, Tr, Th } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { TokenTransfer } from 'types/api/tokenTransfer';
 
@@ -31,6 +32,7 @@ const TokenTransferTable = ({
   socketInfoNum,
   isLoading,
 }: Props) => {
+  const { t } = useTranslation();
 
   return (
     <AddressHighlightProvider>
@@ -38,11 +40,11 @@ const TokenTransferTable = ({
         <Thead top={ top }>
           <Tr>
             { showTxInfo && <Th width="44px"></Th> }
-            <Th width="230px">Token</Th>
-            <Th width="160px">Token ID</Th>
-            { showTxInfo && <Th width="200px">Txn hash</Th> }
-            <Th width="60%">From/To</Th>
-            <Th width="40%" isNumeric>Value</Th>
+            <Th width="230px">{ t('tokenTransferTable.token') }</Th>
+            <Th width="160px">{ t('tokenTransferTable.tokenId') }</Th>
+            { showTxInfo && <Th width="200px">{ t('tokenTransferTable.txnHash') }</Th> }
+            <Th width="60%">{ t('tokenTransferTable.fromTo') }</Th>
+            <Th width="40%" isNumeric>{ t('tokenTransferTable.value') }</Th>
           </Tr>
         </Thead>
         <Tbody>
