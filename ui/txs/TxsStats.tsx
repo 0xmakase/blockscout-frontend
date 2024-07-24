@@ -1,5 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import config from 'configs/app';
 import useApiQuery from 'lib/api/useApiQuery';
@@ -10,6 +11,7 @@ import { TXS_STATS } from 'stubs/tx';
 import StatsWidget from 'ui/shared/stats/StatsWidget';
 
 const TxsStats = () => {
+  const { t } = useTranslation();
   const txsStatsQuery = useApiQuery('txs_stats', {
     queryOptions: {
       placeholderData: TXS_STATS,
@@ -42,20 +44,20 @@ const TxsStats = () => {
       mb={ 6 }
     >
       <StatsWidget
-        label="Transactions"
+        label={ t('txsStats.transactions') }
         value={ Number(txsStatsQuery.data?.transactions_count_24h).toLocaleString() }
         period="24h"
         isLoading={ txsStatsQuery.isPlaceholderData }
         href={ config.features.stats.isEnabled ? { pathname: '/stats', query: { chartId: 'newTxns' } } : undefined }
       />
       <StatsWidget
-        label="Pending transactions"
+        label={ t('txsStats.pendingTransactions') }
         value={ Number(txsStatsQuery.data?.pending_transactions_count).toLocaleString() }
         period="1h"
         isLoading={ txsStatsQuery.isPlaceholderData }
       />
       <StatsWidget
-        label="Transactions fees"
+        label={ t('txsStats.transactionsFees') }
         value={
           (Number(txsStatsQuery.data?.transaction_fees_sum_24h) / (10 ** config.chain.currency.decimals))
             .toLocaleString(undefined, { maximumFractionDigits: 2 })
@@ -66,7 +68,7 @@ const TxsStats = () => {
         href={ config.features.stats.isEnabled ? { pathname: '/stats', query: { chartId: 'txnsFee' } } : undefined }
       />
       <StatsWidget
-        label="Avg. transaction fee"
+        label={ t('txsStats.avgTransactionFee') }
         value={ txFeeAvg.usd ? txFeeAvg.usd : txFeeAvg.valueStr }
         valuePrefix={ txFeeAvg.usd ? '$' : undefined }
         valuePostfix={ txFeeAvg.usd ? undefined : thinsp + config.chain.currency.symbol }

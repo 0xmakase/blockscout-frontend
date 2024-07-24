@@ -61,5 +61,26 @@
         "network_utilization": "ネットワーク利用率：",
         "view_all_blocks": "すべてのブロックを見る",
         "no_data": "データがありません。ページをリロードしてください。"
+    },
+    "txsStats": {
+        "transactions": "トランザクション",
+        "pendingTransactions": "保留中のトランザクション",
+        "transactionsFees": "トランザクション手数料",
+        "avgTransactionFee": "平均トランザクション手数料"
+    },
+    "addressPage": {
+        "transactions": "トランザクション",
+        "accountHistory": "アカウント履歴",
+        "userOperations": "ユーザー操作",
+        "withdrawals": "引き出し",
+        "tokenTransfers": "トークン移転",
+        "tokens": "トークン",
+        "internalTransactions": "内部トランザクション",
+        "coinBalanceHistory": "コイン残高履歴",
+        "blocksValidated": "検証済みブロック",
+        "logs": "ログ",
+        "contract": "コントラクト",
+        "backToTopAccountsList": "トップアカウントリストに戻る",
+        "details": "詳細"
     }
 }      

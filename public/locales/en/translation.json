@@ -61,6 +61,27 @@
         "network_utilization": "Network utilization:",
         "view_all_blocks": "View all blocks",
         "no_data": "No data. Please reload page."
+    },
+    "txsStats": {
+        "transactions": "Transactions",
+        "pendingTransactions": "Pending transactions",
+        "transactionsFees": "Transactions fees",
+        "avgTransactionFee": "Avg. transaction fee"
+    },
+    "addressPage": {
+        "transactions": "Transactions",
+        "accountHistory": "Account history",
+        "userOperations": "User operations",
+        "withdrawals": "Withdrawals",
+        "tokenTransfers": "Token transfers",
+        "tokens": "Tokens",
+        "internalTransactions": "Internal transactions",
+        "coinBalanceHistory": "Coin balance history",
+        "blocksValidated": "Blocks validated",
+        "logs": "Logs",
+        "contract": "Contract",
+        "backToTopAccountsList": "Back to top accounts list",
+        "details": "details"
     }
       
 }
