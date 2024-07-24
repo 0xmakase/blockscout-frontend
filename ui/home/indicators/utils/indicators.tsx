@@ -21,7 +21,7 @@ const mapNullToZero: (item: TimeChartItemRaw) => TimeChartItem = (item) => ({ ..
 
 const dailyTxsIndicator: TChainIndicator<'stats_charts_txs'> = {
   id: 'daily_txs',
-  title: 'Daily transactions',
+  title: 'indicators.dailyTxs',
   value: (stats) => stats.transactions_today === null ?
     'N/A' :
     Number(stats.transactions_today).toLocaleString(undefined, { maximumFractionDigits: 2, notation: 'compact' }),
@@ -43,7 +43,7 @@ const dailyTxsIndicator: TChainIndicator<'stats_charts_txs'> = {
 
 const coinPriceIndicator: TChainIndicator<'stats_charts_market'> = {
   id: 'coin_price',
-  title: `${ config.chain.currency.symbol } price`,
+  title: 'indicators.coinPrice',
   value: (stats) => stats.coin_price === null ?
     '$N/A' :
     '$' + Number(stats.coin_price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 6 }),
@@ -66,7 +66,7 @@ const coinPriceIndicator: TChainIndicator<'stats_charts_market'> = {
 
 const secondaryCoinPriceIndicator: TChainIndicator<'stats_charts_secondary_coin_price'> = {
   id: 'secondary_coin_price',
-  title: `${ config.chain.secondaryCoin.symbol } price`,
+  title: 'indicators.secondaryCoinPrice',
   value: (stats) => !stats.secondary_coin_price || stats.secondary_coin_price === null ?
     '$N/A' :
     '$' + Number(stats.secondary_coin_price).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 6 }),
@@ -89,7 +89,7 @@ const secondaryCoinPriceIndicator: TChainIndicator<'stats_charts_secondary_coin_
 
 const marketPriceIndicator: TChainIndicator<'stats_charts_market'> = {
   id: 'market_cap',
-  title: 'Market cap',
+  title: 'indicators.marketCap',
   value: (stats) => stats.market_cap === null ?
     '$N/A' :
     '$' + Number(stats.market_cap).toLocaleString(undefined, { maximumFractionDigits: 2, notation: 'compact' }),
@@ -126,7 +126,7 @@ const marketPriceIndicator: TChainIndicator<'stats_charts_market'> = {
 
 const tvlIndicator: TChainIndicator<'stats_charts_market'> = {
   id: 'tvl',
-  title: 'Total value locked',
+  title: 'indicators.tvl',
   value: (stats) => stats.tvl === null ?
     '$N/A' :
     '$' + Number(stats.tvl).toLocaleString(undefined, { maximumFractionDigits: 2, notation: 'compact' }),
