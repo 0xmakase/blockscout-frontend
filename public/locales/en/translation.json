@@ -80,7 +80,7 @@
         "blocksValidated": "Blocks validated",
         "logs": "Logs",
         "contract": "Contract",
-        "addresse": "Addresse",
+        "address": "Address",
         "backToTopAccountsList": "Back to top accounts list",
         "details": "details"
     },
@@ -99,5 +99,11 @@
         "fromTo": "From/To",
         "value": "Value",
         "fee": "Fee"
+    },
+    "tokensTable": {
+        "token": "Token",
+        "price": "Price",
+        "onChainMarketCap": "On-chain market cap",
+        "holders": "Holders"
     }
 }
