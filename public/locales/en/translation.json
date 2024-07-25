@@ -213,5 +213,19 @@
     "verifiedContractsCounters": {
         "totalContracts": "Total contracts",
         "verifiedContracts": "Verified contracts"
+    },
+    "blocksPageContent": {
+        "blocks": "Blocks",
+        "all": "All",
+        "forked": "Forked",
+        "uncles": "Uncles"
+    },
+    "addressBlocksValidated": {
+        "block": "Block",
+        "age": "Age",
+        "txn": "Txn",
+        "gasUsed": "Gas used",
+        "reward": "Reward",
+        "noValidatedBlocks": "There are no validated blocks for this address."
     }
 }

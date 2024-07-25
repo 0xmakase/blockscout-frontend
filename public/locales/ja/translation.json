@@ -98,7 +98,7 @@
         "block": "ブロック",
         "fromTo": "送信者/受信者",
         "value": "Value",
-        "fee": "Fee"
+        "fee": "手数料"
     },
     "tokensTable": {
         "token": "トークン",
@@ -213,5 +213,19 @@
     "verifiedContractsCounters": {
         "totalContracts": "総コントラクト数",
         "verifiedContracts": "認証済みコントラクト数"
+    },
+    "blocksPageContent": {
+        "blocks": "ブロック",
+        "all": "すべて",
+        "forked": "フォークされた",
+        "uncles": "アンクル"
+    },
+    "addressBlocksValidated": {
+        "block": "ブロック",
+        "age": "経過時間",
+        "txn": "取引",
+        "gasUsed": "使用されたガス",
+        "reward": "報酬",
+        "noValidatedBlocks": "このアドレスには検証されたブロックがありません。"
     }
 }
