@@ -2,6 +2,7 @@ import { Hide, Show, Table, Tbody, Th, Tr } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { SocketMessage } from 'lib/socket/types';
 import type { AddressBlocksValidatedResponse } from 'types/api/address';
@@ -31,6 +32,7 @@ interface Props {
 }
 
 const AddressBlocksValidated = ({ scrollRef, shouldRender = true, isQueryEnabled = true }: Props) => {
+  const { t } = useTranslation();
   const [ socketAlert, setSocketAlert ] = React.useState(false);
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -100,12 +102,12 @@ const AddressBlocksValidated = ({ scrollRef, shouldRender = true, isQueryEnabled
         <Table variant="simple" size="sm">
           <Thead top={ query.pagination.isVisible ? ACTION_BAR_HEIGHT_DESKTOP : 0 }>
             <Tr>
-              <Th width="17%">Block</Th>
-              <Th width="17%">Age</Th>
-              <Th width="16%">Txn</Th>
-              <Th width="25%">Gas used</Th>
+              <Th width="17%">{ t('addressBlocksValidated.block') }</Th>
+              <Th width="17%">{ t('addressBlocksValidated.age') }</Th>
+              <Th width="16%">{ t('addressBlocksValidated.txn') }</Th>
+              <Th width="25%">{ t('addressBlocksValidated.gasUsed') }</Th>
               { !config.UI.views.block.hiddenFields?.total_reward &&
-              <Th width="25%" isNumeric>Reward { currencyUnits.ether }</Th> }
+              <Th width="25%" isNumeric>{ t('addressBlocksValidated.reward') } { currencyUnits.ether }</Th> }
             </Tr>
           </Thead>
           <Tbody>
@@ -143,7 +145,7 @@ const AddressBlocksValidated = ({ scrollRef, shouldRender = true, isQueryEnabled
     <DataListDisplay
       isError={ query.isError }
       items={ query.data?.items }
-      emptyText="There are no validated blocks for this address."
+      emptyText={ t('addressBlocksValidated.noValidatedBlocks') }
       content={ content }
       actionBar={ actionBar }
     />
