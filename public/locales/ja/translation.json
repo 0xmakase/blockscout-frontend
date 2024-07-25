@@ -98,7 +98,7 @@
         "block": "ブロック",
         "fromTo": "送信者/受信者",
         "value": "Value",
-        "fee": "手数料"
+        "fee": "Fee"
     },
     "tokensTable": {
         "token": "トークン",
