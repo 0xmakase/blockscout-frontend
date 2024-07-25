@@ -171,7 +171,28 @@
         "total_tokens": "総トークン数",
         "number_of_all_token_contracts": "すべてのトークンコントラクトの数",
         "total_txns": "総トランザクション数",
-        "all_transactions_including_pending_dropped_replaced_failed_transactions": "保留中、中断、置換、失敗したトランザクションを含むすべてのトランザクション"
+        "all_transactions_including_pending,_dropped,_replaced,_failed_transactions": "保留中、中断、置換、失敗したトランザクションを含むすべてのトランザクション"
+    },
+    "latestTransactions": {
+        "noData": "データがありません。ページをリロードしてください。",
+        "viewAll": "すべてのトランザクションを見る"
+    },
+    "tabList": {
+        "validated": "検証済み",
+        "mined": "マイニング済み",
+        "pending": "保留中",
+        "blobTxns": "Blob トランザクション",
+        "watchlist": "ウォッチリスト",
+        "transactions": "トランザクション"
+    },
+    "pageTitle": {
+        "apiDocs": "API ドキュメント",
+        "graphQL": "GraphiQL",
+        "interface": "インターフェース",
+        "graphQLPlayground": "GraphQL プレイグラウンド",
+        "topAccounts": "トップアカウント"
+    },
+    "dataListDisplay": {
+        "noAccounts": "アカウントがありません。"
     }
-    
-}      
+}
