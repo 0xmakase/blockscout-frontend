@@ -16,7 +16,7 @@
         "graphql": "GraphQL",
         "rpc_api": "RPC API",
         "eth_rpc_api": "Eth RPC API",
-        "verify_contract": "コントラクトの検証",
+        "verify_contract": "コントラクトの認証",
         "gas_tracker": "ガストラッカー",
         "submit_public_tag": "公開タグの送信",
         "blockchain": "ブロックチェーン",
@@ -77,7 +77,7 @@
         "tokens": "トークン",
         "internalTransactions": "内部トランザクション",
         "coinBalanceHistory": "コイン残高履歴",
-        "blocksValidated": "検証済みブロック",
+        "blocksValidated": "認証済みブロック",
         "logs": "ログ",
         "contract": "コントラクト",
         "address": "アドレス",
@@ -147,10 +147,10 @@
         "cumulative_number_of_contracts_for_the_period": "期間中のコントラクトの累積数",
         "new_contracts": "新しいコントラクト",
         "new_contracts_number_for_the_period": "期間中の新しいコントラクトの数",
-        "new_verified_contracts": "新しい検証済みコントラクト",
-        "new_verified_contracts_number_for_the_period": "期間中の新しい検証済みコントラクト数",
-        "verified_contracts_growth": "検証済みコントラクトの成長",
-        "cumulative_number_verified_contracts_for_the_period": "期間中の累積検証済みコントラクト数"
+        "new_verified_contracts": "新しい認証済みコントラクト",
+        "new_verified_contracts_number_for_the_period": "期間中の新しい認証済みコントラクト数",
+        "verified_contracts_growth": "認証済みコントラクトの成長",
+        "cumulative_number_verified_contracts_for_the_period": "期間中の累積認証済みコントラクト数"
     },
     "numberWidget": {
         "average_block_time": "平均ブロック時間",
@@ -178,7 +178,7 @@
         "viewAll": "すべてのトランザクションを見る"
     },
     "tabList": {
-        "validated": "検証済み",
+        "validated": "認証済み",
         "mined": "マイニング済み",
         "pending": "保留中",
         "blobTxns": "Blob トランザクション",
@@ -194,5 +194,24 @@
     },
     "dataListDisplay": {
         "noAccounts": "アカウントがありません。"
+    },
+    "addressesTable": {
+        "rank": "ランク",
+        "address": "アドレス",
+        "publicTag": "パブリックタグ",
+        "balance": "残高",
+        "percentage": "割合",
+        "txnCount": "トランザクション数"
+    },
+    "verifiedContracts": {
+        "enhancedTitle": "認証された{{name}}コントラクト",
+        "title": "認証されたコントラクト",
+        "searchPlaceholder": "コントラクト名またはアドレスで検索",
+        "noContracts": "認証されたコントラクトはありません。",
+        "noMatches": "クエリに一致するコントラクトが見つかりませんでした。"
+    },
+    "verifiedContractsCounters": {
+        "totalContracts": "総コントラクト数",
+        "verifiedContracts": "認証済みコントラクト数"
     }
 }

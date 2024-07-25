@@ -194,5 +194,24 @@
     },
     "dataListDisplay": {
         "noAccounts": "There are no accounts."
+    },
+    "addressesTable": {
+        "rank": "Rank",
+        "address": "Address",
+        "publicTag": "Public tag",
+        "balance": "Balance",
+        "percentage": "Percentage",
+        "txnCount": "Txn count"
+    },
+    "verifiedContracts": {
+        "enhancedTitle": "Verified {{name}} contracts",
+        "title": "Verified contracts",
+        "searchPlaceholder": "Search by contract name or address",
+        "noContracts": "There are no verified contracts.",
+        "noMatches": "Couldn{{apos}}t find any contract that matches your query."
+    },
+    "verifiedContractsCounters": {
+        "totalContracts": "Total contracts",
+        "verifiedContracts": "Verified contracts"
     }
 }

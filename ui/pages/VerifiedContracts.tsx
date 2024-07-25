@@ -1,6 +1,7 @@
 import { Box, Hide, HStack, Show } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { VerifiedContractsFilters } from 'types/api/contracts';
 import type { VerifiedContractsSorting, VerifiedContractsSortingField, VerifiedContractsSortingValue } from 'types/api/verifiedContracts';
@@ -28,6 +29,7 @@ import VerifiedContractsList from 'ui/verifiedContracts/VerifiedContractsList';
 import VerifiedContractsTable from 'ui/verifiedContracts/VerifiedContractsTable';
 
 const VerifiedContracts = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const [ searchTerm, setSearchTerm ] = React.useState(getQueryParamString(router.query.q) || undefined);
   const [ type, setType ] = React.useState(getQueryParamString(router.query.filter) as VerifiedContractsFilters['filter'] || undefined);
@@ -90,7 +92,7 @@ const VerifiedContracts = () => {
       w={{ base: '100%', lg: '350px' }}
       size="xs"
       onChange={ handleSearchTermChange }
-      placeholder="Search by contract name or address"
+      placeholder={ t('verifiedContracts.searchPlaceholder') }
       initialValue={ searchTerm }
     />
   );
@@ -138,16 +140,16 @@ const VerifiedContracts = () => {
   return (
     <Box>
       <PageTitle
-        title={ config.meta.seo.enhancedDataEnabled ? `Verified ${ config.chain.name } contracts` : 'Verified contracts' }
+        title={ config.meta.seo.enhancedDataEnabled ? t('verifiedContracts.enhancedTitle', { name: config.chain.name }) : t('verifiedContracts.title') }
         withTextAd
       />
       <VerifiedContractsCounters/>
       <DataListDisplay
         isError={ isError }
         items={ data?.items }
-        emptyText="There are no verified contracts."
+        emptyText={ t('verifiedContracts.noContracts') }
         filterProps={{
-          emptyFilteredText: `Couldn${ apos }t find any contract that matches your query.`,
+          emptyFilteredText: t('verifiedContracts.noMatches', { apos }),
           hasActiveFilters: Boolean(searchTerm || type),
         }}
         content={ content }
