@@ -49,10 +49,22 @@ export default function useStats() {
   const displayedCharts = React.useMemo(() => {
     return data?.sections
       ?.map((section) => {
-        const charts = section.charts.filter((chart) => isSectionMatches(section, currentSection) && isChartNameMatches(filterQuery, chart));
+        const charts = section.charts.filter((chart) => isSectionMatches(section, currentSection) && isChartNameMatches(filterQuery, chart))
+          .map((chart) => {
+            // スペースをアンダースコアに変換し、全て小文字にする
+            const titleTranslationKey = `chartsAndStats.${ chart.title.replace(/ /g, '_').toLowerCase() }`;
+            const descriptionTranslationKey = `chartsAndStats.${ chart.description.replace(/ /g, '_').toLowerCase() }`;
 
+            return {
+              ...chart,
+              title: titleTranslationKey,
+              description: descriptionTranslationKey,
+            };
+          });
+        const sectionTitleKey = `chartsAndStats.${ section.title.replace(/ /g, '_').toLowerCase() }`;
         return {
           ...section,
+          title: sectionTitleKey,
           charts,
         };
       }).filter((section) => section.charts.length > 0);

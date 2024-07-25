@@ -20,6 +20,8 @@ const NumberWidgetsList = () => {
     return <DataFetchAlert/>;
   }
 
+  console.log('data', data); // eslint-disable-line no-console
+
   return (
     <Grid
       gridTemplateColumns={{ base: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }}

@@ -1,5 +1,6 @@
 import { Box, Grid, Heading, List, ListItem, Skeleton } from '@chakra-ui/react';
 import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type * as stats from '@blockscout/stats-types';
 import type { StatsIntervalIds } from 'types/client/stats';
@@ -23,6 +24,7 @@ type Props = {
 }
 
 const ChartsWidgetsList = ({ filterQuery, isError, isPlaceholderData, charts, interval, initialFilterQuery }: Props) => {
+  const { t } = useTranslation(); // 翻訳フックを追加
   const [ isSomeChartLoadingError, setIsSomeChartLoadingError ] = useState(false);
   const isAnyChartDisplayed = charts?.some((section) => section.charts.length > 0);
   const isEmptyChartList = Boolean(filterQuery) && !isAnyChartDisplayed;
@@ -72,7 +74,7 @@ const ChartsWidgetsList = ({ filterQuery, isError, isPlaceholderData, charts, in
             >
               <Skeleton isLoaded={ !isPlaceholderData } mb={ 4 } display="inline-flex" alignItems="center" columnGap={ 2 } id={ section.id }>
                 <Heading size="md" id={ section.id }>
-                  { section.title }
+                  { t(section.title) }
                 </Heading>
                 { section.id === 'gas' && homeStatsQuery.data && homeStatsQuery.data.gas_prices && (
                   <GasInfoTooltip data={ homeStatsQuery.data } dataUpdatedAt={ homeStatsQuery.dataUpdatedAt }>
@@ -89,8 +91,8 @@ const ChartsWidgetsList = ({ filterQuery, isError, isPlaceholderData, charts, in
                   <ChartWidgetContainer
                     key={ chart.id }
                     id={ chart.id }
-                    title={ chart.title }
-                    description={ chart.description }
+                    title={ t(chart.title) }
+                    description={ t(chart.description) }
                     interval={ interval }
                     units={ chart.units || undefined }
                     isPlaceholderData={ isPlaceholderData }
