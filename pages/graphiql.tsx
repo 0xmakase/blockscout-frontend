@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import PageNextJs from 'nextjs/PageNextJs';
 
@@ -14,11 +15,14 @@ const GraphQL = dynamic(() => import('ui/graphQL/GraphQL'), {
 });
 
 const Page: NextPage = () => {
+  const { t } = useTranslation();
 
   return (
     <PageNextJs pathname="/graphiql">
       <PageTitle
-        title={ config.meta.seo.enhancedDataEnabled ? `GraphiQL ${ config.chain.name } interface` : 'GraphQL playground' }
+        title={ config.meta.seo.enhancedDataEnabled ?
+          `${ t('pageTitle.graphiQL') } ${ config.chain.name } ${ t('pageTitle.interface') }` :
+          t('pageTitle.graphQLPlayground') }
       />
       <GraphQL/>
     </PageNextJs>

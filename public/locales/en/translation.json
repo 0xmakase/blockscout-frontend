@@ -171,8 +171,28 @@
         "total_tokens": "Total tokens",
         "number_of_all_token_contracts": "Number of all token contracts",
         "total_txns": "Total txns",
-        "all_transactions_including_pending_dropped_replaced_failed_transactions": "All transactions including pending, dropped, replaced, failed transactions"
+        "all_transactions_including_pending,_dropped,_replaced,_failed_transactions": "All transactions including pending, dropped, replaced, failed transactions"
+    },
+    "latestTransactions": {
+        "noData": "No data. Please reload page.",
+        "viewAll": "View all transactions"
+    },
+    "tabList": {
+        "validated": "Validated",
+        "mined": "Mined",
+        "pending": "Pending",
+        "blobTxns": "Blob txns",
+        "watchlist": "Watch list",
+        "transactions": "Transactions"
+    },
+    "pageTitle": {
+        "apiDocs": "API documentation",
+        "graphQL": "GraphiQL",
+        "interface": "interface",
+        "graphQLPlayground": "GraphQL playground",
+        "topAccounts": "Top accounts"
+    },
+    "dataListDisplay": {
+        "noAccounts": "There are no accounts."
     }
-    
-      
 }

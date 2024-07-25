@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { RoutedTab } from 'ui/shared/Tabs/types';
 
@@ -27,7 +28,8 @@ const TAB_LIST_PROPS = {
 const TABS_HEIGHT = 88;
 
 const Transactions = () => {
-  const verifiedTitle = config.chain.verificationType === 'validation' ? 'Validated' : 'Mined';
+  const { t } = useTranslation();
+  const verifiedTitle = config.chain.verificationType === 'validation' ? t('tabList.validated') : t('tabList.mined');
   const router = useRouter();
   const isMobile = useIsMobile();
   const tab = getQueryParamString(router.query.tab);
@@ -102,7 +104,7 @@ const Transactions = () => {
         /> },
     {
       id: 'pending',
-      title: 'Pending',
+      title: t('tabList.pending'),
       component: (
         <TxsWithFrontendSorting
           query={ txsPendingQuery }
@@ -116,7 +118,7 @@ const Transactions = () => {
     },
     config.features.dataAvailability.isEnabled && {
       id: 'blob_txs',
-      title: 'Blob txns',
+      title: t('tabList.blobTxns'),
       component: (
         <TxsWithFrontendSorting
           query={ txsWithBlobsQuery }
@@ -129,7 +131,7 @@ const Transactions = () => {
     },
     hasAccount ? {
       id: 'watchlist',
-      title: 'Watch list',
+      title: t('tabList.watchlist'),
       component: <TxsWatchlist query={ txsWatchlistQuery }/>,
     } : undefined,
   ].filter(Boolean);
@@ -146,7 +148,7 @@ const Transactions = () => {
   return (
     <>
       <PageTitle
-        title={ config.meta.seo.enhancedDataEnabled ? `${ config.chain.name } transactions` : 'Transactions' }
+        title={ config.meta.seo.enhancedDataEnabled ? `${ config.chain.name } ${ t('tabList.transactions') }` : t('tabList.transactions') }
         withTextAd
       />
       <TxsStats/>
