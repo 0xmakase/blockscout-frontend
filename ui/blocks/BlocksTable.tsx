@@ -2,6 +2,7 @@ import { Table, Tbody, Tr, Th } from '@chakra-ui/react';
 import { AnimatePresence } from 'framer-motion';
 import capitalize from 'lodash/capitalize';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { Block } from 'types/api/block';
 
@@ -31,6 +32,7 @@ const FEES_COL_WEIGHT = 22;
 const isRollup = config.features.rollup.isEnabled;
 
 const BlocksTable = ({ data, isLoading, top, page, showSocketInfo, socketInfoNum, socketInfoAlert }: Props) => {
+  const { t } = useTranslation();
 
   const widthBase =
     (!config.UI.views.block.hiddenFields?.miner ? VALIDATOR_COL_WEIGHT : 0) +
@@ -43,16 +45,16 @@ const BlocksTable = ({ data, isLoading, top, page, showSocketInfo, socketInfoNum
       <Table variant="simple" minWidth="1040px" size="md" fontWeight={ 500 }>
         <Thead top={ top }>
           <Tr>
-            <Th width="125px">Block</Th>
-            <Th width="120px">Size, bytes</Th>
+            <Th width="125px">{ t('blocksTable.block') }</Th>
+            <Th width="120px">{ t('blocksTable.sizeBytes') }</Th>
             { !config.UI.views.block.hiddenFields?.miner &&
-            <Th width={ `${ VALIDATOR_COL_WEIGHT / widthBase * 100 }%` } minW="160px">{ capitalize(getNetworkValidatorTitle()) }</Th> }
-            <Th width="64px" isNumeric>Txn</Th>
-            <Th width={ `${ GAS_COL_WEIGHT / widthBase * 100 }%` }>Gas used</Th>
+            <Th width={ `${ VALIDATOR_COL_WEIGHT / widthBase * 100 }%` } minW="160px">{ capitalize(t(getNetworkValidatorTitle())) }</Th> }
+            <Th width="64px" isNumeric>{ t('blocksTable.txn') }</Th>
+            <Th width={ `${ GAS_COL_WEIGHT / widthBase * 100 }%` }>{ t('blocksTable.gasUsed') }</Th>
             { !isRollup && !config.UI.views.block.hiddenFields?.total_reward &&
-              <Th width={ `${ REWARD_COL_WEIGHT / widthBase * 100 }%` }>Reward { currencyUnits.ether }</Th> }
+              <Th width={ `${ REWARD_COL_WEIGHT / widthBase * 100 }%` }>{ t('blocksTable.reward') } { currencyUnits.ether }</Th> }
             { !isRollup && !config.UI.views.block.hiddenFields?.burnt_fees &&
-              <Th width={ `${ FEES_COL_WEIGHT / widthBase * 100 }%` }>Burnt fees { currencyUnits.ether }</Th> }
+              <Th width={ `${ FEES_COL_WEIGHT / widthBase * 100 }%` }>{ t('blocksTable.burntFees') } { currencyUnits.ether }</Th> }
           </Tr>
         </Thead>
         <Tbody>
