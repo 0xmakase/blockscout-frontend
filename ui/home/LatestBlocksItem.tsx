@@ -5,6 +5,7 @@ import {
   Skeleton,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import type { Block } from 'types/api/block';
@@ -22,6 +23,7 @@ type Props = {
 }
 
 const LatestBlocksItem = ({ block, isLoading }: Props) => {
+  const { t } = useTranslation('blockDetails');
   const totalReward = getBlockTotalReward(block);
   return (
     <Box
@@ -56,19 +58,19 @@ const LatestBlocksItem = ({ block, isLoading }: Props) => {
         />
       </Flex>
       <Grid gridGap={ 2 } templateColumns="auto minmax(0, 1fr)" fontSize="sm">
-        <Skeleton isLoaded={ !isLoading }>Txn</Skeleton>
+        <Skeleton isLoaded={ !isLoading }>{ t('txn') }</Skeleton>
         <Skeleton isLoaded={ !isLoading } color="text_secondary"><span>{ block.tx_count }</span></Skeleton>
 
         { !config.features.rollup.isEnabled && !config.UI.views.block.hiddenFields?.total_reward && (
           <>
-            <Skeleton isLoaded={ !isLoading }>Reward</Skeleton>
+            <Skeleton isLoaded={ !isLoading }>{ t('reward') }</Skeleton>
             <Skeleton isLoaded={ !isLoading } color="text_secondary"><span>{ totalReward.dp(10).toFixed() }</span></Skeleton>
           </>
         ) }
 
         { !config.features.rollup.isEnabled && !config.UI.views.block.hiddenFields?.miner && (
           <>
-            <Skeleton isLoaded={ !isLoading } textTransform="capitalize">{ getNetworkValidatorTitle() }</Skeleton>
+            <Skeleton isLoaded={ !isLoading } textTransform="capitalize">{ t(getNetworkValidatorTitle()) }</Skeleton>
             <AddressEntity
               address={ block.miner }
               isLoading={ isLoading }

@@ -1,5 +1,6 @@
 import { Flex, Skeleton, Tooltip } from '@chakra-ui/react';
 import BigNumber from 'bignumber.js';
+import type { TFunction } from 'i18next';
 import React from 'react';
 
 import type { TxStateChange } from 'types/api/txStateChanges';
@@ -15,13 +16,13 @@ import TokenEntity from 'ui/shared/entities/token/TokenEntity';
 
 import TxStateTokenIdList from './TxStateTokenIdList';
 
-export function getStateElements(data: TxStateChange, isLoading?: boolean) {
+export function getStateElements(t: TFunction, data: TxStateChange, isLoading?: boolean) {
   const tag = (() => {
     if (data.is_miner) {
       return (
-        <Tooltip label="A block producer who successfully included the block into the blockchain">
+        <Tooltip label={ t('utils.block_producer_tooltip') }>
           <Tag textTransform="capitalize" colorScheme="yellow" isLoading={ isLoading }>
-            { getNetworkValidatorTitle() }
+            { t('utils.block_producer_tag', { validatorTitle: getNetworkValidatorTitle() }) }
           </Tag>
         </Tooltip>
       );
@@ -37,10 +38,10 @@ export function getStateElements(data: TxStateChange, isLoading?: boolean) {
       })();
 
       if (changeDirection) {
-        const text = changeDirection === 'from' ? 'Mint' : 'Burn';
+        const text = changeDirection === 'from' ? t('utils.mint_address_tag') : t('utils.burn_address_tag');
         return (
-          <Tooltip label="Address used in tokens mintings and burnings">
-            <Tag textTransform="capitalize" colorScheme="yellow" isLoading={ isLoading }>{ text } address</Tag>
+          <Tooltip label={ t('utils.mint_burn_address_tooltip') }>
+            <Tag textTransform="capitalize" colorScheme="yellow" isLoading={ isLoading }>{ text }</Tag>
           </Tooltip>
         );
       }
@@ -60,12 +61,12 @@ export function getStateElements(data: TxStateChange, isLoading?: boolean) {
       return {
         before: (
           <Skeleton isLoaded={ !isLoading } wordBreak="break-all" display="inline-block">
-            { beforeBn.toFormat() } { currencyUnits.ether }
+            { t('utils.coin_balance_before', { balance: beforeBn.toFormat(), currency: currencyUnits.ether }) }
           </Skeleton>
         ),
         after: (
           <Skeleton isLoaded={ !isLoading } wordBreak="break-all" display="inline-block">
-            { afterBn.toFormat() } { currencyUnits.ether }
+            { t('utils.coin_balance_after', { balance: afterBn.toFormat(), currency: currencyUnits.ether }) }
           </Skeleton>
         ),
         change: (
@@ -106,7 +107,7 @@ export function getStateElements(data: TxStateChange, isLoading?: boolean) {
 
         return (
           <Skeleton isLoaded={ !isLoading } display="inline-block" color={ changeColor }>
-            <span>{ changeSign }{ nbsp }{ differenceBn.abs().toFormat() }</span>
+            <span>{ t('utils.token_balance_change', { sign: changeSign, difference: differenceBn.abs().toFormat() }) }</span>
           </Skeleton>
         );
       })();
@@ -132,14 +133,14 @@ export function getStateElements(data: TxStateChange, isLoading?: boolean) {
       return {
         before: data.balance_before ? (
           <Flex whiteSpace="pre-wrap" justifyContent={{ base: 'flex-start', lg: 'flex-end' }} flexWrap="wrap">
-            <Skeleton isLoaded={ !isLoading }>{ beforeBn.toFormat() }</Skeleton>
+            <Skeleton isLoaded={ !isLoading }>{ t('utils.token_balance_before', { balance: beforeBn.toFormat() }) }</Skeleton>
             <span>{ space }</span>
             { tokenLink }
           </Flex>
         ) : null,
         after: data.balance_after ? (
           <Flex whiteSpace="pre-wrap" justifyContent={{ base: 'flex-start', lg: 'flex-end' }} flexWrap="wrap">
-            <Skeleton isLoaded={ !isLoading }>{ afterBn.toFormat() }</Skeleton>
+            <Skeleton isLoaded={ !isLoading }>{ t('utils.token_balance_after', { balance: afterBn.toFormat() }) }</Skeleton>
             <span>{ space }</span>
             { tokenLink }
           </Flex>

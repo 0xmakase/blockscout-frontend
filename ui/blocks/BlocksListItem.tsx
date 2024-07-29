@@ -1,6 +1,7 @@
 import { Flex, Skeleton, Text, Box, useColorModeValue } from '@chakra-ui/react';
 import BigNumber from 'bignumber.js';
 import capitalize from 'lodash/capitalize';
+import { useTranslation } from 'next-i18next';
 import React from 'react';
 
 import type { Block } from 'types/api/block';
@@ -31,6 +32,7 @@ interface Props {
 const isRollup = config.features.rollup.isEnabled;
 
 const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
+  const { t } = useTranslation('blockDetails');
   const totalReward = getBlockTotalReward(data);
   const burntFees = BigNumber(data.burnt_fees || 0);
   const txFees = BigNumber(data.tx_fees || 0);
@@ -52,14 +54,14 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
         <BlockTimestamp ts={ data.timestamp } isEnabled={ enableTimeIncrement } isLoading={ isLoading }/>
       </Flex>
       <Flex columnGap={ 2 }>
-        <Text fontWeight={ 500 }>Size</Text>
+        <Text fontWeight={ 500 }>{ t('size') }</Text>
         <Skeleton isLoaded={ !isLoading } display="inline-block" color="text_secondary">
-          <span>{ data.size.toLocaleString() } bytes</span>
+          <span>{ data.size.toLocaleString() } { t('bytes') }</span>
         </Skeleton>
       </Flex>
       { !config.UI.views.block.hiddenFields?.miner && (
         <Flex columnGap={ 2 } w="100%">
-          <Text fontWeight={ 500 }>{ capitalize(getNetworkValidatorTitle()) }</Text>
+          <Text fontWeight={ 500 }>{ capitalize(t(getNetworkValidatorTitle())) }</Text>
           <AddressEntity
             address={ data.miner }
             isLoading={ isLoading }
@@ -68,7 +70,7 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
         </Flex>
       ) }
       <Flex columnGap={ 2 }>
-        <Text fontWeight={ 500 }>Txn</Text>
+        <Text fontWeight={ 500 }>{ t('txn') }</Text>
         { data.tx_count > 0 ? (
           <Skeleton isLoaded={ !isLoading } display="inline-block">
             <LinkInternal href={ route({ pathname: '/block/[height_or_hash]', query: { height_or_hash: String(data.height), tab: 'txs' } }) }>
@@ -80,7 +82,7 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
         }
       </Flex>
       <Box>
-        <Text fontWeight={ 500 }>Gas used</Text>
+        <Text fontWeight={ 500 }>{ t('gasUsed') }</Text>
         <Flex mt={ 2 }>
           <Skeleton isLoaded={ !isLoading } display="inline-block" color="text_secondary" mr={ 4 }>
             <span>{ BigNumber(data.gas_used || 0).toFormat() }</span>
@@ -96,7 +98,7 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
       </Box>
       { !isRollup && !config.UI.views.block.hiddenFields?.total_reward && (
         <Flex columnGap={ 2 }>
-          <Text fontWeight={ 500 }>Reward { currencyUnits.ether }</Text>
+          <Text fontWeight={ 500 }>{ t('reward') } { currencyUnits.ether }</Text>
           <Skeleton isLoaded={ !isLoading } display="inline-block" color="text_secondary">
             <span>{ totalReward.toFixed() }</span>
           </Skeleton>
@@ -104,7 +106,7 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
       ) }
       { !isRollup && !config.UI.views.block.hiddenFields?.burnt_fees && (
         <Box>
-          <Text fontWeight={ 500 }>Burnt fees</Text>
+          <Text fontWeight={ 500 }>{ t('burntFees') }</Text>
           <Flex columnGap={ 4 } mt={ 2 }>
             <Flex>
               <IconSvg name="flame" boxSize={ 5 } color="gray.500" isLoading={ isLoading }/>
