@@ -1,6 +1,7 @@
 import { Alert, AlertIcon, AlertTitle, Skeleton } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { SocketMessage } from 'lib/socket/types';
 import type { IndexingStatus } from 'types/api/indexingStatus';
@@ -14,6 +15,7 @@ import useSocketChannel from 'lib/socket/useSocketChannel';
 import useSocketMessage from 'lib/socket/useSocketMessage';
 
 const IndexingBlocksAlert = () => {
+  const { t } = useTranslation();
   const appProps = useAppContext();
   const cookiesString = appProps.cookies;
   const [ hasAlertCookie ] = React.useState(cookies.get(cookies.NAMES.INDEXING_ALERT, cookiesString) === 'true');
@@ -59,7 +61,12 @@ const IndexingBlocksAlert = () => {
   }
 
   if (isError) {
-    return null;
+    return (
+      <Alert status="error" colorScheme="red" py={ 3 } borderRadius="md">
+        <AlertIcon display={{ base: 'none', lg: 'flex' }}/>
+        <AlertTitle>{ t('indexingBlocksAlert.error') }</AlertTitle>
+      </Alert>
+    );
   }
 
   if (isPending) {
@@ -74,8 +81,7 @@ const IndexingBlocksAlert = () => {
     <Alert status="info" colorScheme="gray" py={ 3 } borderRadius="md">
       <AlertIcon display={{ base: 'none', lg: 'flex' }}/>
       <AlertTitle>
-        { `${ data.indexed_blocks_ratio && `${ Math.floor(Number(data.indexed_blocks_ratio) * 100) }% Blocks Indexed${ nbsp }${ ndash } ` }
-          We're indexing this chain right now. Some of the counts may be inaccurate.` }
+        { t('indexingBlocksAlert.title', { ratio: Math.floor(Number(data.indexed_blocks_ratio) * 100), nbsp, ndash }) }
       </AlertTitle>
     </Alert>
   );

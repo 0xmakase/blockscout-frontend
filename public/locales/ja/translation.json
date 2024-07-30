@@ -40,7 +40,18 @@
         "latestL1StateBatch": "最新のL1ステートバッチ",
         "walletAddresses": "ウォレットアドレス",
         "gasTracker": "ガストラッカー",
-        "btcLocked": "2WPにロックされたBTC"
+        "btcLocked": "2WPにロックされたBTC",
+        "pageTitle": {
+            "enhanced": "{{chainName}}の統計とデータ",
+            "default": "{{chainName}}の統計"
+          },
+          "numberWidgetsList": "数値ウィジェット",
+          "chartsWidgetsList": "チャートウィジェット",
+          "filters": {
+            "sections": "セクション",
+            "interval": "間隔",
+            "filterInput": "フィルター入力"
+        }
     },
     "indicators": {
         "dailyTxs": "日次トランザクション数",
@@ -571,5 +582,19 @@
         "token_spawning_title": "トークン作成",
         "token_spawning_hint": "トランザクションで作成されたトークンのリスト",
         "view_all": "すべて表示"
+    },
+    "txDetailsOther": {
+        "hint": "このトランザクションに関連するその他のデータ",
+        "label": "その他",
+        "txnType": "トランザクションタイプ",
+        "eip1559": "(EIP-1559)",
+        "eip4844": "(EIP-4844)",
+        "nonce": "ナンス",
+        "position": "位置"
+    },
+    "indexingBlocksAlert": {
+        "title": "{{ratio}}%のブロックがインデックスされています{{nbsp}}– 現在、このチェーンをインデックス中です。一部のカウントが正確でない可能性があります。",
+        "error": "インデックス状態の取得中にエラーが発生しました。",
+        "pending": "インデックス状態を読み込み中..."
     }
 }

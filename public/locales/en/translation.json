@@ -40,7 +40,18 @@
         "latestL1StateBatch": "Latest L1 state batch",
         "walletAddresses": "Wallet addresses",
         "gasTracker": "Gas tracker",
-        "btcLocked": "BTC Locked in 2WP"
+        "btcLocked": "BTC Locked in 2WP",
+        "pageTitle": {
+            "enhanced": "{{chainName}} statistic & data",
+            "default": "{{chainName}} stats"
+          },
+          "numberWidgetsList": "Number Widgets",
+          "chartsWidgetsList": "Charts Widgets",
+          "filters": {
+            "sections": "Sections",
+            "interval": "Interval",
+            "filterInput": "Filter Input"
+        }
     },
     "indicators": {
         "dailyTxs": "Daily transactions",
@@ -579,5 +590,19 @@
         "token_spawning_title": "Tokens created",
         "token_spawning_hint": "List of tokens created in the transaction",
         "view_all": "View all"
+    },
+    "txDetailsOther": {
+        "hint": "Other data related to this transaction",
+        "label": "Other",
+        "txnType": "Txn type",
+        "eip1559": "(EIP-1559)",
+        "eip4844": "(EIP-4844)",
+        "nonce": "Nonce",
+        "position": "Position"
+    },
+    "indexingBlocksAlert": {
+        "title": "{{ratio}}% Blocks Indexed{{nbsp}}– We're indexing this chain right now. Some of the counts may be inaccurate.",
+        "error": "An error occurred while fetching the indexing status.",
+        "pending": "Loading indexing status..."
     }
 }
