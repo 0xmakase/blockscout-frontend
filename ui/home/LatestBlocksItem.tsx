@@ -58,12 +58,12 @@ const LatestBlocksItem = ({ block, isLoading }: Props) => {
         />
       </Flex>
       <Grid gridGap={ 2 } templateColumns="auto minmax(0, 1fr)" fontSize="sm">
-        <Skeleton isLoaded={ !isLoading }>{ t('txn') }</Skeleton>
+        <Skeleton isLoaded={ !isLoading }>{ t('blocksTable.txn') }</Skeleton>
         <Skeleton isLoaded={ !isLoading } color="text_secondary"><span>{ block.tx_count }</span></Skeleton>
 
         { !config.features.rollup.isEnabled && !config.UI.views.block.hiddenFields?.total_reward && (
           <>
-            <Skeleton isLoaded={ !isLoading }>{ t('reward') }</Skeleton>
+            <Skeleton isLoaded={ !isLoading }>{ t('blocksTable.reward') }</Skeleton>
             <Skeleton isLoaded={ !isLoading } color="text_secondary"><span>{ totalReward.dp(10).toFixed() }</span></Skeleton>
           </>
         ) }
