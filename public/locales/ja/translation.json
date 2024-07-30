@@ -553,12 +553,12 @@
     },
     "socketNewItemsNotice": {
         "token_transfer": "トークン転送",
-        "deposit": "入金",
+        "deposit": "預金",
         "block": "ブロック",
         "transaction": "取引",
-        "scanning": "{name}をスキャンしています...",
-        "more": "{num}件の{name}が追加されました",
-        "come_in": "{num}件の{name}が追加されました"
+        "scanning": "新しい{{name}}をスキャン中...",
+        "more": "{{num}} 件の{{name}}{{plural}}",
+        "come_in": " が{{plural}}入りました"
     },
     "blockPageContent": {
         "details": "詳細",
