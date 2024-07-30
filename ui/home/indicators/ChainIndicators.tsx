@@ -97,7 +97,7 @@ const ChainIndicators = () => {
       <Flex flexGrow={ 1 } flexDir="column">
         <Flex alignItems="center">
           <Text fontWeight={ 500 }>{ t(indicator?.title || '', { symbol: config.chain.currency.symbol || '' }) }</Text>
-          { indicator?.hint && <Hint label={ indicator.hint } ml={ 1 }/> }
+          { indicator?.hint && <Hint label={ t(indicator.hint || '', { symbol: config.chain.currency.symbol || '' }) } ml={ 1 }/> }
         </Flex>
         <Flex mb={{ base: 0, lg: 2 }} mt={ 1 } alignItems="end">
           { valueTitle }
