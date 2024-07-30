@@ -1,5 +1,6 @@
 import { Alert, Skeleton, chakra } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import config from 'configs/app';
 
@@ -9,13 +10,15 @@ interface Props {
 }
 
 const TestnetWarning = ({ isLoading, className }: Props) => {
+  const { t } = useTranslation();
+
   if (!config.chain.isTestnet) {
     return null;
   }
 
   return (
     <Skeleton className={ className } isLoaded={ !isLoading }>
-      <Alert status="warning">This is a testnet transaction only</Alert>
+      <Alert status="warning">{ t('testnetWarning.message') }</Alert>
     </Skeleton>
   );
 };

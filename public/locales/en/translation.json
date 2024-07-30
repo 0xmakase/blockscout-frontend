@@ -259,6 +259,7 @@
         "status": "Status",
         "validatedByHint": "A block producer who successfully included the block onto the blockchain",
         "validatedBy": "Validated by",
+        "minedBy": "Mined by",
         "sequencedBy": "Sequenced by",
         "commitmentTxHint": "L1 transaction containing this batch commitment",
         "commitmentTx": "Commitment tx",
@@ -406,6 +407,143 @@
         "token_balance_after": "{{balance}}",
         "token_balance_change": "{{sign}} {{difference}}",
         "token_id_change": "Token ID: {{id}}"
+    },
+    "blocksContent": {
+        "connectionLostAlert": "Connection is lost. Please refresh the page to load new blocks.",
+        "errorAlert": "An error has occurred while fetching new blocks. Please refresh the page to load new blocks.",
+        "blockCountdown": "Block countdown",
+        "noBlocks": "There are no blocks."
+    },
+    "contract_verification": {
+        "page_title": "Verify & publish contract"
+    },
+    "data_fetch_alert": {
+        "description": "Something went wrong. Try refreshing the page or come back later."
+    },
+    "content_loader": {
+        "text": "Loading data, please wait..."
+    },
+    "tokens": {
+        "all_tab": "All",
+        "bridged_tab": "Bridged",
+        "page_title": "Tokens on {{chainName}}",
+        "page_title_generic": "Tokens",
+        "bridged_tokens_description": "List of the tokens bridged through {{bridgesList}} extensions",
+        "and": "and"
+    },
+    "contractVerification": {
+        "license_placeholder": "Contract license",
+        "license_note": "For best practices, all contract source code holders, publishers and authors are encouraged to also specify the accompanying license for their verified contract source code provided.",
+        "smart_contract_address": "Smart contract / Address (0x...)",
+        "contract_address_to_verify": "Contract address to verify",
+        "supported_methods": "Currently, Blockscout supports {{count}} contract verification methods",
+        "supported_methods_list": "Currently, Blockscout supports {{count}} methods:",
+        "flattened_code": "Verification through flattened source code.",
+        "multi_part": "Verification of multi-part Solidity files.",
+        "sourcify": "Verification through",
+        "standard_input": "Verification using",
+        "vyper_code": "Verification of Vyper contract.",
+        "vyper_multi_part": "Verification of multi-part Vyper files.",
+        "vyper_standard_input": "Verification of Vyper contract using",
+        "verification_method_placeholder": "Verification method (compiler type)"
+    },
+    "gasTrackerChart": {
+        "title": "Gas price history",
+        "linkText": "Charts & stats"
+    },
+    "gasTracker": {
+        "title": "Gas tracker",
+        "lastUpdated": "Last updated",
+        "coinPrice": "$ {{price}}",
+        "noData": "No recent data available"
+    },
+    "gasPrices": {
+        "fast": {
+          "title": "Fast"
+        },
+        "average": {
+          "title": "Normal"
+        },
+        "slow": {
+          "title": "Slow"
+        },
+        "perTransaction": "per transaction",
+        "seconds": "s",
+        "baseFee": "Base",
+        "priorityFee": "Priority"
+    },
+    "gasTrackerNetworkUtilization": {
+        "networkUtilization": "Network utilization",
+        "high": "high",
+        "medium": "medium",
+        "low": "low",
+        "load": "load"
+    },
+    "blocksTabSlot": {
+        "networkUtilization": "Network utilization (last 50 blocks):",
+        "blockCountdown": "Block countdown"
+    },
+    "addressNameInfo": {
+        "tokenNameHint": "Token name and symbol",
+        "tokenName": "Token name",
+        "contractNameHint": "The name found in the source code of the Contract",
+        "contractName": "Contract name",
+        "validatorNameHint": "The name of the validator",
+        "validatorName": "Validator name"
+    },
+    "addressDetails": {
+        "creatorHint": "Transaction and address of creation",
+        "creator": "Creator",
+        "atTxn": "at txn",
+        "tokensHint": "All tokens in the account and total value",
+        "tokens": "Tokens",
+        "netWorthHint": "Total net worth in USD of all tokens for the address",
+        "netWorth": "Net worth",
+        "transactionsHint": "Number of transactions related to this address",
+        "transactions": "Transactions",
+        "transfersHint": "Number of transfers to/from this address",
+        "transfers": "Transfers",
+        "gasUsedHint": "Gas used by the address",
+        "gasUsed": "Gas used",
+        "blocksValidatedHint": "Number of blocks validated by this validator",
+        "blocksValidated": "Blocks validated",
+        "lastBalanceUpdateHint": "Block number in which the address was updated",
+        "lastBalanceUpdate": "Last balance update"
+    },
+    "tokenBalances": {
+        "netWorth": "Net Worth",
+        "balance": "Balance",
+        "tokens": "Tokens",
+        "token": "Token"
+    },
+    "detailsSponsoredItem": {
+        "sponsoredHint": "Sponsored banner advertisement",
+        "sponsored": "Sponsored"
+    },
+    "transactionPageContent": {
+        "confidentialComputeTxDetails": "Confidential compute tx details",
+        "details": "Details",
+        "assetFlows": "Asset Flows",
+        "regularTxDetails": "Regular tx details",
+        "tokenTransfers": "Token transfers",
+        "userOperations": "User operations",
+        "internalTxns": "Internal txns",
+        "blobs": "Blobs",
+        "logs": "Logs",
+        "state": "State",
+        "rawTrace": "Raw trace",
+        "backToTxList": "Back to transactions list",
+        "title": "Transaction details"
+    },
+    "txDetailsGasPrice": {
+        "hint": "Price per unit of gas specified by the sender. Higher gas prices can prioritize transaction inclusion during times of high usage",
+        "label": "Gas price"
+    },
+    "txDetailsBurntFees": {
+        "hint": "Amount of {currency} burned for this transaction. Equals Block Base Fee per Gas * Gas Used{blobGasCondition}",
+        "label": "Burnt fees"
+    },
+    "testnetWarning": {
+        "message": "This is a testnet transaction only"
     }
-      
 }

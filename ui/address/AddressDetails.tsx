@@ -1,6 +1,7 @@
 import { Box, Text, Grid } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import config from 'configs/app';
 import throwOnResourceLoadError from 'lib/errors/throwOnResourceLoadError';
@@ -30,6 +31,7 @@ interface Props {
 }
 
 const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
+  const { t } = useTranslation();
   const router = useRouter();
 
   const addressHash = getQueryParamString(router.query.hash);
@@ -96,10 +98,10 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
         { data.is_contract && data.creation_tx_hash && data.creator_address_hash && (
           <>
             <DetailsInfoItem.Label
-              hint="Transaction and address of creation"
+              hint={ t('addressDetails.creatorHint') }
               isLoading={ addressQuery.isPlaceholderData }
             >
-              Creator
+              { t('addressDetails.creator') }
             </DetailsInfoItem.Label>
             <DetailsInfoItem.Value>
               <AddressEntity
@@ -107,7 +109,7 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
                 truncation="constant"
                 noIcon
               />
-              <Text whiteSpace="pre"> at txn </Text>
+              <Text whiteSpace="pre"> { t('addressDetails.atTxn') } </Text>
               <TxEntity hash={ data.creation_tx_hash } truncation="constant" noIcon noCopy={ false }/>
             </DetailsInfoItem.Value>
           </>
@@ -124,9 +126,9 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
         { data.has_tokens && (
           <>
             <DetailsInfoItem.Label
-              hint="All tokens in the account and total value"
+              hint={ t('addressDetails.tokensHint') }
             >
-              Tokens
+              { t('addressDetails.tokens') }
             </DetailsInfoItem.Label>
             <DetailsInfoItem.Value py={ addressQuery.data ? 0 : undefined }>
               { addressQuery.data ? <TokenSelect onClick={ handleCounterItemClick }/> : <Box>0</Box> }
@@ -136,10 +138,10 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
         { (config.features.multichainButton.isEnabled || (data.exchange_rate && data.has_tokens)) && (
           <>
             <DetailsInfoItem.Label
-              hint="Total net worth in USD of all tokens for the address"
+              hint={ t('addressDetails.netWorthHint') }
               isLoading={ addressQuery.isPlaceholderData }
             >
-              Net worth
+              { t('addressDetails.netWorth') }
             </DetailsInfoItem.Label>
             <DetailsInfoItem.Value alignSelf="center" py={ 0 }>
               <AddressNetWorth addressData={ addressQuery.data } addressHash={ addressHash } isLoading={ addressQuery.isPlaceholderData }/>
@@ -149,10 +151,10 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
         }
 
         <DetailsInfoItem.Label
-          hint="Number of transactions related to this address"
+          hint={ t('addressDetails.transactionsHint') }
           isLoading={ addressQuery.isPlaceholderData || countersQuery.isPlaceholderData }
         >
-          Transactions
+          { t('addressDetails.transactions') }
         </DetailsInfoItem.Label>
         <DetailsInfoItem.Value>
           { addressQuery.data ? (
@@ -171,10 +173,10 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
         { data.has_token_transfers && (
           <>
             <DetailsInfoItem.Label
-              hint="Number of transfers to/from this address"
+              hint={ t('addressDetails.transfersHint') }
               isLoading={ addressQuery.isPlaceholderData || countersQuery.isPlaceholderData }
             >
-              Transfers
+              { t('addressDetails.transfers') }
             </DetailsInfoItem.Label>
             <DetailsInfoItem.Value>
               { addressQuery.data ? (
@@ -195,10 +197,10 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
         { countersQuery.data?.gas_usage_count && (
           <>
             <DetailsInfoItem.Label
-              hint="Gas used by the address"
+              hint={ t('addressDetails.gasUsedHint') }
               isLoading={ addressQuery.isPlaceholderData || countersQuery.isPlaceholderData }
             >
-              Gas used
+              { t('addressDetails.gasUsed') }
             </DetailsInfoItem.Label>
             <DetailsInfoItem.Value>
               { addressQuery.data ? (
@@ -219,10 +221,10 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
         { data.has_validated_blocks && (
           <>
             <DetailsInfoItem.Label
-              hint="Number of blocks validated by this validator"
+              hint={ t('addressDetails.blocksValidatedHint') }
               isLoading={ addressQuery.isPlaceholderData || countersQuery.isPlaceholderData }
             >
-              Blocks validated
+              { t('addressDetails.blocksValidated') }
             </DetailsInfoItem.Label>
             <DetailsInfoItem.Value>
               { addressQuery.data ? (
@@ -243,10 +245,10 @@ const AddressDetails = ({ addressQuery, scrollRef }: Props) => {
         { data.block_number_balance_updated_at && (
           <>
             <DetailsInfoItem.Label
-              hint="Block number in which the address was updated"
+              hint={ t('addressDetails.lastBalanceUpdateHint') }
               isLoading={ addressQuery.isPlaceholderData }
             >
-              Last balance update
+              { t('addressDetails.lastBalanceUpdate') }
             </DetailsInfoItem.Label>
             <DetailsInfoItem.Value>
               <BlockEntity

@@ -32,7 +32,6 @@ export default function useStats() {
   const sectionIds = useMemo(() => data?.sections?.map(({ id }) => id), [ data ]);
 
   React.useEffect(() => {
-    console.log('useState Data', data); // eslint-disable-line no-console
     if (!isPlaceholderData && !isError) {
       const chartId = getQueryParamString(router.query.chartId);
       const chartName = data?.sections.map((section) => section.charts.find((chart) => chart.id === chartId)).filter(Boolean)[0]?.title;

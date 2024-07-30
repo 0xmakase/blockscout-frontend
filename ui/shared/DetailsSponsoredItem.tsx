@@ -1,5 +1,6 @@
 import { GridItem } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import config from 'configs/app';
 import * as cookies from 'lib/cookies';
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const DetailsSponsoredItem = ({ isLoading }: Props) => {
+  const { t } = useTranslation();
   const isMobile = useIsMobile();
   const hasAdblockCookie = cookies.get(cookies.NAMES.ADBLOCK_DETECTED);
 
@@ -32,10 +34,10 @@ const DetailsSponsoredItem = ({ isLoading }: Props) => {
   return (
     <>
       <DetailsInfoItem.Label
-        hint="Sponsored banner advertisement"
+        hint={ t('detailsSponsoredItem.sponsoredHint') }
         isLoading={ isLoading }
       >
-        Sponsored
+        { t('detailsSponsoredItem.sponsored') }
       </DetailsInfoItem.Label>
       <DetailsInfoItem.Value>
         <AdBanner isLoading={ isLoading }/>

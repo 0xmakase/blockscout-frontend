@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { RoutedTab } from 'ui/shared/Tabs/types';
 
@@ -32,6 +33,7 @@ import useTxQuery from 'ui/tx/useTxQuery';
 const txInterpretation = config.features.txInterpretation;
 
 const TransactionPageContent = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const appProps = useAppContext();
 
@@ -41,7 +43,7 @@ const TransactionPageContent = () => {
 
   const showDegradedView = publicClient && ((isError && error.status !== 422) || isPlaceholderData) && errorUpdateCount > 0;
 
-  const tabs: Array<RoutedTab> = (() => {
+  const tabs: Array<RoutedTab> = React.useMemo(() => {
     const detailsComponent = showDegradedView ?
       <TxDetailsDegraded hash={ hash } txQuery={ txQuery }/> :
       <TxDetails txQuery={ txQuery }/>;
@@ -49,28 +51,28 @@ const TransactionPageContent = () => {
     return [
       {
         id: 'index',
-        title: config.features.suave.isEnabled && data?.wrapped ? 'Confidential compute tx details' : 'Details',
-        component: detailsComponent,
+        title: config.features.suave.isEnabled && data?.wrapped ? t('transactionPageContent.confidentialComputeTxDetails') :
+          t('transactionPageContent.details'), component: detailsComponent,
       },
       txInterpretation.isEnabled && txInterpretation.provider === 'noves' ?
-        { id: 'asset_flows', title: 'Asset Flows', component: <TxAssetFlows hash={ hash }/> } :
+        { id: 'asset_flows', title: t('transactionPageContent.assetFlows'), component: <TxAssetFlows hash={ hash }/> } :
         undefined,
       config.features.suave.isEnabled && data?.wrapped ?
-        { id: 'wrapped', title: 'Regular tx details', component: <TxDetailsWrapped data={ data.wrapped }/> } :
+        { id: 'wrapped', title: t('transactionPageContent.regularTxDetails'), component: <TxDetailsWrapped data={ data.wrapped }/> } :
         undefined,
-      { id: 'token_transfers', title: 'Token transfers', component: <TxTokenTransfer txQuery={ txQuery }/> },
+      { id: 'token_transfers', title: t('transactionPageContent.tokenTransfers'), component: <TxTokenTransfer txQuery={ txQuery }/> },
       config.features.userOps.isEnabled ?
-        { id: 'user_ops', title: 'User operations', component: <TxUserOps txQuery={ txQuery }/> } :
+        { id: 'user_ops', title: t('transactionPageContent.userOperations'), component: <TxUserOps txQuery={ txQuery }/> } :
         undefined,
-      { id: 'internal', title: 'Internal txns', component: <TxInternals txQuery={ txQuery }/> },
+      { id: 'internal', title: t('transactionPageContent.internalTxns'), component: <TxInternals txQuery={ txQuery }/> },
       config.features.dataAvailability.isEnabled && txQuery.data?.blob_versioned_hashes?.length ?
-        { id: 'blobs', title: 'Blobs', component: <TxBlobs txQuery={ txQuery }/> } :
+        { id: 'blobs', title: t('transactionPageContent.blobs'), component: <TxBlobs txQuery={ txQuery }/> } :
         undefined,
-      { id: 'logs', title: 'Logs', component: <TxLogs txQuery={ txQuery }/> },
-      { id: 'state', title: 'State', component: <TxState txQuery={ txQuery }/> },
-      { id: 'raw_trace', title: 'Raw trace', component: <TxRawTrace txQuery={ txQuery }/> },
+      { id: 'logs', title: t('transactionPageContent.logs'), component: <TxLogs txQuery={ txQuery }/> },
+      { id: 'state', title: t('transactionPageContent.state'), component: <TxState txQuery={ txQuery }/> },
+      { id: 'raw_trace', title: t('transactionPageContent.rawTrace'), component: <TxRawTrace txQuery={ txQuery }/> },
     ].filter(Boolean);
-  })();
+  }, [ t, hash, txQuery, data, showDegradedView ]);
 
   const tabIndex = useTabIndexFromQuery(tabs);
 
@@ -89,10 +91,10 @@ const TransactionPageContent = () => {
     }
 
     return {
-      label: 'Back to transactions list',
+      label: t('transactionPageContent.backToTxList'),
       url: appProps.referrer,
     };
-  }, [ appProps.referrer ]);
+  }, [ appProps.referrer, t ]);
 
   const titleSecondRow = <TxSubHeading hash={ hash } hasTag={ Boolean(data?.tx_tag) } txQuery={ txQuery }/>;
 
@@ -119,7 +121,7 @@ const TransactionPageContent = () => {
     <>
       <TextAd mb={ 6 }/>
       <PageTitle
-        title="Transaction details"
+        title={ t('transactionPageContent.title') }
         backLink={ backLink }
         contentAfter={ tags }
         secondRow={ titleSecondRow }

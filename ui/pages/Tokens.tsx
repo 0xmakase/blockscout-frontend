@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { TokenType } from 'types/api/token';
 import type { TokensSortingValue, TokensSortingField, TokensSorting } from 'types/api/tokens';
@@ -43,6 +44,7 @@ const bridgedTokensFeature = config.features.bridgedTokens;
 const Tokens = () => {
   const router = useRouter();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
   const tab = getQueryParamString(router.query.tab);
   const q = getQueryParamString(router.query.q);
@@ -134,12 +136,12 @@ const Tokens = () => {
     }
 
     const bridgesListText = bridgedTokensFeature.bridges.map((item, index, array) => {
-      return item.title + (index < array.length - 2 ? ', ' : '') + (index === array.length - 2 ? ' and ' : '');
+      return item.title + (index < array.length - 2 ? ', ' : '') + (index === array.length - 2 ? t('tokens.and') : '');
     });
 
     return (
       <Box fontSize="sm" mb={ 4 } mt={ 1 } whiteSpace="pre-wrap" flexWrap="wrap">
-        List of the tokens bridged through { bridgesListText } extensions
+        { t('tokens.bridged_tokens_description', { bridgesList: bridgesListText }) }
       </Box>
     );
   })();
@@ -147,7 +149,7 @@ const Tokens = () => {
   const tabs: Array<RoutedTab> = [
     {
       id: 'all',
-      title: 'All',
+      title: t('tokens.all_tab'),
       component: (
         <TokensList
           query={ tokensQuery }
@@ -161,7 +163,7 @@ const Tokens = () => {
     },
     bridgedTokensFeature.isEnabled ? {
       id: 'bridged',
-      title: 'Bridged',
+      title: t('tokens.bridged_tab'),
       component: (
         <TokensList
           query={ tokensQuery }
@@ -179,7 +181,7 @@ const Tokens = () => {
   return (
     <>
       <PageTitle
-        title={ config.meta.seo.enhancedDataEnabled ? `Tokens on ${ config.chain.name }` : 'Tokens' }
+        title={ config.meta.seo.enhancedDataEnabled ? t('tokens.page_title', { chainName: config.chain.name }) : t('tokens.page_title_generic') }
         withTextAd
       />
       { !hasMultipleTabs && !isMobile && actionBar }

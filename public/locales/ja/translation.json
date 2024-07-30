@@ -230,9 +230,9 @@
     },
     "blocksTable": {
         "block": "ブロック",
-        "sizeBytes": "サイズ、バイト",
+        "sizeBytes": "サイズ,バイト",
         "validator": "バリデーター",
-        "txn": "トランザクション",
+        "txn": "Txn",
         "gasUsed": "使用されたガス",
         "reward": "報酬",
         "burntFees": "燃焼された手数料"
@@ -259,6 +259,7 @@
         "status": "ステータス",
         "validatedByHint": "ブロックチェーンにブロックを正常に追加したブロックプロデューサー",
         "validatedBy": "検証者",
+        "minedBy": "マイニング者による",
         "sequencedBy": "シーケンサー",
         "commitmentTxHint": "このバッチコミットメントを含むL1トランザクション",
         "commitmentTx": "コミットメントtx",
@@ -398,5 +399,143 @@
         "token_balance_after": "{{balance}}",
         "token_balance_change": "{{sign}} {{difference}}",
         "token_id_change": "トークンID: {{id}}"
-    }          
+    },
+    "blocksContent": {
+        "connectionLostAlert": "接続が失われました。新しいブロックを読み込むにはページを更新してください。",
+        "errorAlert": "新しいブロックの取得中にエラーが発生しました。新しいブロックを読み込むにはページを更新してください。",
+        "blockCountdown": "ブロックカウントダウン",
+        "noBlocks": "ブロックがありません。"
+    },
+    "contract_verification": {
+        "page_title": "コントラクトの検証と公開"
+    },
+    "data_fetch_alert": {
+        "description": "問題が発生しました。ページを更新するか、後で戻ってきてください。"
+    },
+    "content_loader": {
+        "text": "データを読み込んでいます。お待ちください..."
+    },
+    "tokens": {
+        "all_tab": "すべて",
+        "bridged_tab": "ブリッジ済み",
+        "page_title": "{{chainName}} のトークン",
+        "page_title_generic": "トークン",
+        "bridged_tokens_description": "{{bridgesList}} 拡張機能を通じてブリッジされたトークンのリスト",
+        "and": "および"
+    },
+    "contractVerification": {
+        "license_placeholder": "契約ライセンス",
+        "license_note": "ベストプラクティスとして、すべての契約ソースコードの保有者、出版社、および著者は、提供された検証済み契約ソースコードに付随するライセンスを指定することをお勧めします。",
+        "smart_contract_address": "スマートコントラクト / アドレス (0x...)",
+        "contract_address_to_verify": "検証する契約アドレス",
+        "supported_methods": "現在、Blockscoutは{{count}}つの契約検証方法をサポートしています",
+        "supported_methods_list": "現在、Blockscoutは{{count}}つの方法をサポートしています：",
+        "flattened_code": "フラット化されたソースコードによる検証。",
+        "multi_part": "マルチパートSolidityファイルの検証。",
+        "sourcify": "Sourcifyを通じた検証",
+        "standard_input": "標準入力JSONファイルを使用した検証",
+        "vyper_code": "Vyper契約の検証。",
+        "vyper_multi_part": "マルチパートVyperファイルの検証。",
+        "vyper_standard_input": "標準入力JSONファイルを使用したVyper契約の検証",
+        "verification_method_placeholder": "検証方法（コンパイラタイプ）"
+    },
+    "gasTrackerChart": {
+        "title": "ガス価格の履歴",
+        "linkText": "チャートと統計"
+    },
+    "gasTracker": {
+        "title": "ガストラッカー",
+        "lastUpdated": "最終更新",
+        "coinPrice": "価格: ${{price}}",
+        "noData": "最近のデータはありません"
+    },
+    "gasPrices": {
+        "fast": {
+          "title": "高速"
+        },
+        "average": {
+          "title": "標準"
+        },
+        "slow": {
+          "title": "低速"
+        },
+        "perTransaction": "取引ごと",
+        "seconds": "秒",
+        "baseFee": "基本料金",
+        "priorityFee": "優先料金"
+    },
+    "gasTrackerNetworkUtilization": {
+        "networkUtilization": "ネットワーク利用率",
+        "high": "高負荷",
+        "medium": "中負荷",
+        "low": "低負荷",
+        "load": "負荷"
+    },
+    "blocksTabSlot": {
+        "networkUtilization": "ネットワーク利用率 (最後の50ブロック):",
+        "blockCountdown": "ブロックカウントダウン"
+    },
+    "addressNameInfo": {
+        "tokenNameHint": "トークンの名前とシンボル",
+        "tokenName": "トークン名",
+        "contractNameHint": "コントラクトのソースコードに記載されている名前",
+        "contractName": "コントラクト名",
+        "validatorNameHint": "バリデータの名前",
+        "validatorName": "バリデータ名"
+    },
+    "addressDetails": {
+        "creatorHint": "作成のトランザクションとアドレス",
+        "creator": "作成者",
+        "atTxn": "のトランザクションで",
+        "tokensHint": "アカウント内のすべてのトークンと総価値",
+        "tokens": "トークン",
+        "netWorthHint": "アドレス内のすべてのトークンの総純資産額 (USD)",
+        "netWorth": "純資産",
+        "transactionsHint": "このアドレスに関連するトランザクションの数",
+        "transactions": "トランザクション",
+        "transfersHint": "このアドレスへの送信および受信の転送数",
+        "transfers": "転送",
+        "gasUsedHint": "このアドレスによって使用されたガス",
+        "gasUsed": "使用されたガス",
+        "blocksValidatedHint": "このバリデーターが検証したブロック数",
+        "blocksValidated": "検証されたブロック",
+        "lastBalanceUpdateHint": "アドレスが更新されたブロック番号",
+        "lastBalanceUpdate": "最終残高更新"
+    },
+    "tokenBalances": {
+        "netWorth": "純資産",
+        "balance": "残高",
+        "tokens": "トークン",
+        "token": "トークン"
+    },
+    "detailsSponsoredItem": {
+        "sponsoredHint": "スポンサー付きバナー広告",
+        "sponsored": "スポンサー"
+    },
+    "transactionPageContent": {
+        "confidentialComputeTxDetails": "秘密計算取引の詳細",
+        "details": "詳細",
+        "assetFlows": "資産の流れ",
+        "regularTxDetails": "通常の取引の詳細",
+        "tokenTransfers": "トークン転送",
+        "userOperations": "ユーザー操作",
+        "internalTxns": "内部取引",
+        "blobs": "ブロブ",
+        "logs": "ログ",
+        "state": "状態",
+        "rawTrace": "生のトレース",
+        "backToTxList": "取引リストに戻る",
+        "title": "取引の詳細"
+    },
+    "txDetailsGasPrice": {
+        "hint": "送信者によって指定されたガス単位あたりの価格。使用率が高い時期に高いガス価格は取引の優先度を上げることができます",
+        "label": "ガス価格"
+    },
+    "txDetailsBurntFees": {
+        "hint": "このトランザクションで焼かれた{currency}の量。イーサリアムのベースガス料金 * 使用されたガス{blobGasCondition}",
+        "label": "焼却手数料"
+    },
+    "testnetWarning": {
+        "message": "これはテストネットのトランザクションです"
+    }
 }
