@@ -405,5 +405,22 @@
         "errorAlert": "新しいブロックの取得中にエラーが発生しました。新しいブロックを読み込むにはページを更新してください。",
         "blockCountdown": "ブロックカウントダウン",
         "noBlocks": "ブロックがありません。"
+    },
+    "contract_verification": {
+        "page_title": "コントラクトの検証と公開"
+    },
+    "data_fetch_alert": {
+        "description": "問題が発生しました。ページを更新するか、後で戻ってきてください。"
+    },
+    "content_loader": {
+        "text": "データを読み込んでいます。お待ちください..."
+    },
+    "tokens": {
+        "all_tab": "すべて",
+        "bridged_tab": "ブリッジ済み",
+        "page_title": "{{chainName}} のトークン",
+        "page_title_generic": "トークン",
+        "bridged_tokens_description": "{{bridgesList}} 拡張機能を通じてブリッジされたトークンのリスト",
+        "and": "および"
     }
 }

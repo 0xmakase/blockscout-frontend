@@ -1,6 +1,7 @@
 import { Box, Text, chakra } from '@chakra-ui/react';
 import { keyframes } from '@chakra-ui/system';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const runnerAnimation = keyframes`
     0% { left: 0%; transform: translateX(-1%); }
@@ -13,6 +14,8 @@ interface Props {
 }
 
 const ContentLoader = ({ className, text }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <Box display="inline-block" className={ className }>
       <Box
@@ -32,7 +35,7 @@ const ContentLoader = ({ className, text }: Props) => {
         }}
       />
       <Text mt={ 6 } variant="secondary">
-        { text || 'Loading data, please wait...' }
+        { text || t('content_loader.text') }
       </Text>
     </Box>
   );

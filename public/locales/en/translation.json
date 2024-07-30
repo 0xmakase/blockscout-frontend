@@ -413,5 +413,22 @@
         "errorAlert": "An error has occurred while fetching new blocks. Please refresh the page to load new blocks.",
         "blockCountdown": "Block countdown",
         "noBlocks": "There are no blocks."
+    },
+    "contract_verification": {
+        "page_title": "Verify & publish contract"
+    },
+    "data_fetch_alert": {
+        "description": "Something went wrong. Try refreshing the page or come back later."
+    },
+    "content_loader": {
+        "text": "Loading data, please wait..."
+    },
+    "tokens": {
+        "all_tab": "All",
+        "bridged_tab": "Bridged",
+        "page_title": "Tokens on {{chainName}}",
+        "page_title_generic": "Tokens",
+        "bridged_tokens_description": "List of the tokens bridged through {{bridgesList}} extensions",
+        "and": "and"
     }
 }

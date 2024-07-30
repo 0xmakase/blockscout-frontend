@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import ContractVerificationForm from 'ui/contractVerification/ContractVerificationForm';
 import useFormConfigQuery from 'ui/contractVerification/useFormConfigQuery';
@@ -7,6 +8,7 @@ import DataFetchAlert from 'ui/shared/DataFetchAlert';
 import PageTitle from 'ui/shared/Page/PageTitle';
 
 const ContractVerification = () => {
+  const { t } = useTranslation();
   const configQuery = useFormConfigQuery(true);
 
   const content = (() => {
@@ -25,7 +27,7 @@ const ContractVerification = () => {
 
   return (
     <>
-      <PageTitle title="Verify & publish contract"/>
+      <PageTitle title={ t('contract_verification.page_title') }/>
       { content }
     </>
   );
