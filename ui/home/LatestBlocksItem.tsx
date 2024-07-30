@@ -23,7 +23,7 @@ type Props = {
 }
 
 const LatestBlocksItem = ({ block, isLoading }: Props) => {
-  const { t } = useTranslation('blockDetails');
+  const { t } = useTranslation();
   const totalReward = getBlockTotalReward(block);
   return (
     <Box
