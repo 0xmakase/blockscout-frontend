@@ -1,5 +1,6 @@
 import { Box, Flex, chakra, useBoolean } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { route } from 'nextjs-routes';
 
@@ -13,12 +14,36 @@ import ChartWidgetContainer from 'ui/stats/ChartWidgetContainer';
 const GAS_PRICE_CHART_ID = 'averageGasPrice';
 
 const GasTrackerChart = () => {
+  const { t } = useTranslation();
   const [ isChartLoadingError, setChartLoadingError ] = useBoolean(false);
   const { data, isPlaceholderData, isError } = useApiQuery('stats_lines', {
     queryOptions: {
       placeholderData: STATS_CHARTS,
     },
   });
+
+  const displayedCharts = React.useMemo(() => {
+    return data?.sections
+      ?.map((section) => {
+        const charts = section.charts
+          .filter((chart) => chart.id === GAS_PRICE_CHART_ID)
+          .map((chart) => {
+            const titleTranslationKey = `chartsAndStats.${ chart.title.replace(/ /g, '_').toLowerCase() }`;
+            const descriptionTranslationKey = `chartsAndStats.${ chart.description.replace(/ /g, '_').toLowerCase() }`;
+
+            return {
+              ...chart,
+              title: t(titleTranslationKey),
+              description: t(descriptionTranslationKey),
+            };
+          });
+        return {
+          ...section,
+          charts,
+        };
+      })
+      .filter((section) => section.charts.length > 0);
+  }, [ data?.sections, t ]);
 
   const content = (() => {
     if (isPlaceholderData) {
@@ -29,7 +54,7 @@ const GasTrackerChart = () => {
       return <DataFetchAlert/>;
     }
 
-    const chart = data?.sections.map((section) => section.charts.find((chart) => chart.id === GAS_PRICE_CHART_ID)).filter(Boolean)?.[0];
+    const chart = displayedCharts?.[0]?.charts?.[0];
 
     if (!chart) {
       return <DataFetchAlert/>;
@@ -52,8 +77,10 @@ const GasTrackerChart = () => {
   return (
     <Box>
       <Flex justifyContent="space-between" alignItems="center" mb={ 6 }>
-        <chakra.h3 textStyle="h3">Gas price history</chakra.h3>
-        <LinkInternal href={ route({ pathname: '/stats', hash: 'gas' }) }>Charts & stats</LinkInternal>
+        <chakra.h3 textStyle="h3">{ t('gasTrackerChart.title') }</chakra.h3>
+        <LinkInternal href={ route({ pathname: '/stats', hash: 'gas' }) }>
+          { t('gasTrackerChart.linkText') }
+        </LinkInternal>
       </Flex>
       { content }
     </Box>

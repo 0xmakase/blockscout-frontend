@@ -438,5 +438,37 @@
         "vyper_multi_part": "マルチパートVyperファイルの検証。",
         "vyper_standard_input": "標準入力JSONファイルを使用したVyper契約の検証",
         "verification_method_placeholder": "検証方法（コンパイラタイプ）"
+    },
+    "gasTrackerChart": {
+        "title": "ガス価格の履歴",
+        "linkText": "チャートと統計"
+    },
+    "gasTracker": {
+        "title": "ガストラッカー",
+        "lastUpdated": "最終更新",
+        "coinPrice": "価格: ${{price}}",
+        "noData": "最近のデータはありません"
+    },
+    "gasPrices": {
+        "fast": {
+          "title": "高速"
+        },
+        "average": {
+          "title": "標準"
+        },
+        "slow": {
+          "title": "低速"
+        },
+        "perTransaction": "取引ごと",
+        "seconds": "秒",
+        "baseFee": "基本料金",
+        "priorityFee": "優先料金"
+    },
+    "gasTrackerNetworkUtilization": {
+        "networkUtilization": "ネットワーク利用率",
+        "high": "高負荷",
+        "medium": "中負荷",
+        "low": "低負荷",
+        "load": "負荷"
     }
 }

@@ -446,5 +446,37 @@
         "vyper_multi_part": "Verification of multi-part Vyper files.",
         "vyper_standard_input": "Verification of Vyper contract using",
         "verification_method_placeholder": "Verification method (compiler type)"
+    },
+    "gasTrackerChart": {
+        "title": "Gas price history",
+        "linkText": "Charts & stats"
+    },
+    "gasTracker": {
+        "title": "Gas tracker",
+        "lastUpdated": "Last updated",
+        "coinPrice": "$ {{price}}",
+        "noData": "No recent data available"
+    },
+    "gasPrices": {
+        "fast": {
+          "title": "Fast"
+        },
+        "average": {
+          "title": "Normal"
+        },
+        "slow": {
+          "title": "Slow"
+        },
+        "perTransaction": "per transaction",
+        "seconds": "s",
+        "baseFee": "Base",
+        "priorityFee": "Priority"
+    },
+    "gasTrackerNetworkUtilization": {
+        "networkUtilization": "Network utilization",
+        "high": "high",
+        "medium": "medium",
+        "low": "low",
+        "load": "load"
     }
 }

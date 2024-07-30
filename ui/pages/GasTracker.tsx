@@ -1,5 +1,6 @@
 import { Alert, Box, Flex, Skeleton, chakra } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import config from 'configs/app';
 import useApiQuery from 'lib/api/useApiQuery';
@@ -13,6 +14,7 @@ import NativeTokenIcon from 'ui/shared/NativeTokenIcon';
 import PageTitle from 'ui/shared/Page/PageTitle';
 
 const GasTracker = () => {
+  const { t } = useTranslation();
   const { data, isPlaceholderData, isError, error, dataUpdatedAt } = useApiQuery('stats', {
     queryOptions: {
       placeholderData: HOMEPAGE_STATS,
@@ -41,7 +43,7 @@ const GasTracker = () => {
         <GasTrackerNetworkUtilization percentage={ data.network_utilization_percentage } isLoading={ isLoading }/> }
       { data?.gas_price_updated_at && (
         <Skeleton isLoaded={ !isLoading } whiteSpace="pre" display="flex" alignItems="center">
-          <span>Last updated </span>
+          <span>{ t('gasTracker.lastUpdated') }</span>
           <chakra.span color="text_secondary">{ dayjs(data.gas_price_updated_at).format('DD MMM, HH:mm:ss') }</chakra.span>
           { data.gas_prices_update_in !== 0 && (
             <GasInfoUpdateTimer
@@ -55,18 +57,35 @@ const GasTracker = () => {
         </Skeleton>
       ) }
       { data?.coin_price && (
-        <Skeleton isLoaded={ !isLoading } ml={{ base: 0, lg: 'auto' }} whiteSpace="pre" display="flex" alignItems="center">
+        <Skeleton
+          isLoaded={ !isLoading }
+          ml={{ base: 0, lg: 'auto' }}
+          whiteSpace="pre"
+          display="flex"
+          alignItems="center"
+        >
           <NativeTokenIcon mr={ 2 } boxSize={ 6 }/>
           <chakra.span color="text_secondary">{ config.chain.currency.symbol }</chakra.span>
-          <span> ${ Number(data.coin_price).toLocaleString(undefined, { maximumFractionDigits: 2 }) }</span>
+          <span>
+            { t('gasTracker.coinPrice', {
+              price: Number(data.coin_price).toLocaleString(undefined, {
+                maximumFractionDigits: 2,
+              }),
+            }) }
+          </span>
         </Skeleton>
       ) }
     </Flex>
   );
 
   const snippets = (() => {
-    if (!isPlaceholderData && data?.gas_prices?.slow === null && data?.gas_prices.average === null && data.gas_prices.fast === null) {
-      return <Alert status="warning">No recent data available</Alert>;
+    if (
+      !isPlaceholderData &&
+      data?.gas_prices?.slow === null &&
+      data?.gas_prices.average === null &&
+      data.gas_prices.fast === null
+    ) {
+      return <Alert status="warning">{ t('gasTracker.noData') }</Alert>;
     }
 
     return data?.gas_prices ? <GasTrackerPrices prices={ data.gas_prices } isLoading={ isLoading }/> : null;
@@ -75,7 +94,10 @@ const GasTracker = () => {
   return (
     <>
       <PageTitle
-        title={ config.meta.seo.enhancedDataEnabled ? `${ config.chain.name } gas tracker` : 'Gas tracker' }
+        title={ config.meta.seo.enhancedDataEnabled ?
+          `${ config.chain.name } ${ t('gasTracker.title') }` :
+          t('gasTracker.title')
+        }
         secondRow={ titleSecondRow }
         withTextAd
       />
