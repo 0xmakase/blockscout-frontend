@@ -556,8 +556,8 @@
         "block": "ブロック",
         "transaction": "取引",
         "scanning": "新しい{{name}}をスキャン中...",
-        "more": "{{num}} 件の{{name}}{{plural}}",
-        "come_in": " が{{plural}}入りました"
+        "more": "{{num}} 件の{{name}}",
+        "come_in": " が入りました"
     },
     "blockPageContent": {
         "details": "詳細",
