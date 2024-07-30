@@ -422,6 +422,8 @@
     },
     "blocksContent": {
         "connectionLostAlert": "Connection is lost. Please refresh the page to load new blocks.",
+        "connectionLost": "Connection is lost. Please reload page.",
+        "connectionLostUpdate": "Connection is lost. Please click here to update transaction info.",
         "errorAlert": "An error has occurred while fetching new blocks. Please refresh the page to load new blocks.",
         "blockCountdown": "Block countdown",
         "noBlocks": "There are no blocks."
