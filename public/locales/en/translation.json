@@ -478,5 +478,72 @@
         "medium": "medium",
         "low": "low",
         "load": "load"
+    },
+    "blocksTabSlot": {
+        "networkUtilization": "Network utilization (last 50 blocks):",
+        "blockCountdown": "Block countdown"
+    },
+    "addressNameInfo": {
+        "tokenNameHint": "Token name and symbol",
+        "tokenName": "Token name",
+        "contractNameHint": "The name found in the source code of the Contract",
+        "contractName": "Contract name",
+        "validatorNameHint": "The name of the validator",
+        "validatorName": "Validator name"
+    },
+    "addressDetails": {
+        "creatorHint": "Transaction and address of creation",
+        "creator": "Creator",
+        "atTxn": "at txn",
+        "tokensHint": "All tokens in the account and total value",
+        "tokens": "Tokens",
+        "netWorthHint": "Total net worth in USD of all tokens for the address",
+        "netWorth": "Net worth",
+        "transactionsHint": "Number of transactions related to this address",
+        "transactions": "Transactions",
+        "transfersHint": "Number of transfers to/from this address",
+        "transfers": "Transfers",
+        "gasUsedHint": "Gas used by the address",
+        "gasUsed": "Gas used",
+        "blocksValidatedHint": "Number of blocks validated by this validator",
+        "blocksValidated": "Blocks validated",
+        "lastBalanceUpdateHint": "Block number in which the address was updated",
+        "lastBalanceUpdate": "Last balance update"
+    },
+    "tokenBalances": {
+        "netWorth": "Net Worth",
+        "balance": "Balance",
+        "tokens": "Tokens",
+        "token": "Token"
+    },
+    "detailsSponsoredItem": {
+        "sponsoredHint": "Sponsored banner advertisement",
+        "sponsored": "Sponsored"
+    },
+    "transactionPageContent": {
+        "confidentialComputeTxDetails": "Confidential compute tx details",
+        "details": "Details",
+        "assetFlows": "Asset Flows",
+        "regularTxDetails": "Regular tx details",
+        "tokenTransfers": "Token transfers",
+        "userOperations": "User operations",
+        "internalTxns": "Internal txns",
+        "blobs": "Blobs",
+        "logs": "Logs",
+        "state": "State",
+        "rawTrace": "Raw trace",
+        "backToTxList": "Back to transactions list",
+        "title": "Transaction details"
+    },
+    "txDetailsGasPrice": {
+        "hint": "Price per unit of gas specified by the sender. Higher gas prices can prioritize transaction inclusion during times of high usage",
+        "label": "Gas price"
+    },
+    "txDetailsBurntFees": {
+        "hint": "Amount of {currency} burned for this transaction. Equals Block Base Fee per Gas * Gas Used{blobGasCondition}",
+        "label": "Burnt fees"
+    },
+    "testnetWarning": {
+        "message": "This is a testnet transaction only"
     }
 }

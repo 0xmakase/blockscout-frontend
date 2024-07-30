@@ -1,6 +1,7 @@
 import { Skeleton } from '@chakra-ui/react';
 import BigNumber from 'bignumber.js';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { TokenInfo } from 'types/api/token';
 
@@ -17,6 +18,8 @@ interface Props {
 }
 
 const TxDetailsGasPrice = ({ gasPrice, gasToken, isLoading }: Props) => {
+  const { t } = useTranslation();
+
   if (config.UI.views.tx.hiddenFields?.gas_price || !gasPrice) {
     return null;
   }
@@ -46,10 +49,10 @@ const TxDetailsGasPrice = ({ gasPrice, gasToken, isLoading }: Props) => {
   return (
     <>
       <DetailsInfoItem.Label
-        hint="Price per unit of gas specified by the sender. Higher gas prices can prioritize transaction inclusion during times of high usage"
+        hint={ t('txDetailsGasPrice.hint') }
         isLoading={ isLoading }
       >
-        Gas price
+        { t('txDetailsGasPrice.label') }
       </DetailsInfoItem.Label>
       <DetailsInfoItem.Value>
         { content }

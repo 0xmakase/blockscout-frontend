@@ -470,5 +470,72 @@
         "medium": "中負荷",
         "low": "低負荷",
         "load": "負荷"
+    },
+    "blocksTabSlot": {
+        "networkUtilization": "ネットワーク利用率 (最後の50ブロック):",
+        "blockCountdown": "ブロックカウントダウン"
+    },
+    "addressNameInfo": {
+        "tokenNameHint": "トークンの名前とシンボル",
+        "tokenName": "トークン名",
+        "contractNameHint": "コントラクトのソースコードに記載されている名前",
+        "contractName": "コントラクト名",
+        "validatorNameHint": "バリデータの名前",
+        "validatorName": "バリデータ名"
+    },
+    "addressDetails": {
+        "creatorHint": "作成のトランザクションとアドレス",
+        "creator": "作成者",
+        "atTxn": "のトランザクションで",
+        "tokensHint": "アカウント内のすべてのトークンと総価値",
+        "tokens": "トークン",
+        "netWorthHint": "アドレス内のすべてのトークンの総純資産額 (USD)",
+        "netWorth": "純資産",
+        "transactionsHint": "このアドレスに関連するトランザクションの数",
+        "transactions": "トランザクション",
+        "transfersHint": "このアドレスへの送信および受信の転送数",
+        "transfers": "転送",
+        "gasUsedHint": "このアドレスによって使用されたガス",
+        "gasUsed": "使用されたガス",
+        "blocksValidatedHint": "このバリデーターが検証したブロック数",
+        "blocksValidated": "検証されたブロック",
+        "lastBalanceUpdateHint": "アドレスが更新されたブロック番号",
+        "lastBalanceUpdate": "最終残高更新"
+    },
+    "tokenBalances": {
+        "netWorth": "純資産",
+        "balance": "残高",
+        "tokens": "トークン",
+        "token": "トークン"
+    },
+    "detailsSponsoredItem": {
+        "sponsoredHint": "スポンサー付きバナー広告",
+        "sponsored": "スポンサー"
+    },
+    "transactionPageContent": {
+        "confidentialComputeTxDetails": "秘密計算取引の詳細",
+        "details": "詳細",
+        "assetFlows": "資産の流れ",
+        "regularTxDetails": "通常の取引の詳細",
+        "tokenTransfers": "トークン転送",
+        "userOperations": "ユーザー操作",
+        "internalTxns": "内部取引",
+        "blobs": "ブロブ",
+        "logs": "ログ",
+        "state": "状態",
+        "rawTrace": "生のトレース",
+        "backToTxList": "取引リストに戻る",
+        "title": "取引の詳細"
+    },
+    "txDetailsGasPrice": {
+        "hint": "送信者によって指定されたガス単位あたりの価格。使用率が高い時期に高いガス価格は取引の優先度を上げることができます",
+        "label": "ガス価格"
+    },
+    "txDetailsBurntFees": {
+        "hint": "このトランザクションで焼かれた{currency}の量。イーサリアムのベースガス料金 * 使用されたガス{blobGasCondition}",
+        "label": "焼却手数料"
+    },
+    "testnetWarning": {
+        "message": "これはテストネットのトランザクションです"
     }
 }
