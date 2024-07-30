@@ -54,9 +54,9 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
         <BlockTimestamp ts={ data.timestamp } isEnabled={ enableTimeIncrement } isLoading={ isLoading }/>
       </Flex>
       <Flex columnGap={ 2 }>
-        <Text fontWeight={ 500 }>{ t('size') }</Text>
+        <Text fontWeight={ 500 }>{ t('blockDetails.size') }</Text>
         <Skeleton isLoaded={ !isLoading } display="inline-block" color="text_secondary">
-          <span>{ data.size.toLocaleString() } { t('bytes') }</span>
+          <span>{ data.size.toLocaleString() } { t('blockDetails.bytes') }</span>
         </Skeleton>
       </Flex>
       { !config.UI.views.block.hiddenFields?.miner && (
@@ -70,7 +70,7 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
         </Flex>
       ) }
       <Flex columnGap={ 2 }>
-        <Text fontWeight={ 500 }>{ t('txn') }</Text>
+        <Text fontWeight={ 500 }>{ t('blocksTable.txn') }</Text>
         { data.tx_count > 0 ? (
           <Skeleton isLoaded={ !isLoading } display="inline-block">
             <LinkInternal href={ route({ pathname: '/block/[height_or_hash]', query: { height_or_hash: String(data.height), tab: 'txs' } }) }>
@@ -82,7 +82,7 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
         }
       </Flex>
       <Box>
-        <Text fontWeight={ 500 }>{ t('gasUsed') }</Text>
+        <Text fontWeight={ 500 }>{ t('blocksTable.gasUsed') }</Text>
         <Flex mt={ 2 }>
           <Skeleton isLoaded={ !isLoading } display="inline-block" color="text_secondary" mr={ 4 }>
             <span>{ BigNumber(data.gas_used || 0).toFormat() }</span>
@@ -98,7 +98,7 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
       </Box>
       { !isRollup && !config.UI.views.block.hiddenFields?.total_reward && (
         <Flex columnGap={ 2 }>
-          <Text fontWeight={ 500 }>{ t('reward') } { currencyUnits.ether }</Text>
+          <Text fontWeight={ 500 }>{ t('blocksTable.reward') } { currencyUnits.ether }</Text>
           <Skeleton isLoaded={ !isLoading } display="inline-block" color="text_secondary">
             <span>{ totalReward.toFixed() }</span>
           </Skeleton>
@@ -106,7 +106,7 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
       ) }
       { !isRollup && !config.UI.views.block.hiddenFields?.burnt_fees && (
         <Box>
-          <Text fontWeight={ 500 }>{ t('burntFees') }</Text>
+          <Text fontWeight={ 500 }>{ t('blocksTable.burntFees') }</Text>
           <Flex columnGap={ 4 } mt={ 2 }>
             <Flex>
               <IconSvg name="flame" boxSize={ 5 } color="gray.500" isLoading={ isLoading }/>
