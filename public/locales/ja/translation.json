@@ -288,7 +288,7 @@
         "baseFeePerGasHint": "ガス単位あたりの最低料金。ネットワークの混雑に応じて料金が調整されます",
         "baseFeePerGas": "ガスあたりの基本料金",
         "burntFeesHint": "ブロックに含まれるトランザクションから燃焼されたネイティブトークンの量。ブロックの基本料金×使用されたガスに等しい",
-        "burntFees": "燃焼された料金",
+        "burntFees": "燃焼された手数料",
         "priorityFeeHint": "トランザクションの優先順位/インクルージョンのために検証者に送られるユーザー定義のチップ",
         "priorityFee": "優先料金 / チップ",
         "viewDetails": "詳細を見る",
@@ -414,6 +414,8 @@
     },
     "blocksContent": {
         "connectionLostAlert": "接続が失われました。新しいブロックを読み込むにはページを更新してください。",
+        "connectionLost": "接続が失われました。ページをリロードしてください。",
+        "connectionLostUpdate": "接続が失われました。トランザクション情報を更新するにはここをクリックしてください。",
         "errorAlert": "新しいブロックの取得中にエラーが発生しました。新しいブロックを読み込むにはページを更新してください。",
         "blockCountdown": "ブロックカウントダウン",
         "noBlocks": "ブロックがありません。"
@@ -478,9 +480,9 @@
     },
     "gasTrackerNetworkUtilization": {
         "networkUtilization": "ネットワーク利用率",
-        "high": "高負荷",
-        "medium": "中負荷",
-        "low": "低負荷",
+        "high": "高",
+        "medium": "中",
+        "low": "低",
         "load": "負荷"
     },
     "blocksTabSlot": {
