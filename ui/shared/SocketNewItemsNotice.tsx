@@ -1,6 +1,7 @@
 import { Alert, Link, Text, chakra, useTheme, useColorModeValue, Skeleton, Tr, Td } from '@chakra-ui/react';
 import { transparentize } from '@chakra-ui/theme-tools';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface InjectedProps {
   content: React.ReactNode;
@@ -18,6 +19,7 @@ interface Props {
 
 const SocketNewItemsNotice = chakra(({ children, className, url, num, alert, type = 'transaction', isLoading }: Props) => {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const alertContent = (() => {
     if (alert) {
@@ -28,27 +30,27 @@ const SocketNewItemsNotice = chakra(({ children, className, url, num, alert, typ
 
     switch (type) {
       case 'token_transfer':
-        name = 'token transfer';
+        name = t('socketNewItemsNotice.token_transfer');
         break;
       case 'deposit':
-        name = 'deposit';
+        name = t('socketNewItemsNotice.deposit');
         break;
       case 'block':
-        name = 'block';
+        name = t('socketNewItemsNotice.block');
         break;
       default:
-        name = 'transaction';
+        name = t('socketNewItemsNotice.transaction');
         break;
     }
 
     if (!num) {
-      return `scanning new ${ name }s...`;
+      return t('socketNewItemsNotice.scanning', { name });
     }
 
     return (
       <>
-        <Link href={ url }>{ num.toLocaleString() } more { name }{ num > 1 ? 's' : '' }</Link>
-        <Text whiteSpace="pre"> ha{ num > 1 ? 've' : 's' } come in</Text>
+        <Link href={ url }>{ t('socketNewItemsNotice.more', { num: num.toLocaleString(), name }) }</Link>
+        <Text whiteSpace="pre">{ t('socketNewItemsNotice.come_in', { num }) }</Text>
       </>
     );
   })();

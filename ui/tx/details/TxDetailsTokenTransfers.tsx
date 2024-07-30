@@ -1,5 +1,6 @@
 import { GridItem, Show, Flex } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { TokenTransfer } from 'types/api/tokenTransfer';
 
@@ -25,6 +26,8 @@ const TOKEN_TRANSFERS_TYPES = [
 ];
 
 const TxDetailsTokenTransfers = ({ data, txHash, isOverflow }: Props) => {
+  const { t } = useTranslation();
+
   const viewAllUrl = route({ pathname: '/tx/[hash]', query: { hash: txHash, tab: 'token_transfers' } });
 
   const transferGroups = TOKEN_TRANSFERS_TYPES.map((group) => ({
@@ -34,7 +37,7 @@ const TxDetailsTokenTransfers = ({ data, txHash, isOverflow }: Props) => {
 
   return (
     <>
-      { transferGroups.map(({ title, hint, type, items }) => {
+      { transferGroups.map(({ type, items }) => {
         if (items.length === 0) {
           return null;
         }
@@ -42,9 +45,9 @@ const TxDetailsTokenTransfers = ({ data, txHash, isOverflow }: Props) => {
         return (
           <React.Fragment key={ type }>
             <DetailsInfoItem.Label
-              hint={ hint }
+              hint={ t(`txDetailsTokenTransfers.${ type }_hint`) }
             >
-              { title }
+              { t(`txDetailsTokenTransfers.${ type }_title`) }
             </DetailsInfoItem.Label>
             <DetailsInfoItem.Value position="relative">
               <Flex
@@ -66,7 +69,7 @@ const TxDetailsTokenTransfers = ({ data, txHash, isOverflow }: Props) => {
           <GridItem fontSize="sm" alignItems="center" display="inline-flex" pl={{ base: '28px', lg: 0 }}>
             <IconSvg name="token" boxSize={ 6 }/>
             <LinkInternal href={ viewAllUrl }>
-              View all
+              { t('txDetailsTokenTransfers.view_all') }
             </LinkInternal>
           </GridItem>
         </>

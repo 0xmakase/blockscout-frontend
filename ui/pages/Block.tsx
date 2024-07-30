@@ -1,6 +1,7 @@
 import { chakra, Skeleton } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { PaginationParams } from 'ui/shared/pagination/types';
 import type { RoutedTab } from 'ui/shared/Tabs/types';
@@ -36,6 +37,7 @@ const TAB_LIST_PROPS = {
 const TABS_HEIGHT = 88;
 
 const BlockPageContent = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const isMobile = useIsMobile();
   const appProps = useAppContext();
@@ -55,7 +57,7 @@ const BlockPageContent = () => {
   const tabs: Array<RoutedTab> = React.useMemo(() => ([
     {
       id: 'index',
-      title: 'Details',
+      title: t('blockPageContent.details'),
       component: (
         <>
           { blockQuery.isDegradedData && <ServiceDegradationWarning isLoading={ blockQuery.isPlaceholderData } mb={ 6 }/> }
@@ -65,7 +67,7 @@ const BlockPageContent = () => {
     },
     {
       id: 'txs',
-      title: 'Transactions',
+      title: t('blockPageContent.transactions'),
       component: (
         <>
           { blockTxsQuery.isDegradedData && <ServiceDegradationWarning isLoading={ blockTxsQuery.isPlaceholderData } mb={ 6 }/> }
@@ -76,7 +78,7 @@ const BlockPageContent = () => {
     config.features.dataAvailability.isEnabled && blockQuery.data?.blob_tx_count ?
       {
         id: 'blob_txs',
-        title: 'Blob txns',
+        title: t('blockPageContent.blob_txns'),
         component: (
           <TxsWithFrontendSorting query={ blockBlobTxsQuery } showBlockInfo={ false } showSocketInfo={ false }/>
         ),
@@ -84,7 +86,7 @@ const BlockPageContent = () => {
     config.features.beaconChain.isEnabled && Boolean(blockQuery.data?.withdrawals_count) ?
       {
         id: 'withdrawals',
-        title: 'Withdrawals',
+        title: t('blockPageContent.withdrawals'),
         component: (
           <>
             { blockWithdrawalsQuery.isDegradedData && <ServiceDegradationWarning isLoading={ blockWithdrawalsQuery.isPlaceholderData } mb={ 6 }/> }
@@ -92,7 +94,7 @@ const BlockPageContent = () => {
           </>
         ),
       } : null,
-  ].filter(Boolean)), [ blockBlobTxsQuery, blockQuery, blockTxsQuery, blockWithdrawalsQuery, hasPagination ]);
+  ].filter(Boolean)), [ blockBlobTxsQuery, blockQuery, blockTxsQuery, blockWithdrawalsQuery, hasPagination, t ]);
 
   let pagination;
   if (tab === 'txs') {
@@ -109,10 +111,10 @@ const BlockPageContent = () => {
     }
 
     return {
-      label: 'Back to blocks list',
+      label: t('blockPageContent.back_to_blocks_list'),
       url: appProps.referrer,
     };
-  }, [ appProps.referrer ]);
+  }, [ appProps.referrer, t ]);
 
   throwOnAbsentParamError(heightOrHash);
 
@@ -128,13 +130,13 @@ const BlockPageContent = () => {
   const title = (() => {
     switch (blockQuery.data?.type) {
       case 'reorg':
-        return `Reorged block #${ blockQuery.data?.height }`;
+        return t('blockPageContent.reorged_block', { height: blockQuery.data?.height });
 
       case 'uncle':
-        return `Uncle block #${ blockQuery.data?.height }`;
+        return t('blockPageContent.uncle_block', { height: blockQuery.data?.height });
 
       default:
-        return `Block #${ blockQuery.data?.height }`;
+        return t('blockPageContent.block', { height: blockQuery.data?.height });
     }
   })();
   const titleSecondRow = (
@@ -149,7 +151,7 @@ const BlockPageContent = () => {
           fontWeight={ 500 }
         >
           <chakra.span flexShrink={ 0 }>
-            { config.chain.verificationType === 'validation' ? 'Validated by' : 'Mined by' }
+            { config.chain.verificationType === 'validation' ? t('blockPageContent.validated_by') : t('blockPageContent.mined_by') }
           </chakra.span>
           <AddressEntity address={ blockQuery.data?.miner }/>
         </Skeleton>
