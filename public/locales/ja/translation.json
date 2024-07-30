@@ -230,9 +230,9 @@
     },
     "blocksTable": {
         "block": "ブロック",
-        "sizeBytes": "サイズ、バイト",
+        "sizeBytes": "サイズ,バイト",
         "validator": "バリデーター",
-        "txn": "トランザクション",
+        "txn": "Txn",
         "gasUsed": "使用されたガス",
         "reward": "報酬",
         "burntFees": "燃焼された手数料"
@@ -259,6 +259,7 @@
         "status": "ステータス",
         "validatedByHint": "ブロックチェーンにブロックを正常に追加したブロックプロデューサー",
         "validatedBy": "検証者",
+        "minedBy": "マイニング者による",
         "sequencedBy": "シーケンサー",
         "commitmentTxHint": "このバッチコミットメントを含むL1トランザクション",
         "commitmentTx": "コミットメントtx",
@@ -398,5 +399,11 @@
         "token_balance_after": "{{balance}}",
         "token_balance_change": "{{sign}} {{difference}}",
         "token_id_change": "トークンID: {{id}}"
-    }          
+    },
+    "blocksContent": {
+        "connectionLostAlert": "接続が失われました。新しいブロックを読み込むにはページを更新してください。",
+        "errorAlert": "新しいブロックの取得中にエラーが発生しました。新しいブロックを読み込むにはページを更新してください。",
+        "blockCountdown": "ブロックカウントダウン",
+        "noBlocks": "ブロックがありません。"
+    }
 }

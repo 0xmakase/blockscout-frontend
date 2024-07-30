@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { SocketMessage } from 'lib/socket/types';
 import type { BlockType, BlocksResponse } from 'types/api/block';
@@ -32,10 +33,10 @@ interface Props {
 }
 
 const BlocksContent = ({ type, query, enableSocket = true, top }: Props) => {
+  const { t } = useTranslation();
   const queryClient = useQueryClient();
   const isMobile = useIsMobile();
   const [ socketAlert, setSocketAlert ] = React.useState('');
-
   const [ newItemsCount, setNewItemsCount ] = React.useState(0);
 
   const handleNewBlockMessage: SocketMessage.NewBlock['handler'] = React.useCallback((payload) => {
@@ -51,12 +52,12 @@ const BlocksContent = ({ type, query, enableSocket = true, top }: Props) => {
         };
       }
 
-      if (!shouldAddToList || prevData.items.some((block => block.height === payload.block.height))) {
+      if (!shouldAddToList || prevData.items.some((block) => block.height === payload.block.height)) {
         return prevData;
       }
 
       if (prevData.items.length >= OVERLOAD_COUNT) {
-        setNewItemsCount(prev => prev + 1);
+        setNewItemsCount((prev) => prev + 1);
         return prevData;
       }
 
@@ -66,12 +67,12 @@ const BlocksContent = ({ type, query, enableSocket = true, top }: Props) => {
   }, [ queryClient, type ]);
 
   const handleSocketClose = React.useCallback(() => {
-    setSocketAlert('Connection is lost. Please refresh the page to load new blocks.');
-  }, []);
+    setSocketAlert(t('blocksContent:connectionLostAlert'));
+  }, [ t ]);
 
   const handleSocketError = React.useCallback(() => {
-    setSocketAlert('An error has occurred while fetching new blocks. Please refresh the page to load new blocks.');
-  }, []);
+    setSocketAlert(t('blocksContent:errorAlert'));
+  }, [ t ]);
 
   const channel = useSocketChannel({
     topic: 'blocks:new_block',
@@ -117,7 +118,7 @@ const BlocksContent = ({ type, query, enableSocket = true, top }: Props) => {
     <ActionBar mt={ -6 }>
       <LinkInternal display="inline-flex" alignItems="center" href={ route({ pathname: '/block/countdown' }) }>
         <IconSvg name="hourglass" boxSize={ 5 } mr={ 2 }/>
-        <span>Block countdown</span>
+        <span>{ t('blocksContent:blockCountdown') }</span>
       </LinkInternal>
       <Pagination ml="auto" { ...query.pagination }/>
     </ActionBar>
@@ -127,7 +128,7 @@ const BlocksContent = ({ type, query, enableSocket = true, top }: Props) => {
     <DataListDisplay
       isError={ query.isError }
       items={ query.data?.items }
-      emptyText="There are no blocks."
+      emptyText={ t('blocksContent:noBlocks') }
       content={ content }
       actionBar={ actionBar }
     />

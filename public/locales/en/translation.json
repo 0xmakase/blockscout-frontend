@@ -259,6 +259,7 @@
         "status": "Status",
         "validatedByHint": "A block producer who successfully included the block onto the blockchain",
         "validatedBy": "Validated by",
+        "minedBy": "Mined by",
         "sequencedBy": "Sequenced by",
         "commitmentTxHint": "L1 transaction containing this batch commitment",
         "commitmentTx": "Commitment tx",
@@ -406,6 +407,11 @@
         "token_balance_after": "{{balance}}",
         "token_balance_change": "{{sign}} {{difference}}",
         "token_id_change": "Token ID: {{id}}"
+    },
+    "blocksContent": {
+        "connectionLostAlert": "Connection is lost. Please refresh the page to load new blocks.",
+        "errorAlert": "An error has occurred while fetching new blocks. Please refresh the page to load new blocks.",
+        "blockCountdown": "Block countdown",
+        "noBlocks": "There are no blocks."
     }
-      
 }
