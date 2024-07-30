@@ -43,14 +43,16 @@ const SocketNewItemsNotice = chakra(({ children, className, url, num, alert, typ
         break;
     }
 
+    const plural = num && num > 1 ? 's' : '';
+
     if (!num) {
       return t('socketNewItemsNotice.scanning', { name });
     }
 
     return (
       <>
-        <Link href={ url }>{ t('socketNewItemsNotice.more', { num: num.toLocaleString(), name }) }</Link>
-        <Text whiteSpace="pre">{ t('socketNewItemsNotice.come_in', { num }) }</Text>
+        <Link href={ url }>{ t('socketNewItemsNotice.more', { num: num.toLocaleString(), name, plural }) }</Link>
+        <Text whiteSpace="pre">{ t('socketNewItemsNotice.come_in', { num, plural }) }</Text>
       </>
     );
   })();

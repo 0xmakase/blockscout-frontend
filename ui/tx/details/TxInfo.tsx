@@ -655,7 +655,7 @@ const TxInfo = ({ data, isLoading, socketStatus }: Props) => {
             (data.base_fee_per_gas || data.max_fee_per_gas || data.max_priority_fee_per_gas) && (
         <>
           <DetailsInfoItem.Label
-            hint={ t('txInfo.gas_fees_hint', { validatorTitle: getNetworkValidatorTitle() }) }
+            hint={ t('txInfo.gas_fees_hint', { validatorTitle: t(getNetworkValidatorTitle()) }) }
             isLoading={ isLoading }
           >
             { t('txInfo.gas_fees', { currency: currencyUnits.gwei }) }

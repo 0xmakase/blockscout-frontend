@@ -1,6 +1,7 @@
 import { Box, Heading, Text, Flex } from '@chakra-ui/react';
 import BigNumber from 'bignumber.js';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { Transaction } from 'types/api/transaction';
 
@@ -16,6 +17,8 @@ import TxFee from 'ui/shared/tx/TxFee';
 import Utilization from 'ui/shared/Utilization/Utilization';
 
 const TxAdditionalInfoContent = ({ tx }: { tx: Transaction }) => {
+  const { t } = useTranslation();
+
   const sectionProps = {
     borderBottom: '1px solid',
     borderColor: 'divider',
@@ -30,17 +33,17 @@ const TxAdditionalInfoContent = ({ tx }: { tx: Transaction }) => {
 
   return (
     <>
-      <Heading as="h4" size="sm" mb={ 6 }>Additional info </Heading>
+      <Heading as="h4" size="sm" mb={ 6 }>{ t('txAdditionalInfoContent.heading') }</Heading>
       { tx.blob_versioned_hashes && tx.blob_versioned_hashes.length > 0 && (
         <Box { ...sectionProps } mb={ 4 }>
           <Flex alignItems="center" justifyContent="space-between">
-            <Text { ...sectionTitleProps }>Blobs: { tx.blob_versioned_hashes.length }</Text>
+            <Text { ...sectionTitleProps }>{ t('txAdditionalInfoContent.blobs', { count: tx.blob_versioned_hashes.length }) }</Text>
             { tx.blob_versioned_hashes.length > 3 && (
               <LinkInternal
                 href={ route({ pathname: '/tx/[hash]', query: { hash: tx.hash, tab: 'blobs' } }) }
                 mb={ 3 }
               >
-                view all
+                { t('txAdditionalInfoContent.view_all') }
               </LinkInternal>
             ) }
           </Flex>
@@ -58,7 +61,7 @@ const TxAdditionalInfoContent = ({ tx }: { tx: Transaction }) => {
         <Box { ...sectionProps } mb={ 4 }>
           { (tx.stability_fee !== undefined || tx.fee.value !== null) && (
             <>
-              <Text { ...sectionTitleProps }>Transaction fee</Text>
+              <Text { ...sectionTitleProps }>{ t('txAdditionalInfoContent.transaction_fee') }</Text>
               <TxFee tx={ tx } withUsd accuracyUsd={ 2 } rowGap={ 0 }/>
             </>
           ) }
@@ -66,7 +69,7 @@ const TxAdditionalInfoContent = ({ tx }: { tx: Transaction }) => {
       ) }
       { tx.gas_used !== null && (
         <Box { ...sectionProps } mb={ 4 }>
-          <Text { ...sectionTitleProps }>Gas limit & usage by transaction</Text>
+          <Text { ...sectionTitleProps }>{ t('txAdditionalInfoContent.gas_limit_usage') }</Text>
           <Flex>
             <Text>{ BigNumber(tx.gas_used).toFormat() }</Text>
             <TextSeparator/>
@@ -78,22 +81,22 @@ const TxAdditionalInfoContent = ({ tx }: { tx: Transaction }) => {
       { !config.UI.views.tx.hiddenFields?.gas_fees &&
         (tx.base_fee_per_gas !== null || tx.max_fee_per_gas !== null || tx.max_priority_fee_per_gas !== null) && (
         <Box { ...sectionProps } mb={ 4 }>
-          <Text { ...sectionTitleProps }>Gas fees ({ currencyUnits.gwei })</Text>
+          <Text { ...sectionTitleProps }>{ t('txAdditionalInfoContent.gas_fees', { unit: currencyUnits.gwei }) }</Text>
           { tx.base_fee_per_gas !== null && (
             <Box>
-              <Text as="span" fontWeight="500">Base: </Text>
+              <Text as="span" fontWeight="500">{ t('txAdditionalInfoContent.base') }: </Text>
               <Text fontWeight="700" as="span">{ getValueWithUnit(tx.base_fee_per_gas, 'gwei').toFormat() }</Text>
             </Box>
           ) }
           { tx.max_fee_per_gas !== null && (
             <Box mt={ 1 }>
-              <Text as="span" fontWeight="500">Max: </Text>
+              <Text as="span" fontWeight="500">{ t('txAdditionalInfoContent.max') }: </Text>
               <Text fontWeight="700" as="span">{ getValueWithUnit(tx.max_fee_per_gas, 'gwei').toFormat() }</Text>
             </Box>
           ) }
           { tx.max_priority_fee_per_gas !== null && (
             <Box mt={ 1 }>
-              <Text as="span" fontWeight="500">Max priority: </Text>
+              <Text as="span" fontWeight="500">{ t('txAdditionalInfoContent.max_priority') }: </Text>
               <Text fontWeight="700" as="span">{ getValueWithUnit(tx.max_priority_fee_per_gas, 'gwei').toFormat() }</Text>
             </Box>
           ) }
@@ -101,23 +104,23 @@ const TxAdditionalInfoContent = ({ tx }: { tx: Transaction }) => {
       ) }
       { !(tx.blob_versioned_hashes && tx.blob_versioned_hashes.length > 0) && (
         <Box { ...sectionProps } mb={ 4 }>
-          <Text { ...sectionTitleProps }>Others</Text>
+          <Text { ...sectionTitleProps }>{ t('txAdditionalInfoContent.others') }</Text>
           <Box>
-            <Text as="span" fontWeight="500">Txn type: </Text>
+            <Text as="span" fontWeight="500">{ t('txAdditionalInfoContent.txn_type') }: </Text>
             <Text fontWeight="600" as="span">{ tx.type }</Text>
             { tx.type === 2 && <Text fontWeight="400" as="span" ml={ 1 } color="gray.500">(EIP-1559)</Text> }
           </Box>
           <Box mt={ 1 }>
-            <Text as="span" fontWeight="500">Nonce: </Text>
+            <Text as="span" fontWeight="500">{ t('txAdditionalInfoContent.nonce') }: </Text>
             <Text fontWeight="600" as="span">{ tx.nonce }</Text>
           </Box>
           <Box mt={ 1 }>
-            <Text as="span" fontWeight="500">Position: </Text>
+            <Text as="span" fontWeight="500">{ t('txAdditionalInfoContent.position') }: </Text>
             <Text fontWeight="600" as="span">{ tx.position }</Text>
           </Box>
         </Box>
       ) }
-      <LinkInternal href={ route({ pathname: '/tx/[hash]', query: { hash: tx.hash } }) }>More details</LinkInternal>
+      <LinkInternal href={ route({ pathname: '/tx/[hash]', query: { hash: tx.hash } }) }>{ t('txAdditionalInfoContent.more_details') }</LinkInternal>
     </>
   );
 };

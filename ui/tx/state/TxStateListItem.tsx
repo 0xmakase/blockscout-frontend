@@ -20,7 +20,7 @@ const TxStateListItem = ({ data, isLoading }: Props) => {
   return (
     <ListItemMobileGrid.Container>
 
-      <ListItemMobileGrid.Label isLoading={ isLoading }>Address</ListItemMobileGrid.Label>
+      <ListItemMobileGrid.Label isLoading={ isLoading }>{ t('txStateListItem.address') }</ListItemMobileGrid.Label>
       <ListItemMobileGrid.Value py="3px" display="flex" flexWrap="nowrap" columnGap={ 3 }>
         <AddressEntity
           address={ data.address }
@@ -32,28 +32,28 @@ const TxStateListItem = ({ data, isLoading }: Props) => {
 
       { before && (
         <>
-          <ListItemMobileGrid.Label isLoading={ isLoading }>Before</ListItemMobileGrid.Label>
+          <ListItemMobileGrid.Label isLoading={ isLoading }>{ t('txStateListItem.before') }</ListItemMobileGrid.Label>
           <ListItemMobileGrid.Value>{ before }</ListItemMobileGrid.Value>
         </>
       ) }
 
       { after && (
         <>
-          <ListItemMobileGrid.Label isLoading={ isLoading }>After</ListItemMobileGrid.Label>
+          <ListItemMobileGrid.Label isLoading={ isLoading }>{ t('txStateListItem.after') }</ListItemMobileGrid.Label>
           <ListItemMobileGrid.Value>{ after }</ListItemMobileGrid.Value>
         </>
       ) }
 
       { change && (
         <>
-          <ListItemMobileGrid.Label isLoading={ isLoading }>Change</ListItemMobileGrid.Label>
+          <ListItemMobileGrid.Label isLoading={ isLoading }>{ t('txStateListItem.change') }</ListItemMobileGrid.Label>
           <ListItemMobileGrid.Value>{ change }</ListItemMobileGrid.Value>
         </>
       ) }
 
       { tokenId && (
         <>
-          <ListItemMobileGrid.Label isLoading={ isLoading }>Token ID</ListItemMobileGrid.Label>
+          <ListItemMobileGrid.Label isLoading={ isLoading }>{ t('txStateListItem.tokenId') }</ListItemMobileGrid.Label>
           <ListItemMobileGrid.Value py="0">{ tokenId }</ListItemMobileGrid.Value>
         </>
       ) }

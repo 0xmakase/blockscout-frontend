@@ -22,7 +22,7 @@ export function getStateElements(t: TFunction, data: TxStateChange, isLoading?: 
       return (
         <Tooltip label={ t('utils.block_producer_tooltip') }>
           <Tag textTransform="capitalize" colorScheme="yellow" isLoading={ isLoading }>
-            { t('utils.block_producer_tag', { validatorTitle: getNetworkValidatorTitle() }) }
+            { t(getNetworkValidatorTitle()) }
           </Tag>
         </Tooltip>
       );

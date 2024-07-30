@@ -1,5 +1,6 @@
 import { Flex, Grid, Skeleton, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { DecodedInput } from 'types/api/decodedInput';
 import type { ArrayElement } from 'types/utils';
@@ -70,6 +71,7 @@ const Row = ({ name, type, indexed, value, isLoading }: ArrayElement<DecodedInpu
 };
 
 const LogDecodedInputDataTable = ({ data, isLoading }: Props) => {
+  const { t } = useTranslation();
   const bgColor = useColorModeValue('blackAlpha.50', 'whiteAlpha.50');
   const hasIndexed = data.some(({ indexed }) => indexed !== undefined);
 
@@ -94,10 +96,10 @@ const LogDecodedInputDataTable = ({ data, isLoading }: Props) => {
       borderBottomLeftRadius="md"
       borderBottomRightRadius="md"
     >
-      <HeaderItem isLoading={ isLoading }>Name</HeaderItem>
-      <HeaderItem isLoading={ isLoading }>Type</HeaderItem>
-      { hasIndexed && <HeaderItem isLoading={ isLoading }>Inde<wbr/>xed?</HeaderItem> }
-      <HeaderItem isLoading={ isLoading }>Data</HeaderItem>
+      <HeaderItem isLoading={ isLoading }>{ t('logDecodedInputDataTable.name') }</HeaderItem>
+      <HeaderItem isLoading={ isLoading }>{ t('logDecodedInputDataTable.type') }</HeaderItem>
+      { hasIndexed && <HeaderItem isLoading={ isLoading }>{ t('logDecodedInputDataTable.indexed') }</HeaderItem> }
+      <HeaderItem isLoading={ isLoading }>{ t('logDecodedInputDataTable.data') }</HeaderItem>
       { data.map((item) => {
 
         return <Row key={ item.name } { ...item } isLoading={ isLoading }/>;
