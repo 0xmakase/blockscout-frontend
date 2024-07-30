@@ -32,7 +32,7 @@ interface Props {
 const isRollup = config.features.rollup.isEnabled;
 
 const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
-  const { t } = useTranslation('blockDetails');
+  const { t } = useTranslation();
   const totalReward = getBlockTotalReward(data);
   const burntFees = BigNumber(data.burnt_fees || 0);
   const txFees = BigNumber(data.tx_fees || 0);
