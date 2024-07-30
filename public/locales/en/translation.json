@@ -666,5 +666,12 @@
         "normal": "Normal",
         "slow": "Slow",
         "overview": "Gas tracker overview"
+    },
+    "indicatorsHint": {
+        "dailyTxs": "Number of transactions yesterday (0:00 - 23:59 UTC). The chart displays daily transactions for the past 30 days.",
+        "coinPrice": "{{symbol}} token daily price in USD.",
+        "secondaryCoinPrice": "{{symbol}} token daily price in USD.",
+        "marketCap": "The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market. Market Cap = Current Price x Circulating Supply.",
+        "tvl": "Total value of digital assets locked or staked in a chain."
     }
 }
