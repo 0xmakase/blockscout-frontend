@@ -100,7 +100,8 @@
         "tokenId": "トークンID",
         "txnHash": "取引ハッシュ",
         "fromTo": "送信者/受信者",
-        "value": "値"
+        "value": "値",
+        "method": "メソッド"
     },
     "txsTable": {
         "txnHash": "取引ハッシュ",
@@ -667,5 +668,54 @@
         "secondaryCoinPrice": "{{symbol}} トークンの1日あたりの価格（USD）。",
         "marketCap": "暗号通貨の循環供給量の総市場価値。株式市場のフリーフロート時価総額に類似しています。時価総額 = 現在の価格 x 循環供給量。",
         "tvl": "チェーン内にロックまたはステークされたデジタル資産の総価値。"
+    },
+    "addressIntTxsTable": {
+        "parentTxnHash": "親トランザクションハッシュ",
+        "type": "タイプ",
+        "block": "ブロック",
+        "fromTo": "送信者/受信者",
+        "value": "値"
+    },
+    "erc20TokensTable": {
+        "asset": "資産",
+        "contractAddress": "コントラクトアドレス",
+        "price": "価格",
+        "quantity": "数量",
+        "value": "価値"
+    },
+    "addressCoinBalanceHistory": {
+        "block": "ブロック",
+        "txn": "トランザクション",
+        "age": "年齢",
+        "balance": "残高 {{unit}}",
+        "delta": "差分",
+        "emptyText": "このアドレスにはコイン残高の履歴がありません。"
+    },
+    "tokenInstanceContent": {
+        "tokenTransfers": "トークンの移動",
+        "holders": "保有者",
+        "metadata": "メタデータ"
+    },
+    "tokenHoldersTable": {
+        "holder": "保有者",
+        "id": "ID#",
+        "quantity": "数量",
+        "percentage": "割合"
+    },
+    "tokenDetails": {
+        "price": "価格",
+        "priceHint": "取引所でのトークンあたりの価格",
+        "marketCap": "完全希薄化時価総額",
+        "marketCapHint": "総供給量 * 価格",
+        "totalSupply": "最大総供給量",
+        "totalSupplyHint": "発行されたトークンの総量",
+        "holders": "保有者",
+        "holdersHint": "トークンを保有しているアカウントの数",
+        "transfers": "転送",
+        "transfersHint": "トークンの転送数",
+        "decimals": "小数点",
+        "decimalsHint": "トークン値を表示する際の小数点以下の桁数",
+        "dapp": "Dapp",
+        "dappHint": "Dappへのリンク"
     }
 }

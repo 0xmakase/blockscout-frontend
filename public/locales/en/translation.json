@@ -100,7 +100,8 @@
         "tokenId": "Token ID",
         "txnHash": "Txn hash",
         "fromTo": "From/To",
-        "value": "Value"
+        "value": "Value",
+        "method": "Method"
     },
     "txsTable": {
         "txnHash": "Txn hash",
@@ -675,5 +676,54 @@
         "secondaryCoinPrice": "{{symbol}} token daily price in USD.",
         "marketCap": "The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market. Market Cap = Current Price x Circulating Supply.",
         "tvl": "Total value of digital assets locked or staked in a chain."
+    },
+    "addressIntTxsTable": {
+        "parentTxnHash": "Parent txn hash",
+        "type": "Type",
+        "block": "Block",
+        "fromTo": "From/To",
+        "value": "Value"
+    },
+    "erc20TokensTable": {
+        "asset": "Asset",
+        "contractAddress": "Contract address",
+        "price": "Price",
+        "quantity": "Quantity",
+        "value": "Value"
+    },
+    "addressCoinBalanceHistory": {
+        "block": "Block",
+        "txn": "Txn",
+        "age": "Age",
+        "balance": "Balance {{unit}}",
+        "delta": "Delta",
+        "emptyText": "There is no coin balance history for this address."
+    },
+    "tokenInstanceContent": {
+        "tokenTransfers": "Token transfers",
+        "holders": "Holders",
+        "metadata": "Metadata"
+    },
+    "tokenHoldersTable": {
+        "holder": "Holder",
+        "id": "ID#",
+        "quantity": "Quantity",
+        "percentage": "Percentage"
+    },
+    "tokenDetails": {
+        "price": "Price",
+        "priceHint": "Price per token on the exchanges",
+        "marketCap": "Fully diluted market cap",
+        "marketCapHint": "Total supply * Price",
+        "totalSupply": "Max total supply",
+        "totalSupplyHint": "The total amount of tokens issued",
+        "holders": "Holders",
+        "holdersHint": "Number of accounts holding the token",
+        "transfers": "Transfers",
+        "transfersHint": "Number of transfers for the token",
+        "decimals": "Decimals",
+        "decimalsHint": "Number of digits that come after the decimal place when displaying token value",
+        "dapp": "Dapp",
+        "dappHint": "Link to the dapp"
     }
 }

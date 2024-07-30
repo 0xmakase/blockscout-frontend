@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { PaginationParams } from 'ui/shared/pagination/types';
 import type { RoutedTab } from 'ui/shared/Tabs/types';
@@ -31,6 +32,7 @@ import TokenInstancePageTitle from 'ui/tokenInstance/TokenInstancePageTitle';
 export type TokenTabs = 'token_transfers' | 'holders'
 
 const TokenInstanceContent = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const isMobile = useIsMobile();
 
@@ -96,13 +98,14 @@ const TokenInstanceContent = () => {
   const tabs: Array<RoutedTab> = [
     {
       id: 'token_transfers',
-      title: 'Token transfers',
+      title: t('tokenInstanceContent.tokenTransfers'),
       component: <TokenTransfer transfersQuery={ transfersQuery } tokenId={ id } token={ tokenQuery.data } shouldRender={ !isLoading }/>,
     },
     shouldFetchHolders ?
-      { id: 'holders', title: 'Holders', component: <TokenHolders holdersQuery={ holdersQuery } token={ tokenQuery.data } shouldRender={ !isLoading }/> } :
+      { id: 'holders', title: t('tokenInstanceContent.holders'), component:
+      <TokenHolders holdersQuery={ holdersQuery } token={ tokenQuery.data } shouldRender={ !isLoading }/> } :
       undefined,
-    { id: 'metadata', title: 'Metadata', component: (
+    { id: 'metadata', title: t('tokenInstanceContent.metadata'), component: (
       <TokenInstanceMetadata
         data={ tokenInstanceQuery.data?.metadata }
         isPlaceholderData={ isLoading }
@@ -131,7 +134,8 @@ const TokenInstanceContent = () => {
         hash={ hash }
       />
 
-      <TokenInstanceDetails data={ tokenInstanceQuery?.data } isLoading={ isLoading } scrollRef={ scrollRef } token={ tokenQuery.data }/>
+      <TokenInstanceDetails data={ tokenInstanceQuery?.data } isLoading={ isLoading }
+        scrollRef={ scrollRef } token={ tokenQuery.data }/>
 
       { /* should stay before tabs to scroll up with pagination */ }
       <Box ref={ scrollRef }></Box>

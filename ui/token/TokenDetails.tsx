@@ -3,6 +3,7 @@ import type { UseQueryResult } from '@tanstack/react-query';
 import BigNumber from 'bignumber.js';
 import { useRouter } from 'next/router';
 import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 import { scroller } from 'react-scroll';
 
 import type { TokenInfo } from 'types/api/token';
@@ -29,6 +30,7 @@ interface Props {
 }
 
 const TokenDetails = ({ tokenQuery }: Props) => {
+  const { t } = useTranslation();
   const router = useRouter();
   const isMounted = useIsMounted();
   const { value: isActionButtonExperiment } = useFeatureValue('action_button_exp', false);
@@ -107,10 +109,10 @@ const TokenDetails = ({ tokenQuery }: Props) => {
       { exchangeRate && (
         <>
           <DetailsInfoItem.Label
-            hint="Price per token on the exchanges"
+            hint={ t('tokenDetails.priceHint') }
             isLoading={ tokenQuery.isPlaceholderData }
           >
-            Price
+            { t('tokenDetails.price') }
           </DetailsInfoItem.Label>
           <DetailsInfoItem.Value>
             <Skeleton isLoaded={ !tokenQuery.isPlaceholderData } display="inline-block">
@@ -123,10 +125,10 @@ const TokenDetails = ({ tokenQuery }: Props) => {
       { marketCap && (
         <>
           <DetailsInfoItem.Label
-            hint="Total supply * Price"
+            hint={ t('tokenDetails.marketCapHint') }
             isLoading={ tokenQuery.isPlaceholderData }
           >
-            Fully diluted market cap
+            { t('tokenDetails.marketCap') }
           </DetailsInfoItem.Label>
           <DetailsInfoItem.Value>
             <Skeleton isLoaded={ !tokenQuery.isPlaceholderData } display="inline-block">
@@ -137,10 +139,10 @@ const TokenDetails = ({ tokenQuery }: Props) => {
       ) }
 
       <DetailsInfoItem.Label
-        hint="The total amount of tokens issued"
+        hint={ t('tokenDetails.totalSupplyHint') }
         isLoading={ tokenQuery.isPlaceholderData }
       >
-        Max total supply
+        { t('tokenDetails.totalSupply') }
       </DetailsInfoItem.Label>
       <DetailsInfoItem.Value
         alignSelf="center"
@@ -155,10 +157,10 @@ const TokenDetails = ({ tokenQuery }: Props) => {
       </DetailsInfoItem.Value>
 
       <DetailsInfoItem.Label
-        hint="Number of accounts holding the token"
+        hint={ t('tokenDetails.holdersHint') }
         isLoading={ tokenQuery.isPlaceholderData }
       >
-        Holders
+        { t('tokenDetails.holders') }
       </DetailsInfoItem.Label>
       <DetailsInfoItem.Value>
         <Skeleton isLoaded={ !tokenCountersQuery.isPlaceholderData }>
@@ -167,10 +169,10 @@ const TokenDetails = ({ tokenQuery }: Props) => {
       </DetailsInfoItem.Value>
 
       <DetailsInfoItem.Label
-        hint="Number of transfer for the token"
+        hint={ t('tokenDetails.transfersHint') }
         isLoading={ tokenQuery.isPlaceholderData }
       >
-        Transfers
+        { t('tokenDetails.transfers') }
       </DetailsInfoItem.Label>
       <DetailsInfoItem.Value>
         <Skeleton isLoaded={ !tokenCountersQuery.isPlaceholderData }>
@@ -181,10 +183,10 @@ const TokenDetails = ({ tokenQuery }: Props) => {
       { decimals && (
         <>
           <DetailsInfoItem.Label
-            hint="Number of digits that come after the decimal place when displaying token value"
+            hint={ t('tokenDetails.decimalsHint') }
             isLoading={ tokenQuery.isPlaceholderData }
           >
-            Decimals
+            { t('tokenDetails.decimals') }
           </DetailsInfoItem.Label>
           <DetailsInfoItem.Value>
             <Skeleton isLoaded={ !tokenQuery.isPlaceholderData } minW={ 6 }>
@@ -207,9 +209,9 @@ const TokenDetails = ({ tokenQuery }: Props) => {
       { (type !== 'ERC-20' && config.UI.views.nft.marketplaces.length === 0 && appActionData && isActionButtonExperiment) && (
         <>
           <DetailsInfoItem.Label
-            hint="Link to the dapp"
+            hint={ t('tokenDetails.dappHint') }
           >
-            Dapp
+            { t('tokenDetails.dapp') }
           </DetailsInfoItem.Label>
           <DetailsInfoItem.Value
             py="1px"

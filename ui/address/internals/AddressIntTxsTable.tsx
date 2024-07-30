@@ -1,5 +1,6 @@
 import { Table, Tbody, Tr, Th } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { InternalTransaction } from 'types/api/internalTransaction';
 
@@ -16,17 +17,19 @@ interface Props {
 }
 
 const AddressIntTxsTable = ({ data, currentAddress, isLoading }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <AddressHighlightProvider>
       <Table variant="simple" size="sm">
         <Thead top={ 68 }>
           <Tr>
-            <Th width="15%">Parent txn hash</Th>
-            <Th width="15%">Type</Th>
-            <Th width="10%">Block</Th>
-            <Th width="40%">From/To</Th>
+            <Th width="15%">{ t('addressIntTxsTable.parentTxnHash') }</Th>
+            <Th width="15%">{ t('addressIntTxsTable.type') }</Th>
+            <Th width="10%">{ t('addressIntTxsTable.block') }</Th>
+            <Th width="40%">{ t('addressIntTxsTable.fromTo') }</Th>
             <Th width="20%" isNumeric>
-              Value { currencyUnits.ether }
+              { t('addressIntTxsTable.value') } { currencyUnits.ether }
             </Th>
           </Tr>
         </Thead>
@@ -42,7 +45,6 @@ const AddressIntTxsTable = ({ data, currentAddress, isLoading }: Props) => {
         </Tbody>
       </Table>
     </AddressHighlightProvider>
-
   );
 };
 
