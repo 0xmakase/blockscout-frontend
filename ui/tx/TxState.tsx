@@ -1,5 +1,6 @@
 import { Accordion, Hide, Show, Text } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { TX_STATE_CHANGES } from 'stubs/txStateChanges';
 import ActionBar, { ACTION_BAR_HEIGHT_DESKTOP } from 'ui/shared/ActionBar';
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const TxState = ({ txQuery }: Props) => {
+  const { t } = useTranslation();
   const { data, isPlaceholderData, isError, pagination } = useQueryWithPages({
     resourceName: 'tx_state_changes',
     pathParams: { hash: txQuery.data?.hash },
@@ -58,14 +60,13 @@ const TxState = ({ txQuery }: Props) => {
     <>
       { !isError && !txQuery.isError && (
         <Text mb={ 6 }>
-          A set of information that represents the current state is updated when a transaction takes place on the network.
-          The below is a summary of those changes.
+          { t('txState.info') }
         </Text>
       ) }
       <DataListDisplay
         isError={ isError || txQuery.isError }
         items={ data?.items }
-        emptyText="There are no state changes for this transaction."
+        emptyText={ t('txState.no_state_changes') }
         content={ content }
         actionBar={ actionBar }
       />

@@ -1,12 +1,12 @@
 import { Grid, GridItem, Tooltip, Button, useColorModeValue, Alert, Link, Skeleton } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { Log } from 'types/api/log';
 
 import { route } from 'nextjs-routes';
 
 // import searchIcon from 'icons/search.svg';
-import { space } from 'lib/html-entities';
 import AddressEntity from 'ui/shared/entities/address/AddressEntity';
 import TxEntity from 'ui/shared/entities/tx/TxEntity';
 import LogDecodedInputData from 'ui/shared/logs/LogDecodedInputData';
@@ -24,7 +24,7 @@ const RowHeader = ({ children, isLoading }: { children: React.ReactNode; isLoadi
 );
 
 const LogItem = ({ address, index, topics, data, decoded, type, tx_hash: txHash, isLoading }: Props) => {
-
+  const { t } = useTranslation();
   const borderColor = useColorModeValue('blackAlpha.200', 'whiteAlpha.200');
   const dataBgColor = useColorModeValue('blackAlpha.50', 'whiteAlpha.50');
 
@@ -46,12 +46,15 @@ const LogItem = ({ address, index, topics, data, decoded, type, tx_hash: txHash,
       { !decoded && !address.is_verified && type === 'transaction' && (
         <GridItem colSpan={{ base: 1, lg: 2 }}>
           <Alert status="warning" display="inline-table" whiteSpace="normal">
-            To see accurate decoded input data, the contract must be verified.{ space }
-            <Link href={ route({ pathname: '/address/[hash]/contract-verification', query: { hash: address.hash } }) }>Verify the contract here</Link>
+            { t('logItem.verify_contract_message') }
+            <Link href={ route({ pathname: '/address/[hash]/contract-verification', query: { hash: address.hash } }) }>
+              { t('logItem.verify_contract_link') }
+            </Link>
           </Alert>
         </GridItem>
       ) }
-      { hasTxInfo ? <RowHeader isLoading={ isLoading }>Transaction</RowHeader> : <RowHeader isLoading={ isLoading }>Address</RowHeader> }
+      { hasTxInfo ? <RowHeader isLoading={ isLoading }>{ t('logItem.transaction') }</RowHeader> :
+        <RowHeader isLoading={ isLoading }>{ t('logItem.address') }</RowHeader> }
       <GridItem display="flex" alignItems="center">
         { type === 'address' ? (
           <TxEntity
@@ -73,7 +76,7 @@ const LogItem = ({ address, index, topics, data, decoded, type, tx_hash: txHash,
           </Link>
         </Tooltip> */ }
         <Skeleton isLoaded={ !isLoading } ml="auto" borderRadius="base">
-          <Tooltip label="Log index">
+          <Tooltip label={ t('logItem.log_index') }>
             <Button variant="outline" colorScheme="gray" data-selected="true" size="sm" fontWeight={ 400 }>
               { index }
             </Button>
@@ -82,13 +85,13 @@ const LogItem = ({ address, index, topics, data, decoded, type, tx_hash: txHash,
       </GridItem>
       { decoded && (
         <>
-          <RowHeader isLoading={ isLoading }>Decode input data</RowHeader>
+          <RowHeader isLoading={ isLoading }>{ t('logItem.decode_input_data') }</RowHeader>
           <GridItem>
             <LogDecodedInputData data={ decoded } isLoading={ isLoading }/>
           </GridItem>
         </>
       ) }
-      <RowHeader isLoading={ isLoading }>Topics</RowHeader>
+      <RowHeader isLoading={ isLoading }>{ t('logItem.topics') }</RowHeader>
       <GridItem>
         { topics.filter(Boolean).map((item, index) => (
           <LogTopic
@@ -99,7 +102,7 @@ const LogItem = ({ address, index, topics, data, decoded, type, tx_hash: txHash,
           />
         )) }
       </GridItem>
-      <RowHeader isLoading={ isLoading }>Data</RowHeader>
+      <RowHeader isLoading={ isLoading }>{ t('logItem.data') }</RowHeader>
       <Skeleton isLoaded={ !isLoading } p={ 4 } fontSize="sm" borderRadius="md" bgColor={ isLoading ? undefined : dataBgColor }>
         { data }
       </Skeleton>

@@ -401,7 +401,6 @@
     },
     "utils": {
         "block_producer_tooltip": "ブロックを正常にブロックチェーンに含めたブロックプロデューサー",
-        "block_producer_tag": "{{validatorTitle}}",
         "mint_burn_address_tooltip": "トークンのミントとバーンに使用されるアドレス",
         "mint_address_tag": "ミントアドレス",
         "burn_address_tag": "バーンアドレス",
@@ -596,5 +595,68 @@
         "title": "{{ratio}}%のブロックがインデックスされています{{nbsp}}– 現在、このチェーンをインデックス中です。一部のカウントが正確でない可能性があります。",
         "error": "インデックス状態の取得中にエラーが発生しました。",
         "pending": "インデックス状態を読み込み中..."
+    },
+    "txAdditionalInfoContent": {
+        "heading": "追加情報",
+        "blobs": "ブロブ: {{count}}",
+        "view_all": "すべて表示",
+        "transaction_fee": "取引手数料",
+        "gas_limit_usage": "ガス制限と使用量",
+        "gas_fees": "ガス料金 ({{unit}})",
+        "base": "ベース",
+        "max": "最大",
+        "max_priority": "最大優先",
+        "others": "その他",
+        "txn_type": "トランザクションタイプ",
+        "nonce": "ナンス",
+        "position": "位置",
+        "more_details": "詳細情報"
+    },
+    "addressBalance": {
+        "label": "残高",
+        "hint": "残高"
+    },
+    "txPendingAlert": {
+        "message": "このトランザクションは確認待ちです。"
+    },
+    "logItem": {
+        "verify_contract_message": "正確なデコードされた入力データを見るためには、コントラクトを検証する必要があります。",
+        "verify_contract_link": "ここでコントラクトを検証",
+        "transaction": "トランザクション",
+        "address": "アドレス",
+        "log_index": "ログインデックス",
+        "decode_input_data": "デコードされた入力データ",
+        "topics": "トピック",
+        "data": "データ"
+    },
+    "txState": {
+        "info": "トランザクションがネットワーク上で行われると、現在の状態を表す情報のセットが更新されます。以下はこれらの変更の概要です。",
+        "no_state_changes": "このトランザクションには状態の変化はありません。"
+    },
+    "txStateListItem": {
+        "address": "アドレス",
+        "before": "前",
+        "after": "後",
+        "change": "変更",
+        "tokenId": "トークンID"
+    },
+    "txInternalsTable": {
+        "type": "種類",
+        "fromTo": "送信者/受信者",
+        "value": "Value",
+        "gasLimit": "ガスリミット"
+    },
+    "logDecodedInputDataTable": {
+        "name": "名前",
+        "type": "タイプ",
+        "indexed": "インデックス?",
+        "data": "データ"
+    },
+    "gasInfoTooltip": {
+        "lastUpdate": "最終更新",
+        "fast": "高速",
+        "normal": "標準",
+        "slow": "低速",
+        "overview": "ガストラッカーの概要"
     }
 }

@@ -409,7 +409,6 @@
     },
     "utils": {
         "block_producer_tooltip": "A block producer who successfully included the block into the blockchain",
-        "block_producer_tag": "{{validatorTitle}}",
         "mint_burn_address_tooltip": "Address used in tokens mintings and burnings",
         "mint_address_tag": "Mint address",
         "burn_address_tag": "Burn address",
@@ -604,5 +603,68 @@
         "title": "{{ratio}}% Blocks Indexed{{nbsp}}– We're indexing this chain right now. Some of the counts may be inaccurate.",
         "error": "An error occurred while fetching the indexing status.",
         "pending": "Loading indexing status..."
+    },
+    "txAdditionalInfoContent": {
+        "heading": "Additional info",
+        "blobs": "Blobs: {{count}}",
+        "view_all": "view all",
+        "transaction_fee": "Transaction fee",
+        "gas_limit_usage": "Gas limit & usage by transaction",
+        "gas_fees": "Gas fees ({{unit}})",
+        "base": "Base",
+        "max": "Max",
+        "max_priority": "Max priority",
+        "others": "Others",
+        "txn_type": "Txn type",
+        "nonce": "Nonce",
+        "position": "Position",
+        "more_details": "More details"
+    },
+    "addressBalance": {
+        "label": "Balance",
+        "hint": "balance"
+    },
+    "txPendingAlert": {
+        "message": "This transaction is pending confirmation."
+    },
+    "logItem": {
+        "verify_contract_message": "To see accurate decoded input data, the contract must be verified.",
+        "verify_contract_link": "Verify the contract here",
+        "transaction": "Transaction",
+        "address": "Address",
+        "log_index": "Log index",
+        "decode_input_data": "Decode input data",
+        "topics": "Topics",
+        "data": "Data"
+    },
+    "txState": {
+        "info": "A set of information that represents the current state is updated when a transaction takes place on the network. The below is a summary of those changes.",
+        "no_state_changes": "There are no state changes for this transaction."
+    },
+    "txStateListItem": {
+        "address": "Address",
+        "before": "Before",
+        "after": "After",
+        "change": "Change",
+        "tokenId": "Token ID"
+    },
+    "txInternalsTable": {
+        "type": "Type",
+        "fromTo": "From/To",
+        "value": "Value",
+        "gasLimit": "Gas limit"
+    },
+    "logDecodedInputDataTable": {
+        "name": "Name",
+        "type": "Type",
+        "indexed": "Indexed?",
+        "data": "Data"
+    },
+    "gasInfoTooltip": {
+        "lastUpdate": "Last update",
+        "fast": "Fast",
+        "normal": "Normal",
+        "slow": "Slow",
+        "overview": "Gas tracker overview"
     }
 }
