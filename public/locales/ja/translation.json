@@ -238,8 +238,9 @@
         "burntFees": "燃焼された手数料"
     },
     "blockDetails": {
+        "block": "ブロック",
         "blockHeightHint": "特定のブロックのブロック高は、ブロックチェーン内でそれに先行するブロックの数として定義されます",
-        "blockHeight": "ブロック高",
+        "blockHeight": "高",
         "genesisBlock": " - ジェネシスブロック",
         "viewPreviousBlock": "前のブロックを見る",
         "viewNextBlock": "次のブロックを見る",
@@ -309,7 +310,8 @@
         "txn": "トランザクション",
         "reward": "報酬",
         "validator": "バリデータ",
-        "miner": "マイナー"
+        "miner": "マイナー",
+        "inThisBlock": "in this block"
     },
     "txInfo": {
         "transaction_hash": "トランザクションハッシュ",
@@ -537,5 +539,37 @@
     },
     "testnetWarning": {
         "message": "これはテストネットのトランザクションです"
+    },
+    "socketNewItemsNotice": {
+        "token_transfer": "トークン転送",
+        "deposit": "入金",
+        "block": "ブロック",
+        "transaction": "取引",
+        "scanning": "{name}をスキャンしています...",
+        "more": "{num}件の{name}が追加されました",
+        "come_in": "{num}件の{name}が追加されました"
+    },
+    "blockPageContent": {
+        "details": "詳細",
+        "transactions": "トランザクション",
+        "blob_txns": "Blob トランザクション",
+        "withdrawals": "出金",
+        "back_to_blocks_list": "ブロックリストに戻る",
+        "reorged_block": "再編成されたブロック #{{height}}",
+        "uncle_block": "叔父ブロック #{{height}}",
+        "block": "ブロック #{{height}}",
+        "validated_by": "検証者",
+        "mined_by": "採掘者"
+    },
+    "txDetailsTokenTransfers": {
+        "token_transfer_title": "トークン転送",
+        "token_transfer_hint": "トランザクションで転送されたトークンのリスト",
+        "token_minting_title": "トークン発行",
+        "token_minting_hint": "トランザクションで発行されたトークンのリスト",
+        "token_burning_title": "トークン焼却",
+        "token_burning_hint": "トランザクションで焼却されたトークンのリスト",
+        "token_spawning_title": "トークン作成",
+        "token_spawning_hint": "トランザクションで作成されたトークンのリスト",
+        "view_all": "すべて表示"
     }
 }

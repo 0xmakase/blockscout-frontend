@@ -238,8 +238,9 @@
         "burntFees": "Burnt fees"
     },
     "blockDetails": {
+        "block": "Block",
         "blockHeightHint": "The block height of a particular block is defined as the number of blocks preceding it in the blockchain",
-        "blockHeight": "Block height",
+        "blockHeight": "height",
         "genesisBlock": " - Genesis Block",
         "viewPreviousBlock": "View previous block",
         "viewNextBlock": "View next block",
@@ -309,7 +310,8 @@
         "txn": "Txn",
         "reward": "Reward",
         "validator": "Validator",
-        "miner": "Miner"
+        "miner": "Miner",
+        "inThisBlock": "in this block"
     },
     "txInfo": {
         "transaction_hash": "Transaction hash",
@@ -545,5 +547,37 @@
     },
     "testnetWarning": {
         "message": "This is a testnet transaction only"
+    },
+    "socketNewItemsNotice": {
+        "token_transfer": "token transfer",
+        "deposit": "deposit",
+        "block": "block",
+        "transaction": "transaction",
+        "scanning": "scanning new {name}s...",
+        "more": "{num} more {name}{num > 1 ? 's' : ''}",
+        "come_in": " ha{num > 1 ? 've' : 's'} come in"
+    },
+    "blockPageContent": {
+        "details": "Details",
+        "transactions": "Transactions",
+        "blob_txns": "Blob txns",
+        "withdrawals": "Withdrawals",
+        "back_to_blocks_list": "Back to blocks list",
+        "reorged_block": "Reorged block #{{height}}",
+        "uncle_block": "Uncle block #{{height}}",
+        "block": "Block #{{height}}",
+        "validated_by": "Validated by",
+        "mined_by": "Mined by"
+    },
+    "txDetailsTokenTransfers": {
+        "token_transfer_title": "Tokens transferred",
+        "token_transfer_hint": "List of tokens transferred in the transaction",
+        "token_minting_title": "Tokens minted",
+        "token_minting_hint": "List of tokens minted in the transaction",
+        "token_burning_title": "Tokens burnt",
+        "token_burning_hint": "List of tokens burnt in the transaction",
+        "token_spawning_title": "Tokens created",
+        "token_spawning_hint": "List of tokens created in the transaction",
+        "view_all": "View all"
     }
 }
