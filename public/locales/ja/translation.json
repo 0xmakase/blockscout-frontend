@@ -422,5 +422,21 @@
         "page_title_generic": "トークン",
         "bridged_tokens_description": "{{bridgesList}} 拡張機能を通じてブリッジされたトークンのリスト",
         "and": "および"
+    },
+    "contractVerification": {
+        "license_placeholder": "契約ライセンス",
+        "license_note": "ベストプラクティスとして、すべての契約ソースコードの保有者、出版社、および著者は、提供された検証済み契約ソースコードに付随するライセンスを指定することをお勧めします。",
+        "smart_contract_address": "スマートコントラクト / アドレス (0x...)",
+        "contract_address_to_verify": "検証する契約アドレス",
+        "supported_methods": "現在、Blockscoutは{{count}}つの契約検証方法をサポートしています",
+        "supported_methods_list": "現在、Blockscoutは{{count}}つの方法をサポートしています：",
+        "flattened_code": "フラット化されたソースコードによる検証。",
+        "multi_part": "マルチパートSolidityファイルの検証。",
+        "sourcify": "Sourcifyを通じた検証",
+        "standard_input": "標準入力JSONファイルを使用した検証",
+        "vyper_code": "Vyper契約の検証。",
+        "vyper_multi_part": "マルチパートVyperファイルの検証。",
+        "vyper_standard_input": "標準入力JSONファイルを使用したVyper契約の検証",
+        "verification_method_placeholder": "検証方法（コンパイラタイプ）"
     }
 }

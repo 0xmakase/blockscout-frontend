@@ -430,5 +430,21 @@
         "page_title_generic": "Tokens",
         "bridged_tokens_description": "List of the tokens bridged through {{bridgesList}} extensions",
         "and": "and"
+    },
+    "contractVerification": {
+        "license_placeholder": "Contract license",
+        "license_note": "For best practices, all contract source code holders, publishers and authors are encouraged to also specify the accompanying license for their verified contract source code provided.",
+        "smart_contract_address": "Smart contract / Address (0x...)",
+        "contract_address_to_verify": "Contract address to verify",
+        "supported_methods": "Currently, Blockscout supports {{count}} contract verification methods",
+        "supported_methods_list": "Currently, Blockscout supports {{count}} methods:",
+        "flattened_code": "Verification through flattened source code.",
+        "multi_part": "Verification of multi-part Solidity files.",
+        "sourcify": "Verification through",
+        "standard_input": "Verification using",
+        "vyper_code": "Verification of Vyper contract.",
+        "vyper_multi_part": "Verification of multi-part Vyper files.",
+        "vyper_standard_input": "Verification of Vyper contract using",
+        "verification_method_placeholder": "Verification method (compiler type)"
     }
 }

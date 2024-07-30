@@ -15,6 +15,7 @@ import {
 import React from 'react';
 import type { ControllerRenderProps, Control } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import type { FormFields } from '../types';
 import type { SmartContractVerificationConfig, SmartContractVerificationMethod } from 'types/api/contract';
@@ -33,6 +34,7 @@ interface Props {
 }
 
 const ContractVerificationFieldMethod = ({ control, isDisabled, methods }: Props) => {
+  const { t } = useTranslation();
   const tooltipBg = useColorModeValue('gray.700', 'gray.900');
   const isMobile = useIsMobile();
 
@@ -58,16 +60,15 @@ const ContractVerificationFieldMethod = ({ control, isDisabled, methods }: Props
   const renderPopoverListItem = React.useCallback((method: SmartContractVerificationMethod) => {
     switch (method) {
       case 'flattened-code':
-        return <ListItem key={ method }>Verification through flattened source code.</ListItem>;
+        return <ListItem key={ method }>{ t('contractVerification.flattened_code') }</ListItem>;
       case 'multi-part':
-        return <ListItem key={ method }>Verification of multi-part Solidity files.</ListItem>;
+        return <ListItem key={ method }>{ t('contractVerification.multi_part') }</ListItem>;
       case 'sourcify':
-        return <ListItem key={ method }>Verification through <Link href="https://sourcify.dev/" target="_blank">Sourcify</Link>.</ListItem>;
+        return <ListItem key={ method }>{ t('contractVerification.sourcify') } <Link href="https://sourcify.dev/" target="_blank">Sourcify</Link>.</ListItem>;
       case 'standard-input':
         return (
           <ListItem key={ method }>
-            <span>Verification using </span>
-            <Link
+            { t('contractVerification.standard_input') } <Link
               href="https://docs.soliditylang.org/en/latest/using-the-compiler.html#input-description"
               target="_blank"
             >
@@ -77,14 +78,13 @@ const ContractVerificationFieldMethod = ({ control, isDisabled, methods }: Props
           </ListItem>
         );
       case 'vyper-code':
-        return <ListItem key={ method }>Verification of Vyper contract.</ListItem>;
+        return <ListItem key={ method }>{ t('contractVerification.vyper_code') }</ListItem>;
       case 'vyper-multi-part':
-        return <ListItem key={ method }>Verification of multi-part Vyper files.</ListItem>;
+        return <ListItem key={ method }>{ t('contractVerification.vyper_multi_part') }</ListItem>;
       case 'vyper-standard-input':
         return (
           <ListItem key={ method }>
-            <span>Verification of Vyper contract using </span>
-            <Link
+            { t('contractVerification.vyper_standard_input') } <Link
               href="https://docs.vyperlang.org/en/stable/compiling-a-contract.html#compiler-input-and-output-json-description"
               target="_blank"
             >
@@ -94,13 +94,13 @@ const ContractVerificationFieldMethod = ({ control, isDisabled, methods }: Props
           </ListItem>
         );
     }
-  }, []);
+  }, [ t ]);
 
   return (
     <>
       <Box mt={{ base: 10, lg: 6 }} gridColumn={{ lg: '1 / 3' }}>
         <chakra.span fontWeight={ 500 } fontSize="lg" fontFamily="heading">
-          Currently, Blockscout supports { methods.length } contract verification methods
+          { t('contractVerification.supported_methods', { count: methods.length }) }
         </chakra.span>
         <Popover trigger="hover" isLazy placement={ isMobile ? 'bottom-end' : 'right-start' } offset={ [ -8, 8 ] }>
           <PopoverTrigger>
@@ -113,7 +113,7 @@ const ContractVerificationFieldMethod = ({ control, isDisabled, methods }: Props
               <PopoverArrow bgColor={ tooltipBg }/>
               <PopoverBody color="white">
                 <DarkMode>
-                  <span>Currently, Blockscout supports { methods.length } methods:</span>
+                  <span>{ t('contractVerification.supported_methods_list', { count: methods.length }) }</span>
                   <OrderedList>
                     { methods.map(renderPopoverListItem) }
                   </OrderedList>
