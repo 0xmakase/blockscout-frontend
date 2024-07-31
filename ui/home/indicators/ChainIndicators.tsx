@@ -52,7 +52,7 @@ const ChainIndicators = () => {
     }
 
     if (!statsQueryResult.data) {
-      return <Text fontSize="xs">There is no data</Text>;
+      return <Text fontSize="xs">{ t('general.noData') }</Text>;
     }
 
     return (

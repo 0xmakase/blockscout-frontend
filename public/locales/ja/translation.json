@@ -717,5 +717,8 @@
         "decimalsHint": "トークン値を表示する際の小数点以下の桁数",
         "dapp": "Dapp",
         "dappHint": "Dappへのリンク"
+    },
+    "general": {
+        "noData": "データがありません"
     }
 }

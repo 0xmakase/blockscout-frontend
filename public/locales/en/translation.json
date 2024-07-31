@@ -725,5 +725,8 @@
         "decimalsHint": "Number of digits that come after the decimal place when displaying token value",
         "dapp": "Dapp",
         "dappHint": "Link to the dapp"
+    },
+    "general": {
+        "noData": "There is no data"
     }
 }
