@@ -1,7 +1,8 @@
 import { Box } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useMemo, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { SocketMessage } from 'lib/socket/types';
 import type { TokenInfo } from 'types/api/token';
@@ -44,12 +45,13 @@ const TABS_RIGHT_SLOT_PROPS = {
 };
 
 const TokenPageContent = () => {
-  const [ isQueryEnabled, setIsQueryEnabled ] = React.useState(false);
-  const [ totalSupplySocket, setTotalSupplySocket ] = React.useState<number>();
+  const [ isQueryEnabled, setIsQueryEnabled ] = useState(false);
+  const [ totalSupplySocket, setTotalSupplySocket ] = useState<number>();
   const router = useRouter();
   const isMobile = useIsMobile();
+  const { t } = useTranslation();
 
-  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const hashString = getQueryParamString(router.query.hash);
   const tab = getQueryParamString(router.query.tab);
@@ -67,7 +69,7 @@ const TokenPageContent = () => {
     },
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (tokenQuery.data && totalSupplySocket) {
       queryClient.setQueryData(getResourceKey('token', { pathParams: { hash: hashString } }), (prevData: TokenInfo | undefined) => {
         if (prevData) {
@@ -77,7 +79,7 @@ const TokenPageContent = () => {
     }
   }, [ tokenQuery.data, totalSupplySocket, hashString, queryClient ]);
 
-  const handleTotalSupplyMessage: SocketMessage.TokenTotalSupply['handler'] = React.useCallback((payload) => {
+  const handleTotalSupplyMessage: SocketMessage.TokenTotalSupply['handler'] = useCallback((payload) => {
     const prevData = queryClient.getQueryData(getResourceKey('token', { pathParams: { hash: hashString } }));
     if (!prevData) {
       setTotalSupplySocket(payload.total_supply);
@@ -89,7 +91,7 @@ const TokenPageContent = () => {
     });
   }, [ queryClient, hashString ]);
 
-  const enableQuery = React.useCallback(() => setIsQueryEnabled(true), []);
+  const enableQuery = useCallback(() => setIsQueryEnabled(true), []);
 
   const channel = useSocketChannel({
     topic: `tokens:${ hashString?.toLowerCase() }`,
@@ -163,17 +165,17 @@ const TokenPageContent = () => {
   const tabs: Array<RoutedTab> = [
     hasInventoryTab ? {
       id: 'inventory',
-      title: 'Inventory',
+      title: t('tokenPage.inventory'),
       component: <TokenInventory inventoryQuery={ inventoryQuery } tokenQuery={ tokenQuery } ownerFilter={ ownerFilter } shouldRender={ !isLoading }/>,
     } : undefined,
     {
       id: 'token_transfers',
-      title: 'Token transfers',
+      title: t('tokenPage.tokenTransfers'),
       component: <TokenTransfer transfersQuery={ transfersQuery } token={ tokenQuery.data } shouldRender={ !isLoading }/>,
     },
     {
       id: 'holders',
-      title: 'Holders',
+      title: t('tokenPage.holders'),
       component: <TokenHolders token={ tokenQuery.data } holdersQuery={ holdersQuery } shouldRender={ !isLoading }/>,
     },
     addressQuery.data?.is_contract ? {
@@ -182,13 +184,13 @@ const TokenPageContent = () => {
         if (addressQuery.data?.is_verified) {
           return (
             <>
-              <span>Contract</span>
+              <span>{ t('tokenPage.verifiedContract') }</span>
               <IconSvg name="status/success" boxSize="14px" color="green.500" ml={ 1 }/>
             </>
           );
         }
 
-        return 'Contract';
+        return t('tokenPage.contract');
       },
       component: <AddressContract tabs={ contractTabs.tabs } isLoading={ contractTabs.isLoading } shouldRender={ !isLoading }/>,
       subTabs: contractTabs.tabs.map(tab => tab.id),
@@ -211,7 +213,7 @@ const TokenPageContent = () => {
     pagination = inventoryQuery.pagination;
   }
 
-  const tabListProps = React.useCallback(({ isSticky, activeTabIndex }: { isSticky: boolean; activeTabIndex: number }) => {
+  const tabListProps = useCallback(({ isSticky, activeTabIndex }: { isSticky: boolean; activeTabIndex: number }) => {
     if (isMobile) {
       return { mt: 8 };
     }
@@ -224,7 +226,7 @@ const TokenPageContent = () => {
     };
   }, [ isMobile ]);
 
-  const tabsRightSlot = React.useMemo(() => {
+  const tabsRightSlot = useMemo(() => {
     if (isMobile) {
       return null;
     }
