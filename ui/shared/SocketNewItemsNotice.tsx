@@ -28,6 +28,7 @@ const SocketNewItemsNotice = chakra(({ children, className, url, num, alert, typ
 
     let name;
     const plural = num && num > 1 ? 's' : '';
+    const plural2 = num && num > 1 ? 've' : 's';
 
     switch (type) {
       case 'token_transfer':
@@ -51,7 +52,7 @@ const SocketNewItemsNotice = chakra(({ children, className, url, num, alert, typ
     return (
       <>
         <Link href={ url }>{ t('socketNewItemsNotice.more', { num: num.toLocaleString(), name, plural }) }</Link>
-        <Text whiteSpace="pre">{ t('socketNewItemsNotice.come_in', { num, plural }) }</Text>
+        <Text whiteSpace="pre">{ t('socketNewItemsNotice.come_in', { name, plural2 }) }</Text>
       </>
     );
   })();
