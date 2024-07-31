@@ -567,9 +567,9 @@
         "block": "block",
         "transaction": "transaction",
         "scanning": "scanning new {{name}}s...",
-        "more": "{{num}} more {{name}}{{num > 1 ? 's' : ''}}",
-        "come_in": " ha{{num > 1 ? 've' : 's'}} come in"
-    },
+        "more": "{{num}} more {{name}}{{plural}}",
+        "come_in": "{{plural}} {{name}} ha{{plural}} come in"
+      },
     "blockPageContent": {
         "details": "Details",
         "transactions": "Transactions",

@@ -27,6 +27,7 @@ const SocketNewItemsNotice = chakra(({ children, className, url, num, alert, typ
     }
 
     let name;
+    const plural = num && num > 1 ? 's' : '';
 
     switch (type) {
       case 'token_transfer':
@@ -42,8 +43,6 @@ const SocketNewItemsNotice = chakra(({ children, className, url, num, alert, typ
         name = t('socketNewItemsNotice.transaction');
         break;
     }
-
-    const plural = num && num > 1 ? 's' : '';
 
     if (!num) {
       return t('socketNewItemsNotice.scanning', { name });
