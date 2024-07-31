@@ -100,7 +100,7 @@
         "tokenId": "トークンID",
         "txnHash": "取引ハッシュ",
         "fromTo": "送信者/受信者",
-        "value": "値",
+        "value": "Value",
         "method": "メソッド"
     },
     "txsTable": {
@@ -674,7 +674,7 @@
         "type": "タイプ",
         "block": "ブロック",
         "fromTo": "送信者/受信者",
-        "value": "値"
+        "value": "Value"
     },
     "erc20TokensTable": {
         "asset": "資産",
@@ -717,5 +717,27 @@
         "decimalsHint": "トークン値を表示する際の小数点以下の桁数",
         "dapp": "Dapp",
         "dappHint": "Dappへのリンク"
+    },
+    "general": {
+        "noData": "データがありません"
+    },
+    "tokenPage": {
+        "inventory": "インベントリ",
+        "tokenTransfers": "トークン転送",
+        "holders": "保有者",
+        "contract": "コントラクト",
+        "verifiedContract": "コントラクト",
+        "priceHint": "取引所でのトークンの価格",
+        "price": "価格",
+        "marketCapHint": "総供給量 * 価格",
+        "marketCap": "完全希薄化時価総額",
+        "totalSupplyHint": "発行されたトークンの総量",
+        "totalSupply": "最大総供給量",
+        "holdersHint": "トークンを保有しているアカウントの数",
+        "transfersHint": "トークンの転送回数",
+        "decimalsHint": "トークン値を表示する際の小数点以下の桁数",
+        "decimals": "小数点",
+        "dappHint": "dappへのリンク",
+        "dapp": "Dapp"
     }
 }

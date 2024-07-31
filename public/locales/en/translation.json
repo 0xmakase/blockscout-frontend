@@ -725,5 +725,27 @@
         "decimalsHint": "Number of digits that come after the decimal place when displaying token value",
         "dapp": "Dapp",
         "dappHint": "Link to the dapp"
+    },
+    "general": {
+        "noData": "There is no data"
+    },
+    "tokenPage": {
+        "inventory": "Inventory",
+        "tokenTransfers": "Token transfers",
+        "holders": "Holders",
+        "contract": "Contract",
+        "verifiedContract": "Contract",
+        "priceHint": "Price per token on the exchanges",
+        "price": "Price",
+        "marketCapHint": "Total supply * Price",
+        "marketCap": "Fully diluted market cap",
+        "totalSupplyHint": "The total amount of tokens issued",
+        "totalSupply": "Max total supply",
+        "holdersHint": "Number of accounts holding the token",
+        "transfersHint": "Number of transfer for the token",
+        "decimalsHint": "Number of digits that come after the decimal place when displaying token value",
+        "decimals": "Decimals",
+        "dappHint": "Link to the dapp",
+        "dapp": "Dapp"
     }
 }
