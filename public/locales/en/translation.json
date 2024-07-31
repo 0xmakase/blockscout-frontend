@@ -568,7 +568,7 @@
         "transaction": "transaction",
         "scanning": "scanning new {{name}}s...",
         "more": "{{num}} more {{name}}{{plural}}",
-        "come_in": "{{plural}} {{name}} ha{{plural}} come in"
+        "come_in": "{{name}} ha{{plural}} come in"
       },
     "blockPageContent": {
         "details": "Details",
