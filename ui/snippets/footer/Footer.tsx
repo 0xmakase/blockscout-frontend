@@ -184,7 +184,7 @@ const Footer = () => {
         >
           {
             ([
-              { title: 'Blockscout', links: BLOCKSCOUT_LINKS },
+              // { title: 'Blockscout', links: BLOCKSCOUT_LINKS },
               ...(linksData || []),
             ])
               .slice(0, colNum)
