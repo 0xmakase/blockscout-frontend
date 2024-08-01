@@ -3,17 +3,8 @@
       "title": "Berachain",
       "links": [
         {
-            "text": "About Berachain",
+            "text": "Home",
             "url": "https://www.berachain.com/"
-        },
-        {
-            "text": "Documentation",
-            "url": "https://docs.berachain.com/"
-        },
-        {
-            "icon": "social/git",
-            "text": "GitHub",
-            "url": "https://github.com/berachain"
         },
         {
             "icon": "social/twitter",
@@ -31,6 +22,15 @@
             "url": "https://t.me/BerachainPortal"
         },
         {
+            "icon": "social/git",
+            "text": "GitHub",
+            "url": "https://github.com/berachain"
+        },
+        {
+            "text": "Documentation",
+            "url": "https://docs.berachain.com/"
+        },
+        {
             "text": "Blog",
             "url": "https://blog.berachain.com/"
         }
@@ -40,7 +40,7 @@
       "title": "KudasaiJP",
       "links": [
         {
-          "text": "About KudasaiJP",
+          "text": "Home",
           "url": "https://kudasai.co.jp/"
         },
         {
@@ -59,13 +59,13 @@
             "url": "https://t.me/KudasaiJP"
         },
         {
-            "text": "Line",
-            "url": "https://line.me/ti/g2/3kDnvsbzNwdXFGdn_XnMiL9_VxY8QtK1qr9i1A"
+            "icon": "social/medium_filled",
+            "text": "Medium",
+            "url": "https://medium.com/cryptokudasaijp"
         },
         {
-            "icon": "social/medium_filled",
-            "text": "Blog",
-            "url": "https://medium.com/cryptokudasaijp"
+            "text": "Line",
+            "url": "https://line.me/ti/g2/3kDnvsbzNwdXFGdn_XnMiL9_VxY8QtK1qr9i1A"
         }
       ]
     },
@@ -73,7 +73,7 @@
       "title": "Omakase",
       "links": [
         {
-            "text": "About Omakase",
+            "text": "Home",
             "url": "https://0xmakase.co.jp/"
         },
         {
