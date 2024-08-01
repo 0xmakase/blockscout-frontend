@@ -18,11 +18,11 @@ interface Props {
 }
 
 const AdBanner = ({ className, isLoading, platform }: Props) => {
-  const provider = useAppContext().adBannerProvider;
+  const provider = 'adsense'; // Google AdSense用に固定
 
   const hasAdblockCookie = cookies.get(cookies.NAMES.ADBLOCK_DETECTED, useAppContext().cookies);
 
-  if (!feature.isEnabled || hasAdblockCookie === 'true' || !provider) {
+  if (!feature.isEnabled || hasAdblockCookie === 'true') {
     return null;
   }
 
