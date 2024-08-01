@@ -16,28 +16,23 @@
             "url": "https://github.com/berachain"
         },
         {
-          "text": "Community",
-          "links": [
-            {
-                "icon": "social/twitter",
-                "text": "X (ex-Twitter)",
-                "url": "https://x.com/berachain"
-            },
-            {
-                "icon": "social/discord",
-                "text": "Discord",
-                "url": "https://discord.com/invite/berachain"
-            },
-            {
-                "icon": "social/telega",
-                "text": "Telegram",
-                "url": "https://t.me/BerachainPortal"
-            },
-            {
-                "text": "Blog",
-                "url": "https://blog.berachain.com/"
-            }
-          ]
+            "icon": "social/twitter",
+            "text": "X (ex-Twitter)",
+            "url": "https://x.com/berachain"
+        },
+        {
+            "icon": "social/discord",
+            "text": "Discord",
+            "url": "https://discord.com/invite/berachain"
+        },
+        {
+            "icon": "social/telega",
+            "text": "Telegram",
+            "url": "https://t.me/BerachainPortal"
+        },
+        {
+            "text": "Blog",
+            "url": "https://blog.berachain.com/"
         }
       ]
     },
@@ -49,33 +44,28 @@
           "url": "https://kudasai.co.jp/"
         },
         {
-          "text": "Community",
-          "links": [
-            {
-                "icon": "social/twitter",
-                "text": "X (ex-Twitter)",
-                "url": "https://x.com/kudasai_japan"
-            },
-            {
-                "icon": "social/discord",
-                "text": "Discord",
-                "url": "https://discord.com/invite/kudasaijp"
-            },
-            {
-                "icon": "social/telega",
-                "text": "Telegram",
-                "url": "https://t.me/KudasaiJP"
-            },
-            {
-                "text": "Line",
-                "url": "https://line.me/ti/g2/3kDnvsbzNwdXFGdn_XnMiL9_VxY8QtK1qr9i1A"
-            },
-            {
-                "icon": "social/medium_filled",
-                "text": "Blog",
-                "url": "https://medium.com/cryptokudasaijp"
-            }
-          ]
+            "icon": "social/twitter",
+            "text": "X (ex-Twitter)",
+            "url": "https://x.com/kudasai_japan"
+        },
+        {
+            "icon": "social/discord",
+            "text": "Discord",
+            "url": "https://discord.com/invite/kudasaijp"
+        },
+        {
+            "icon": "social/telega",
+            "text": "Telegram",
+            "url": "https://t.me/KudasaiJP"
+        },
+        {
+            "text": "Line",
+            "url": "https://line.me/ti/g2/3kDnvsbzNwdXFGdn_XnMiL9_VxY8QtK1qr9i1A"
+        },
+        {
+            "icon": "social/medium_filled",
+            "text": "Blog",
+            "url": "https://medium.com/cryptokudasaijp"
         }
       ]
     },
