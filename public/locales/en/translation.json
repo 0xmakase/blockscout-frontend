@@ -747,5 +747,8 @@
         "decimals": "Decimals",
         "dappHint": "Link to the dapp",
         "dapp": "Dapp"
+    },
+    "serviceDegradationWarning": {
+        "message": "Data sync in progress... page will refresh automatically once data is available"
     }
 }
