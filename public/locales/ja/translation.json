@@ -739,5 +739,8 @@
         "decimals": "小数点",
         "dappHint": "dappへのリンク",
         "dapp": "Dapp"
+    },
+    "serviceDegradationWarning": {
+        "message": "データ同期中です... データが利用可能になり次第、ページは自動的にリフレッシュされます"
     }
 }
