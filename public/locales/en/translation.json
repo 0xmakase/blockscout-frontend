@@ -453,7 +453,7 @@
         "contract_address_to_verify": "Contract address to verify",
         "supported_methods": "Currently, Blockscout supports {{count}} contract verification methods",
         "supported_methods_list": "Currently, Blockscout supports {{count}} methods:",
-        "flattened_code": "Verification through flattened source code.",
+        "flattened_code": "Verification through a single file.",
         "multi_part": "Verification of multi-part Solidity files.",
         "sourcify": "Verification through",
         "standard_input": "Verification using",

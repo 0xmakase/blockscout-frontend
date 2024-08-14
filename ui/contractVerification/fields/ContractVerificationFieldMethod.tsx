@@ -18,7 +18,7 @@ import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import type { FormFields } from '../types';
-import type { SmartContractVerificationConfig, SmartContractVerificationMethod } from 'types/api/contract';
+import type { SmartContractVerificationMethod, SmartContractVerificationConfig } from 'types/client/contract';
 
 import useIsMobile from 'lib/hooks/useIsMobile';
 import Popover from 'ui/shared/chakra/Popover';
@@ -93,6 +93,10 @@ const ContractVerificationFieldMethod = ({ control, isDisabled, methods }: Props
             <span> file.</span>
           </ListItem>
         );
+      case 'solidity-hardhat':
+        return <ListItem key={ method }>Verification through Hardhat plugin.</ListItem>;
+      case 'solidity-foundry':
+        return <ListItem key={ method }>Verification through Foundry.</ListItem>;
     }
   }, [ t ]);
 

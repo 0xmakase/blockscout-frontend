@@ -32,15 +32,23 @@ import type {
   AddressCollectionsResponse,
   AddressNFTTokensFilter,
   AddressCoinBalanceHistoryChartOld,
+  AddressMudTables,
+  AddressMudTablesFilter,
+  AddressMudRecords,
+  AddressMudRecordsFilter,
+  AddressMudRecordsSorting,
+  AddressMudRecord,
 } from 'types/api/address';
 import type { AddressesResponse } from 'types/api/addresses';
 import type { AddressMetadataInfo, PublicTagTypesResponse } from 'types/api/addressMetadata';
 import type {
   ArbitrumL2MessagesResponse,
+  ArbitrumL2MessagesItem,
   ArbitrumL2TxnBatch,
   ArbitrumL2TxnBatchesResponse,
   ArbitrumL2BatchTxs,
   ArbitrumL2BatchBlocks,
+  ArbitrumL2TxnBatchesItem,
 } from 'types/api/arbitrumL2';
 import type { TxBlobs, Blob } from 'types/api/blobs';
 import type { BlocksResponse, BlockTransactionsResponse, Block, BlockFilters, BlockWithdrawalsResponse, BlockCountdownResponse } from 'types/api/block';
@@ -48,7 +56,7 @@ import type { ChartMarketResponse, ChartSecondaryCoinPriceResponse, ChartTransac
 import type { BackendVersionConfig } from 'types/api/configs';
 import type {
   SmartContract,
-  SmartContractVerificationConfig,
+  SmartContractVerificationConfigRaw,
   SolidityscanReport,
   SmartContractSecurityAudits,
 } from 'types/api/contract';
@@ -61,6 +69,7 @@ import type {
 import type { IndexingStatus } from 'types/api/indexingStatus';
 import type { InternalTransactionsResponse } from 'types/api/internalTransaction';
 import type { LogsResponseTx, LogsResponseAddress } from 'types/api/log';
+import type { MudWorldsResponse } from 'types/api/mudWorlds';
 import type { NovesAccountHistoryResponse, NovesDescribeTxsResponse, NovesResponseData } from 'types/api/noves';
 import type {
   OptimisticL2DepositsResponse,
@@ -573,14 +582,20 @@ export const RESOURCES = {
   homepage_blocks: {
     path: '/api/v2/main-page/blocks',
   },
-  homepage_deposits: {
+  homepage_optimistic_deposits: {
     path: '/api/v2/main-page/optimism-deposits',
+  },
+  homepage_arbitrum_deposits: {
+    path: '/api/v2/main-page/arbitrum/messages/to-rollup',
   },
   homepage_txs: {
     path: '/api/v2/main-page/transactions',
   },
   homepage_zkevm_l2_batches: {
     path: '/api/v2/main-page/zkevm/batches/confirmed',
+  },
+  homepage_arbitrum_l2_batches: {
+    path: '/api/v2/main-page/arbitrum/batches/committed',
   },
   homepage_txs_watchlist: {
     path: '/api/v2/main-page/transactions/watchlist',
@@ -593,6 +608,9 @@ export const RESOURCES = {
   },
   homepage_zksync_latest_batch: {
     path: '/api/v2/main-page/zksync/batches/latest-number',
+  },
+  homepage_arbitrum_latest_batch: {
+    path: '/api/v2/main-page/arbitrum/batches/latest-number',
   },
 
   // SEARCH
@@ -652,6 +670,34 @@ export const RESOURCES = {
 
   optimistic_l2_dispute_games_count: {
     path: '/api/v2/optimism/games/count',
+  },
+
+  // MUD worlds on optimism
+  mud_worlds: {
+    path: '/api/v2/mud/worlds',
+    filterFields: [],
+  },
+
+  address_mud_tables: {
+    path: '/api/v2/mud/worlds/:hash/tables',
+    pathParams: [ 'hash' as const ],
+    filterFields: [ 'q' as const ],
+  },
+
+  address_mud_tables_count: {
+    path: '/api/v2/mud/worlds/:hash/tables/count',
+    pathParams: [ 'hash' as const ],
+  },
+
+  address_mud_records: {
+    path: '/api/v2/mud/worlds/:hash/tables/:table_id/records',
+    pathParams: [ 'hash' as const, 'table_id' as const ],
+    filterFields: [ 'filter_key0' as const, 'filter_key1' as const ],
+  },
+
+  address_mud_record: {
+    path: '/api/v2/mud/worlds/:hash/tables/:table_id/records/:record_id',
+    pathParams: [ 'hash' as const, 'table_id' as const, 'record_id' as const ],
   },
 
   // arbitrum L2
@@ -899,6 +945,7 @@ export type PaginatedResources = 'blocks' | 'block_txs' |
 'verified_contracts' |
 'optimistic_l2_output_roots' | 'optimistic_l2_withdrawals' | 'optimistic_l2_txn_batches' | 'optimistic_l2_deposits' |
 'optimistic_l2_dispute_games' |
+'mud_worlds'| 'address_mud_tables' | 'address_mud_records' |
 'shibarium_deposits' | 'shibarium_withdrawals' |
 'arbitrum_l2_messages' | 'arbitrum_l2_txn_batches' | 'arbitrum_l2_txn_batch_txs' | 'arbitrum_l2_txn_batch_blocks' |
 'zkevm_l2_deposits' | 'zkevm_l2_withdrawals' | 'zkevm_l2_txn_batches' | 'zkevm_l2_txn_batch_txs' |
@@ -930,11 +977,14 @@ Q extends 'stats_charts_secondary_coin_price' ? ChartSecondaryCoinPriceResponse 
 Q extends 'homepage_blocks' ? Array<Block> :
 Q extends 'homepage_txs' ? Array<Transaction> :
 Q extends 'homepage_txs_watchlist' ? Array<Transaction> :
-Q extends 'homepage_deposits' ? Array<OptimisticL2DepositsItem> :
+Q extends 'homepage_optimistic_deposits' ? Array<OptimisticL2DepositsItem> :
+Q extends 'homepage_arbitrum_deposits' ? { items: Array<ArbitrumL2MessagesItem> } :
 Q extends 'homepage_zkevm_l2_batches' ? { items: Array<ZkEvmL2TxnBatchesItem> } :
+Q extends 'homepage_arbitrum_l2_batches' ? { items: Array<ArbitrumL2TxnBatchesItem>} :
 Q extends 'homepage_indexing_status' ? IndexingStatus :
 Q extends 'homepage_zkevm_latest_batch' ? number :
 Q extends 'homepage_zksync_latest_batch' ? number :
+Q extends 'homepage_arbitrum_latest_batch' ? number :
 Q extends 'stats_counters' ? stats.Counters :
 Q extends 'stats_lines' ? stats.LineCharts :
 Q extends 'stats_line' ? stats.LineChart :
@@ -992,9 +1042,7 @@ Q extends 'contract_solidityscan_report' ? SolidityscanReport :
 Q extends 'verified_contracts' ? VerifiedContractsResponse :
 Q extends 'verified_contracts_counters' ? VerifiedContractsCounters :
 Q extends 'visualize_sol2uml' ? visualizer.VisualizeResponse :
-Q extends 'contract_verification_config' ? SmartContractVerificationConfig :
-Q extends 'withdrawals' ? WithdrawalsResponse :
-Q extends 'withdrawals_counters' ? WithdrawalsCounters :
+Q extends 'contract_verification_config' ? SmartContractVerificationConfigRaw :
 Q extends 'optimistic_l2_output_roots' ? OptimisticL2OutputRootsResponse :
 Q extends 'optimistic_l2_withdrawals' ? OptimisticL2WithdrawalsResponse :
 Q extends 'optimistic_l2_deposits' ? OptimisticL2DepositsResponse :
@@ -1056,6 +1104,13 @@ Q extends 'user_op_interpretation'? TxInterpretationResponse :
 Q extends 'noves_transaction' ? NovesResponseData :
 Q extends 'noves_address_history' ? NovesAccountHistoryResponse :
 Q extends 'noves_describe_txs' ? NovesDescribeTxsResponse :
+Q extends 'mud_worlds' ? MudWorldsResponse :
+Q extends 'address_mud_tables' ? AddressMudTables :
+Q extends 'address_mud_tables_count' ? number :
+Q extends 'address_mud_records' ? AddressMudRecords :
+Q extends 'address_mud_record' ? AddressMudRecord :
+Q extends 'withdrawals' ? WithdrawalsResponse :
+Q extends 'withdrawals_counters' ? WithdrawalsCounters :
 never;
 /* eslint-enable @typescript-eslint/indent */
 
@@ -1087,6 +1142,8 @@ Q extends 'addresses_lookup' ? EnsAddressLookupFilters :
 Q extends 'domains_lookup' ? EnsDomainLookupFilters :
 Q extends 'user_ops' ? UserOpsFilters :
 Q extends 'validators' ? ValidatorsFilters :
+Q extends 'address_mud_tables' ? AddressMudTablesFilter :
+Q extends 'address_mud_records' ? AddressMudRecordsFilter :
 never;
 /* eslint-enable @typescript-eslint/indent */
 
@@ -1099,5 +1156,6 @@ Q extends 'address_txs' ? TransactionsSorting :
 Q extends 'addresses_lookup' ? EnsLookupSorting :
 Q extends 'domains_lookup' ? EnsLookupSorting :
 Q extends 'validators' ? ValidatorsSorting :
+Q extends 'address_mud_records' ? AddressMudRecordsSorting :
 never;
 /* eslint-enable @typescript-eslint/indent */

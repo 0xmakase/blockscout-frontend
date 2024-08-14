@@ -144,6 +144,16 @@ export const apiDocs: GetServerSideProps<Props> = async(context) => {
   return base(context);
 };
 
+export const graphIQl: GetServerSideProps<Props> = async(context) => {
+  if (!config.features.graphqlApiDocs.isEnabled) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return base(context);
+};
+
 export const csvExport: GetServerSideProps<Props> = async(context) => {
   if (!config.features.csvExport.isEnabled) {
     return {
@@ -268,6 +278,16 @@ export const publicTagsSubmit: GetServerSideProps<Props> = async(context) => {
 
 export const disputeGames: GetServerSideProps<Props> = async(context) => {
   if (!config.features.faultProofSystem.isEnabled) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return base(context);
+};
+
+export const mud: GetServerSideProps<Props> = async(context) => {
+  if (!config.features.mudFramework.isEnabled) {
     return {
       notFound: true,
     };

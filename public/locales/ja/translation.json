@@ -445,7 +445,7 @@
         "contract_address_to_verify": "検証する契約アドレス",
         "supported_methods": "現在、Blockscoutは{{count}}つの契約検証方法をサポートしています",
         "supported_methods_list": "現在、Blockscoutは{{count}}つの方法をサポートしています：",
-        "flattened_code": "フラット化されたソースコードによる検証。",
+        "flattened_code": "一つのファイルによる検証。",
         "multi_part": "マルチパートSolidityファイルの検証。",
         "sourcify": "Sourcifyを通じた検証",
         "standard_input": "標準入力JSONファイルを使用した検証",
