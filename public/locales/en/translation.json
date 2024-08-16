@@ -460,11 +460,12 @@
         "vyper_code": "Verification of Vyper contract.",
         "vyper_multi_part": "Verification of multi-part Vyper files.",
         "vyper_standard_input": "Verification of Vyper contract using",
-        "verification_method_placeholder": "Verification method (compiler type)",
         "verificationMethod": "Verification method (compiler type)",
         "hardhat_plugin": "Verification through Hardhat plugin",
         "foundry": "Verification through Foundry",
-        "file": "file"
+        "file": "file",
+        "newSmartContractVerification": "New smart contract verification",
+        "backToContract": "Back to contract"
     },
     "gasTrackerChart": {
         "title": "Gas price history",

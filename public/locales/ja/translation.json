@@ -452,10 +452,12 @@
         "vyper_code": "Vyper契約の検証。",
         "vyper_multi_part": "マルチパートVyperファイルの検証。",
         "vyper_standard_input": "標準入力JSONファイルを使用したVyper契約の検証",
-        "verification_method_placeholder": "検証方法（コンパイラタイプ）",
+        "verificationMethod": "検証方法（コンパイラタイプ）",
         "hardhat_plugin": "Hardhatプラグインを使用した検証",
         "foundry": "Foundryを使用した検証",
-        "file": "ファイル"
+        "file": "ファイル",
+        "newSmartContractVerification": "新しいスマートコントラクトの検証",
+        "backToContract": "契約に戻る"
     },
     "gasTrackerChart": {
         "title": "ガス価格の履歴",
