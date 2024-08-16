@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { SmartContractVerificationMethodApi } from 'types/api/contract';
 import type { SmartContractVerificationMethod } from 'types/client/contract';
@@ -16,6 +17,7 @@ import AddressEntity from 'ui/shared/entities/address/AddressEntity';
 import PageTitle from 'ui/shared/Page/PageTitle';
 
 const ContractVerificationForAddress = () => {
+  const { t } = useTranslation();
   const appProps = useAppContext();
   const router = useRouter();
 
@@ -75,15 +77,15 @@ const ContractVerificationForAddress = () => {
     }
 
     return {
-      label: 'Back to contract',
+      label: t('contractVerificationForAddress.backToContract'),
       url: appProps.referrer,
     };
-  }, [ appProps.referrer ]);
+  }, [ appProps.referrer, t ]);
 
   return (
     <>
       <PageTitle
-        title="New smart contract verification"
+        title={ t('contractVerificationForAddress.newSmartContractVerification') }
         backLink={ backLink }
       />
       <AddressEntity

@@ -455,7 +455,9 @@
         "verificationMethod": "検証方法（コンパイラタイプ）",
         "hardhat_plugin": "Hardhatプラグインを使用した検証",
         "foundry": "Foundryを使用した検証",
-        "file": "ファイル"
+        "file": "ファイル",
+        "newSmartContractVerification": "新しいスマートコントラクトの検証",
+        "backToContract": "契約に戻る"
     },
     "gasTrackerChart": {
         "title": "ガス価格の履歴",
