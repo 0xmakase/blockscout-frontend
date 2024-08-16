@@ -1,11 +1,13 @@
 import { chakra, Box, Center, Heading, useColorModeValue } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import FilterInput from 'ui/shared/filters/FilterInput';
 import IconSvg from 'ui/shared/IconSvg';
 
 const BlockCountdownIndex = () => {
+  const { t } = useTranslation();
   const router = useRouter();
   const iconColor = useColorModeValue('gray.300', 'gray.600');
 
@@ -28,10 +30,10 @@ const BlockCountdownIndex = () => {
         h={{ base: '24px', lg: '40px' }}
         mt={{ base: 3, lg: 6 }}
       >
-        Block countdown
+        { t('blockCountdownIndex.heading') }
       </Heading>
       <Box mt={ 2 }>
-        The estimated time for a block to be created and added to the blockchain.
+        { t('blockCountdownIndex.description') }
       </Box>
       <chakra.form
         noValidate
@@ -40,7 +42,7 @@ const BlockCountdownIndex = () => {
         mt={{ base: 3, lg: 6 }}
       >
         <FilterInput
-          placeholder="Search by block number"
+          placeholder={ t('blockCountdownIndex.searchPlaceholder') }
           size="xs"
           type="number"
           name="search_term"

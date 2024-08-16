@@ -1,5 +1,6 @@
 import { Box, Checkbox, CheckboxGroup, Flex, HStack, Image, Link, Text, VStack, chakra } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type * as bens from '@blockscout/bens-types';
 import type { EnsDomainLookupFiltersOptions } from 'types/api/ens';
@@ -45,6 +46,7 @@ const NameDomainsActionBar = ({
   protocolsFilterValue,
   onProtocolsFilterChange,
 }: Props) => {
+  const { t } = useTranslation();
   const isInitialLoading = useIsInitialLoading(isLoading);
 
   const searchInput = (
@@ -53,7 +55,7 @@ const NameDomainsActionBar = ({
       minW={{ base: 'auto', lg: '250px' }}
       size="xs"
       onChange={ onSearchChange }
-      placeholder="Search by name or address"
+      placeholder={ t('nameDomainsActionBar.searchPlaceholder') }
       initialValue={ searchTerm }
       isLoading={ isInitialLoading }
     />
@@ -73,7 +75,7 @@ const NameDomainsActionBar = ({
         { protocolsData && protocolsData.length > 1 && (
           <>
             <Flex justifyContent="space-between" fontSize="sm" mb={ 3 }>
-              <Text fontWeight={ 600 } variant="secondary">Protocol</Text>
+              <Text fontWeight={ 600 } variant="secondary">{ t('nameDomainsActionBar.filter.protocol') }</Text>
               <Link
                 onClick={ handleProtocolReset }
                 color={ protocolsData.length > 0 ? 'link' : 'text_secondary' }
@@ -81,7 +83,7 @@ const NameDomainsActionBar = ({
                   color: protocolsData.length > 0 ? 'link_hovered' : 'text_secondary',
                 }}
               >
-                Reset
+                { t('nameDomainsActionBar.filter.reset') }
               </Link>
             </Flex>
             <CheckboxGroup size="lg" value={ protocolsFilterValue } defaultValue={ protocolsFilterValue } onChange={ onProtocolsFilterChange }>
@@ -112,9 +114,9 @@ const NameDomainsActionBar = ({
           </>
         ) }
         <CheckboxGroup size="lg" onChange={ onFilterValueChange } value={ filterValue } defaultValue={ filterValue }>
-          <Text variant="secondary" fontWeight={ 600 } mb={ 3 } fontSize="sm">Address</Text>
+          <Text variant="secondary" fontWeight={ 600 } mb={ 3 } fontSize="sm">{ t('nameDomainsActionBar.filter.address') }</Text>
           <Checkbox value="owned_by" isDisabled={ !isAddressSearch } display="block">
-            Owned by
+            { t('nameDomainsActionBar.filter.ownedBy') }
           </Checkbox>
           <Checkbox
             value="resolved_to"
@@ -122,12 +124,12 @@ const NameDomainsActionBar = ({
             isDisabled={ !isAddressSearch }
             display="block"
           >
-            Resolved to address
+            { t('nameDomainsActionBar.filter.resolvedToAddress') }
           </Checkbox>
           { filterGroupDivider }
-          <Text variant="secondary" fontWeight={ 600 } mb={ 3 } fontSize="sm">Status</Text>
+          <Text variant="secondary" fontWeight={ 600 } mb={ 3 } fontSize="sm">{ t('nameDomainsActionBar.filter.status') }</Text>
           <Checkbox value="with_inactive" display="block">
-            Include expired
+            { t('nameDomainsActionBar.filter.includeExpired') }
           </Checkbox>
         </CheckboxGroup>
       </div>

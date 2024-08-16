@@ -9,6 +9,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useCallback } from 'react';
 import type { ControllerRenderProps, SubmitHandler } from 'react-hook-form';
 import { useForm, Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import type { CustomAbi, CustomAbis, CustomAbiErrors } from 'types/api/account';
 
@@ -35,6 +36,7 @@ type Inputs = {
 const NAME_MAX_LENGTH = 255;
 
 const CustomAbiForm: React.FC<Props> = ({ data, onClose, setAlertVisible }) => {
+  const { t } = useTranslation();
   const { control, formState: { errors, isDirty }, handleSubmit, setError } = useForm<Inputs>({
     defaultValues: {
       contract_address_hash: data?.contract_address_hash || '',
@@ -107,10 +109,10 @@ const CustomAbiForm: React.FC<Props> = ({ data, onClose, setAlertVisible }) => {
         field={ field }
         error={ errors.contract_address_hash }
         bgColor="dialog_bg"
-        placeholder="Smart contract address (0x...)"
+        placeholder={ t('customAbiForm.contractAddressPlaceholder') } // 多言語化対応
       />
     );
-  }, [ errors ]);
+  }, [ errors, t ]);
 
   const renderNameInput = useCallback(({ field }: {field: ControllerRenderProps<Inputs, 'name'>}) => {
     return (
@@ -121,10 +123,10 @@ const CustomAbiForm: React.FC<Props> = ({ data, onClose, setAlertVisible }) => {
           maxLength={ NAME_MAX_LENGTH }
           bgColor="dialog_bg"
         />
-        <InputPlaceholder text="Project name" error={ errors.name }/>
+        <InputPlaceholder text={ t('customAbiForm.projectName') } error={ errors.name }/>
       </FormControl>
     );
-  }, [ errors ]);
+  }, [ errors, t ]);
 
   const renderAbiInput = useCallback(({ field }: {field: ControllerRenderProps<Inputs, 'abi'>}) => {
     return (
@@ -136,10 +138,10 @@ const CustomAbiForm: React.FC<Props> = ({ data, onClose, setAlertVisible }) => {
           isInvalid={ Boolean(errors.abi) }
           bgColor="dialog_bg"
         />
-        <InputPlaceholder text="Custom ABI [{...}] (JSON format)" error={ errors.abi }/>
+        <InputPlaceholder text={ t('customAbiForm.abiPlaceholder') } error={ errors.abi }/>
       </FormControl>
     );
-  }, [ errors ]);
+  }, [ errors, t ]);
 
   return (
     <form noValidate onSubmit={ handleSubmit(onSubmit) }>
@@ -177,7 +179,7 @@ const CustomAbiForm: React.FC<Props> = ({ data, onClose, setAlertVisible }) => {
           isDisabled={ !isDirty }
           isLoading={ mutation.isPending }
         >
-          { data ? 'Save' : 'Create custom ABI' }
+          { data ? t('customAbiForm.saveButton') : t('customAbiForm.createButton') }
         </Button>
       </Box>
     </form>

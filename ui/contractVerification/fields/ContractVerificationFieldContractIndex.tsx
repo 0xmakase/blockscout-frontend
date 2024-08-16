@@ -2,6 +2,7 @@ import { useUpdateEffect } from '@chakra-ui/react';
 import React from 'react';
 import type { ControllerRenderProps } from 'react-hook-form';
 import { useFormContext, Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next'; // 追加
 
 import type { FormFields } from '../types';
 import type { Option } from 'ui/shared/FancySelect/types';
@@ -16,6 +17,7 @@ const SOURCIFY_ERROR_REGEXP = /\(([^()]*)\)/;
 const ContractVerificationFieldContractIndex = () => {
   const [ options, setOptions ] = React.useState<Array<Option>>([]);
   const { formState, control, watch } = useFormContext<FormFields>();
+  const { t } = useTranslation(); // 追加
   const isMobile = useIsMobile();
 
   const sources = watch('sources');
@@ -48,14 +50,14 @@ const ContractVerificationFieldContractIndex = () => {
         { ...field }
         options={ options }
         size={ isMobile ? 'md' : 'lg' }
-        placeholder="Contract name"
+        placeholder={ t('contractVerificationFieldContractIndex.contractNamePlaceholder') }
         isDisabled={ formState.isSubmitting }
         error={ error }
         isRequired
         isAsync={ false }
       />
     );
-  }, [ formState.errors, formState.isSubmitting, isMobile, options ]);
+  }, [ formState.errors, formState.isSubmitting, isMobile, options, t ]);
 
   if (options.length === 0) {
     return null;

@@ -3,6 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import type { ControllerRenderProps } from 'react-hook-form';
 import { useFormContext, Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import type { FormFields } from '../types';
 import type { SmartContractVerificationConfig } from 'types/client/contract';
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const ContractVerificationFieldEvmVersion = ({ isVyper }: Props) => {
+  const { t } = useTranslation();
   const { formState, control } = useFormContext<FormFields>();
   const isMobile = useIsMobile();
   const queryClient = useQueryClient();
@@ -35,13 +37,13 @@ const ContractVerificationFieldEvmVersion = ({ isVyper }: Props) => {
         { ...field }
         options={ options }
         size={ isMobile ? 'md' : 'lg' }
-        placeholder="EVM Version"
+        placeholder={ t('contractVerificationFieldEvmVersion.evmVersionPlaceholder') }
         isDisabled={ formState.isSubmitting }
         error={ error }
         isRequired
       />
     );
-  }, [ formState.errors, formState.isSubmitting, isMobile, options ]);
+  }, [ formState.errors, formState.isSubmitting, isMobile, options, t ]);
 
   return (
     <ContractVerificationFormRow>
@@ -52,7 +54,7 @@ const ContractVerificationFieldEvmVersion = ({ isVyper }: Props) => {
         rules={{ required: true }}
       />
       <>
-        <span>The EVM version the contract is written for. If the bytecode does not match the version, we try to verify using the latest EVM version. </span>
+        <span>{ t('contractVerificationFieldEvmVersion.evmVersionDescription') }</span>
         <Link
           href={ isVyper ?
             'https://docs.vyperlang.org/en/stable/compiling-a-contract.html#target-options' :
@@ -60,7 +62,7 @@ const ContractVerificationFieldEvmVersion = ({ isVyper }: Props) => {
           }
           target="_blank"
         >
-          EVM version details
+          { t('contractVerificationFieldEvmVersion.evmVersionDetailsLink') }
         </Link>
       </>
     </ContractVerificationFormRow>

@@ -1,5 +1,6 @@
 import { HStack } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { TokensSortingValue } from 'types/api/tokens';
 import type { PaginationParams } from 'ui/shared/pagination/types';
@@ -29,13 +30,14 @@ const TokensActionBar = ({
   filter,
   inTabsSlot,
 }: Props) => {
+  const { t } = useTranslation();
 
   const searchInput = (
     <FilterInput
       w={{ base: '100%', lg: '360px' }}
       size="xs"
       onChange={ onSearchChange }
-      placeholder="Token name or symbol"
+      placeholder={ t('tokensActionBar.searchPlaceholder') } // 多言語化対応
       initialValue={ searchTerm }
     />
   );

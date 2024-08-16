@@ -1,10 +1,10 @@
 import { Hide, Show } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import useDebounce from 'lib/hooks/useDebounce';
 import useIsInitialLoading from 'lib/hooks/useIsInitialLoading';
-import { apos } from 'lib/html-entities';
 import getQueryParamString from 'lib/router/getQueryParamString';
 import { ADDRESS_MUD_TABLE_ITEM } from 'stubs/address';
 import { generateListStub } from 'stubs/utils';
@@ -17,13 +17,14 @@ import useQueryWithPages from 'ui/shared/pagination/useQueryWithPages';
 import AddressMudTablesListItem from './AddressMudTablesListItem';
 import AddressMudTablesTable from './AddressMudTablesTable';
 
-type Props ={
+type Props = {
   scrollRef?: React.RefObject<HTMLDivElement>;
   isQueryEnabled?: boolean;
 }
 
 const AddressMudTables = ({ scrollRef, isQueryEnabled = true }: Props) => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const hash = getQueryParamString(router.query.hash);
   const q = getQueryParamString(router.query.q);
@@ -52,7 +53,7 @@ const AddressMudTables = ({ scrollRef, isQueryEnabled = true }: Props) => {
       minW={{ base: 'auto', lg: '250px' }}
       size="xs"
       onChange={ setSearchTerm }
-      placeholder="Search by name, namespace or table ID..."
+      placeholder={ t('addressMudTables.searchPlaceholder') }
       initialValue={ searchTerm }
       isLoading={ isInitialLoading }
     />
@@ -93,9 +94,9 @@ const AddressMudTables = ({ scrollRef, isQueryEnabled = true }: Props) => {
     <DataListDisplay
       isError={ isError }
       items={ data?.items }
-      emptyText="There are no tables for this address."
+      emptyText={ t('addressMudTables.emptyText') }
       filterProps={{
-        emptyFilteredText: `Couldn${ apos }t find tables that match your filter query.`,
+        emptyFilteredText: t('addressMudTables.emptyFilteredText'),
         hasActiveFilters: Boolean(searchTerm),
       }}
       content={ content }

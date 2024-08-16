@@ -127,7 +127,7 @@
         "new_accounts": "新しいアカウント",
         "new_accounts_number_per_day": "日ごとの新しいアカウント数",
         "transactions": "トランザクション",
-        "average_txn_fee": "平均トランザクション手数料",
+        "average_transaction_fee": "平均トランザクション手数料",
         "the_average_amount_in_eth_spent_per_transaction": "トランザクションあたりに支払われたETHの平均額",
         "new_transactions": "新しいトランザクション",
         "new_transactions_number": "新しいトランザクション数",
@@ -452,7 +452,10 @@
         "vyper_code": "Vyper契約の検証。",
         "vyper_multi_part": "マルチパートVyperファイルの検証。",
         "vyper_standard_input": "標準入力JSONファイルを使用したVyper契約の検証",
-        "verification_method_placeholder": "検証方法（コンパイラタイプ）"
+        "verification_method_placeholder": "検証方法（コンパイラタイプ）",
+        "hardhat_plugin": "Hardhatプラグインを使用した検証",
+        "foundry": "Foundryを使用した検証",
+        "file": "ファイル"
     },
     "gasTrackerChart": {
         "title": "ガス価格の履歴",
@@ -742,5 +745,85 @@
     },
     "serviceDegradationWarning": {
         "message": "データ同期中です... データが利用可能になり次第、ページは自動的にリフレッシュされます"
+    },
+    "searchBarInput": {
+        "mobilePlaceholder": "アドレスで検索 / ...",
+        "desktopPlaceholder": "アドレス / トランザクションハッシュ / ブロック / トークンで検索..."
+    },
+    "addressMudTables": {
+        "searchPlaceholder": "名前、ネームスペース、またはテーブルIDで検索...",
+        "emptyText": "このアドレスにはテーブルがありません。",
+        "emptyFilteredText": "フィルタークエリに一致するテーブルが見つかりませんでした。"
+    },
+    "tokenSelectMenu": {
+        "searchPlaceholder": "トークン名で検索",
+        "sortAriaLabel": "{{tokenType}} トークンを並べ替え",
+        "tokenTypeLabel": "{{tokenType}} トークン ({{num}})",
+        "noMatches": "一致するものが見つかりませんでした。"
+    },
+    "nameDomainsActionBar": {
+        "searchPlaceholder": "名前またはアドレスで検索",
+        "filter": {
+          "protocol": "プロトコル",
+          "reset": "リセット",
+          "address": "アドレス",
+          "ownedBy": "所有者",
+          "resolvedToAddress": "アドレスに解決済み",
+          "status": "ステータス",
+          "includeExpired": "期限切れを含む"
+        }
+    },
+    "blockCountdownIndex": {
+        "heading": "ブロックカウントダウン",
+        "description": "ブロックが作成され、ブロックチェーンに追加されるまでの推定時間。",
+        "searchPlaceholder": "ブロック番号で検索"
+    },
+    "contractVerificationFieldCompiler": {
+        "includeNightlyBuilds": "ナイトリービルドを含む",
+        "compilerVersionInfo": "コンパイラバージョンは",
+        "useCompilerVersion": "コンパイラバージョンを使用してください。Solidityコンパイラを使用している場合は、",
+        "checkCompilerVersion": "を実行して確認してください。",
+        "pragmaSolidity": "pragma solidity X.X.X",
+        "solcVersionCommand": "solc --version",
+        "placeholder": "コンパイラ（バージョンを入力するか、ドロップダウンを使用）"
+    },
+    "contractVerificationFieldContractIndex": {
+        "contractNamePlaceholder": "コントラクト名"
+    },
+    "contractVerificationFieldEvmVersion": {
+        "evmVersionPlaceholder": "EVMバージョン",
+        "evmVersionDescription": "契約が記述されているEVMバージョンです。バイトコードがバージョンと一致しない場合、最新のEVMバージョンで検証を試みます。",
+        "evmVersionDetailsLink": "EVMバージョンの詳細"
+    },
+    "customAbiForm": {
+        "contractAddressPlaceholder": "スマートコントラクトアドレス (0x...)",
+        "projectName": "プロジェクト名",
+        "abiPlaceholder": "カスタムABI [{...}] (JSONフォーマット)",
+        "saveButton": "保存",
+        "createButton": "カスタムABIを作成"
+    },
+    "marketplace": {
+        "page_title": "DAppscout",
+        "submit_app": "アプリを提出",
+        "suggest_ideas": "アイデアを提案",
+        "find_app": "名前やキーワードでアプリを探す...",
+        "sort": "並び替え",
+        "contract_list": "契約リスト",
+        "back": "戻る",
+        "close": "閉じる"
+    },
+    "codeEditor": {
+        "expandAll": "すべて展開",
+        "collapseAll": "すべて折りたたむ",
+        "noResults": "結果が見つかりませんでした。設定した除外条件を確認してください。",
+        "result": "結果{{count > 1 ? '件' : '件'}}",
+        "file": "ファイル{{count > 1 ? '件' : '件'}}",
+        "searchPlaceholder": "検索",
+        "matchCase": "大文字と小文字を区別する",
+        "matchWholeWord": "単語全体を一致させる",
+        "useRegex": "正規表現を使用"
+    },
+    "tokensActionBar": {
+        "searchPlaceholder": "Token name or symbol"
     }
 }

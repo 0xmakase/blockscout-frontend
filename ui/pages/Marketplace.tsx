@@ -1,6 +1,7 @@
 import { MenuButton, MenuItem, MenuList, Flex, IconButton } from '@chakra-ui/react';
 import React from 'react';
 import type { MouseEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { MarketplaceCategory } from 'types/client/marketplace';
 import type { TabItem } from 'ui/shared/Tabs/types';
@@ -27,25 +28,25 @@ import TabsWithScroll from 'ui/shared/Tabs/TabsWithScroll';
 import useMarketplace from '../marketplace/useMarketplace';
 const feature = config.features.marketplace;
 
-const links: Array<{ label: string; href: string; icon: IconName }> = [];
-if (feature.isEnabled) {
-  if (feature.submitFormUrl) {
-    links.push({
-      label: 'Submit app',
-      href: feature.submitFormUrl,
-      icon: 'plus' as IconName,
-    });
-  }
-  if (feature.suggestIdeasFormUrl) {
-    links.push({
-      label: 'Suggest ideas',
-      href: feature.suggestIdeasFormUrl,
-      icon: 'edit' as IconName,
-    });
-  }
-}
-
 const Marketplace = () => {
+  const { t } = useTranslation();
+  const links: Array<{ label: string; href: string; icon: IconName }> = [];
+  if (feature.isEnabled) {
+    if (feature.submitFormUrl) {
+      links.push({
+        label: t('marketplace.submitApp'),
+        href: feature.submitFormUrl,
+        icon: 'plus' as IconName,
+      });
+    }
+    if (feature.suggestIdeasFormUrl) {
+      links.push({
+        label: t('marketplace.suggestIdeas'),
+        href: feature.suggestIdeasFormUrl,
+        icon: 'edit' as IconName,
+      });
+    }
+  }
   const {
     isPlaceholderData,
     isError,
@@ -90,7 +91,7 @@ const Marketplace = () => {
 
     tabs.unshift({
       id: MarketplaceCategory.ALL,
-      title: MarketplaceCategory.ALL,
+      title: t('marketplace.all'),
       count: appsTotal,
       component: null,
     });
@@ -103,7 +104,7 @@ const Marketplace = () => {
     });
 
     return tabs;
-  }, [ categories, appsTotal, favoriteApps.length ]);
+  }, [ categories, appsTotal, favoriteApps.length, t ]);
 
   const selectedCategoryIndex = React.useMemo(() => {
     const index = categoryTabs.findIndex(c => c.id === selectedCategoryId);
@@ -142,7 +143,7 @@ const Marketplace = () => {
   return (
     <>
       <PageTitle
-        title="DAppscout"
+        title={ t('marketplace.title') }
         mb={ 2 }
         contentAfter={ (isMobile && links.length > 1) ? (
           <Menu>
@@ -214,7 +215,7 @@ const Marketplace = () => {
           <FilterInput
             initialValue={ filterQuery }
             onChange={ onSearchInputChange }
-            placeholder="Find app by name or keyword..."
+            placeholder={ t('marketplace.searchPlaceholder') }
             isLoading={ isPlaceholderData }
             size={ showSort ? 'xs' : 'sm' }
             w={{ base: '100%', lg: '350px' }}
