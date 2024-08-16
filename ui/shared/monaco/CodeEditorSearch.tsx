@@ -2,6 +2,7 @@ import type { ChakraProps } from '@chakra-ui/react';
 import { Accordion, Box, Input, InputGroup, InputRightElement, useBoolean } from '@chakra-ui/react';
 import type * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { File, Monaco, SearchResult } from './types';
 
@@ -22,6 +23,7 @@ interface Props {
 }
 
 const CodeEditorSearch = ({ monaco, data, onFileSelect, isInputStuck, isActive, setActionBarRenderer, defaultValue }: Props) => {
+  const { t } = useTranslation();
   const [ searchTerm, changeSearchTerm ] = React.useState('');
   const [ searchResults, setSearchResults ] = React.useState<Array<SearchResult>>([]);
   const [ expandedSections, setExpandedSections ] = React.useState<Array<number>>([]);
@@ -31,7 +33,6 @@ const CodeEditorSearch = ({ monaco, data, onFileSelect, isInputStuck, isActive, 
   const decorations = React.useRef<Record<string, Array<string>>>({});
 
   const themeColors = useThemeColors();
-
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   React.useEffect(() => {
@@ -103,12 +104,12 @@ const CodeEditorSearch = ({ monaco, data, onFileSelect, isInputStuck, isActive, 
     return (
       <CoderEditorCollapseButton
         onClick={ handleToggleCollapseClick }
-        label={ expandedSections.length === 0 ? 'Expand all' : 'Collapse all' }
+        label={ expandedSections.length === 0 ? t('codeEditor.expandAll') : t('codeEditor.collapseAll') }
         isDisabled={ searchResults.length === 0 }
         isCollapsed={ expandedSections.length === 0 }
       />
     );
-  }, [ expandedSections.length, handleToggleCollapseClick, searchResults.length ]);
+  }, [ expandedSections.length, handleToggleCollapseClick, searchResults.length, t ]);
 
   React.useEffect(() => {
     isActive && setActionBarRenderer(() => renderActionBar);
@@ -133,14 +134,14 @@ const CodeEditorSearch = ({ monaco, data, onFileSelect, isInputStuck, isActive, 
     if (!totalResults) {
       return (
         <Box px="8px" fontSize="13px" lineHeight="18px" mb="8px">
-          No results found. Review your settings for configured exclusions.
+          { t('codeEditor.noResults') }
         </Box>
       );
     }
 
     return (
       <Box px="8px" fontSize="13px" lineHeight="18px" mb="8px">
-        { totalResults } result{ totalResults > 1 ? 's' : '' } in { searchResults.length } file{ searchResults.length > 1 ? 's' : '' }
+        { totalResults } { t('codeEditor.result', { count: totalResults }) } { searchResults.length } { t('codeEditor.file', { count: searchResults.length }) }
       </Box>
     );
   })();
@@ -161,7 +162,7 @@ const CodeEditorSearch = ({ monaco, data, onFileSelect, isInputStuck, isActive, 
           size="xs"
           onChange={ handleSearchTermChange }
           value={ searchTerm }
-          placeholder="Search"
+          placeholder={ t('codeEditor.searchPlaceholder') }
           variant="unstyled"
           color={ themeColors['input.foreground'] }
           bgColor={ themeColors['input.background'] }
@@ -185,8 +186,8 @@ const CodeEditorSearch = ({ monaco, data, onFileSelect, isInputStuck, isActive, 
             onClick={ setMatchCase.toggle }
             bgColor={ isMatchCase ? themeColors['custom.inputOption.activeBackground'] : 'transparent' }
             _hover={{ bgColor: isMatchCase ? themeColors['custom.inputOption.activeBackground'] : themeColors['custom.inputOption.hoverBackground'] }}
-            title="Match Case"
-            aria-label="Match Case"
+            title={ t('codeEditor.matchCase') }
+            aria-label={ t('codeEditor.matchCase') }
           />
           <Box
             { ...buttonProps }
@@ -194,8 +195,8 @@ const CodeEditorSearch = ({ monaco, data, onFileSelect, isInputStuck, isActive, 
             bgColor={ isMatchWholeWord ? themeColors['custom.inputOption.activeBackground'] : 'transparent' }
             onClick={ setMatchWholeWord.toggle }
             _hover={{ bgColor: isMatchWholeWord ? themeColors['custom.inputOption.activeBackground'] : themeColors['custom.inputOption.hoverBackground'] }}
-            title="Match Whole Word"
-            aria-label="Match Whole Word"
+            title={ t('codeEditor.matchWholeWord') }
+            aria-label={ t('codeEditor.matchWholeWord') }
           />
           <Box
             { ...buttonProps }
@@ -203,8 +204,8 @@ const CodeEditorSearch = ({ monaco, data, onFileSelect, isInputStuck, isActive, 
             bgColor={ isMatchRegex ? themeColors['custom.inputOption.activeBackground'] : 'transparent' }
             onClick={ setMatchRegex.toggle }
             _hover={{ bgColor: isMatchRegex ? themeColors['custom.inputOption.activeBackground'] : themeColors['custom.inputOption.hoverBackground'] }}
-            title="Use Regular Expression"
-            aria-label="Use Regular Expression"
+            title={ t('codeEditor.useRegex') }
+            aria-label={ t('codeEditor.useRegex') }
           />
         </InputRightElement>
       </InputGroup>

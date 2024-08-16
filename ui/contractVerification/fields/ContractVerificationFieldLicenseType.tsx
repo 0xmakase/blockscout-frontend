@@ -26,12 +26,12 @@ const ContractVerificationFieldLicenseType = () => {
         { ...field }
         options={ options }
         size={ isMobile ? 'md' : 'lg' }
-        placeholder="Contract license"
+        placeholder={ t('contractVerification.license_placeholder') }
         isDisabled={ formState.isSubmitting }
         error={ error }
       />
     );
-  }, [ formState.errors, formState.isSubmitting, isMobile ]);
+  }, [ formState.errors, formState.isSubmitting, isMobile, t ]);
 
   return (
     <ContractVerificationFormRow>

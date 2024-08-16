@@ -49,13 +49,13 @@ const ContractVerificationFieldMethod = ({ control, isDisabled, methods }: Props
         { ...field }
         options={ options }
         size={ isMobile ? 'md' : 'lg' }
-        placeholder="Verification method (compiler type)"
+        placeholder={ t('contractVerification.verificationMethod') }
         isDisabled={ isDisabled }
         isRequired
         isAsync={ false }
       />
     );
-  }, [ isDisabled, isMobile, options ]);
+  }, [ isDisabled, isMobile, options, t ]);
 
   const renderPopoverListItem = React.useCallback((method: SmartContractVerificationMethod) => {
     switch (method) {
@@ -74,7 +74,7 @@ const ContractVerificationFieldMethod = ({ control, isDisabled, methods }: Props
             >
               Standard input JSON
             </Link>
-            <span> file.</span>
+            <span> { t('contractVerification.file') }</span>
           </ListItem>
         );
       case 'vyper-code':
@@ -90,13 +90,13 @@ const ContractVerificationFieldMethod = ({ control, isDisabled, methods }: Props
             >
               Standard input JSON
             </Link>
-            <span> file.</span>
+            <span> { t('contractVerification.file') }</span>
           </ListItem>
         );
       case 'solidity-hardhat':
-        return <ListItem key={ method }>Verification through Hardhat plugin.</ListItem>;
+        return <ListItem key={ method }>{ t('contractVerification.hardhat_plugin') }</ListItem>;
       case 'solidity-foundry':
-        return <ListItem key={ method }>Verification through Foundry.</ListItem>;
+        return <ListItem key={ method }>{ t('contractVerification.foundry') }</ListItem>;
     }
   }, [ t ]);
 

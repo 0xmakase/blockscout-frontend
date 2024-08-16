@@ -2,6 +2,7 @@ import { InputGroup, Input, InputLeftElement, chakra, useColorModeValue, forward
 import throttle from 'lodash/throttle';
 import React from 'react';
 import type { ChangeEvent, FormEvent, FocusEvent } from 'react';
+import { useTranslation } from 'react-i18next'; // 追加
 
 import { useScrollDirection } from 'lib/contexts/scrollDirection';
 import useIsMobile from 'lib/hooks/useIsMobile';
@@ -24,6 +25,7 @@ const SearchBarInput = (
   { onChange, onSubmit, isHomepage, isSuggestOpen, onFocus, onBlur, onHide, onClear, value }: Props,
   ref: React.ForwardedRef<HTMLFormElement>,
 ) => {
+  const { t } = useTranslation(); // 追加
   const innerRef = React.useRef<HTMLFormElement>(null);
   React.useImperativeHandle(ref, () => innerRef.current as HTMLFormElement, []);
   const [ isSticky, setIsSticky ] = React.useState(false);
@@ -103,7 +105,7 @@ const SearchBarInput = (
               paddingRight: '36px',
             },
           }}
-          placeholder={ isMobile ? 'Search by address / ... ' : 'Search by address / txn hash / block / token... ' }
+          placeholder={ isMobile ? t('searchBarInput.mobilePlaceholder') : t('searchBarInput.desktopPlaceholder') }
           onChange={ handleChange }
           border={ isHomepage ? 'none' : '2px solid' }
           borderColor={ useColorModeValue('blackAlpha.100', 'whiteAlpha.200') }

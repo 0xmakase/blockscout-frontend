@@ -2,6 +2,7 @@ import { Text, Box, Input, InputGroup, InputLeftElement, useColorModeValue, Flex
 import _sumBy from 'lodash/sumBy';
 import type { ChangeEvent } from 'react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { FormattedData } from './types';
 import type { TokenType } from 'types/api/token';
@@ -24,6 +25,7 @@ interface Props {
 }
 
 const TokenSelectMenu = ({ erc20sort, erc1155sort, erc404sort, filteredData, onInputChange, onSortClick, searchTerm }: Props) => {
+  const { t } = useTranslation();
   const searchIconColor = useColorModeValue('blackAlpha.600', 'whiteAlpha.600');
 
   const hasFilteredResult = _sumBy(Object.values(filteredData), ({ items }) => items.length) > 0;
@@ -36,7 +38,7 @@ const TokenSelectMenu = ({ erc20sort, erc1155sort, erc404sort, filteredData, onI
         </InputLeftElement>
         <Input
           paddingInlineStart="38px"
-          placeholder="Search by token name"
+          placeholder={ t('tokenSelectMenu.searchPlaceholder') }
           ml="1px"
           onChange={ onInputChange }
           bgColor="dialog_bg"
@@ -75,10 +77,10 @@ const TokenSelectMenu = ({ erc20sort, erc1155sort, erc404sort, filteredData, onI
             <Box key={ type }>
               <Flex justifyContent="space-between">
                 <Text mb={ 3 } color="gray.500" fontWeight={ 600 } fontSize="sm">
-                  { getTokenTypeName(type) } tokens ({ numPrefix }{ tokenInfo.items.length })
+                  { t('tokenSelectMenu.tokenTypeLabel', { tokenType: getTokenTypeName(type), num: `${ numPrefix }${ tokenInfo.items.length }` }) }
                 </Text>
                 { hasSort && (
-                  <Link data-type={ type } onClick={ onSortClick } aria-label={ `Sort ${ getTokenTypeName(type) } tokens` }>
+                  <Link data-type={ type } onClick={ onSortClick } aria-label={ t('tokenSelectMenu.sortAriaLabel', { tokenType: getTokenTypeName(type) }) }>
                     <IconSvg name="arrows/east" boxSize={ 5 } transform={ arrowTransform } transitionDuration="faster"/>
                   </Link>
                 ) }
@@ -89,7 +91,7 @@ const TokenSelectMenu = ({ erc20sort, erc1155sort, erc404sort, filteredData, onI
           );
         }) }
       </Flex>
-      { Boolean(searchTerm) && !hasFilteredResult && <Text fontSize="sm">Could not find any matches.</Text> }
+      { Boolean(searchTerm) && !hasFilteredResult && <Text fontSize="sm">{ t('tokenSelectMenu.noMatches') }</Text> }
     </>
   );
 };

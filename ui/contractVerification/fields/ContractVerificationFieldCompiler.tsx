@@ -2,7 +2,8 @@ import { chakra, Checkbox, Code } from '@chakra-ui/react';
 import { useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import type { ControllerRenderProps } from 'react-hook-form';
-import { useFormContext, Controller } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next'; // 追加
 
 import type { FormFields } from '../types';
 import type { SmartContractVerificationConfig } from 'types/client/contract';
@@ -22,6 +23,7 @@ interface Props {
 
 const ContractVerificationFieldCompiler = ({ isVyper }: Props) => {
   const [ isNightly, setIsNightly ] = React.useState(false);
+  const { t } = useTranslation(); // 追加
   const { formState, control, getValues, resetField } = useFormContext<FormFields>();
   const isMobile = useIsMobile();
   const queryClient = useQueryClient();
@@ -55,7 +57,7 @@ const ContractVerificationFieldCompiler = ({ isVyper }: Props) => {
         loadOptions={ loadOptions }
         defaultOptions
         size={ isMobile ? 'md' : 'lg' }
-        placeholder="Compiler (enter version or use the dropdown)"
+        placeholder={ t('contractVerificationFieldCompiler.placeholder') }
         placeholderIcon={ <IconSvg name="search"/> }
         isDisabled={ formState.isSubmitting }
         error={ error }
@@ -63,7 +65,9 @@ const ContractVerificationFieldCompiler = ({ isVyper }: Props) => {
         isAsync
       />
     );
-  }, [ formState.errors, formState.isSubmitting, isMobile, loadOptions ]);
+  },
+  [ formState.errors, formState.isSubmitting, isMobile, loadOptions, t ], // t を依存関係に追加
+  );
 
   return (
     <ContractVerificationFormRow>
@@ -75,7 +79,7 @@ const ContractVerificationFieldCompiler = ({ isVyper }: Props) => {
             onChange={ handleCheckboxChange }
             isDisabled={ formState.isSubmitting }
           >
-            Include nightly builds
+            { t('contractVerificationFieldCompiler.includeNightlyBuilds') }
           </Checkbox>
         ) }
         <Controller
@@ -87,11 +91,11 @@ const ContractVerificationFieldCompiler = ({ isVyper }: Props) => {
       </>
       { isVyper ? null : (
         <chakra.div mt={{ base: 0, lg: 8 }}>
-          <span >The compiler version is specified in </span>
-          <Code color="text_secondary">pragma solidity X.X.X</Code>
-          <span>. Use the compiler version rather than the nightly build. If using the Solidity compiler, run </span>
-          <Code color="text_secondary">solc —version</Code>
-          <span> to check.</span>
+          <span>{ t('contractVerificationFieldCompiler.compilerVersionInfo') } </span>
+          <Code color="text_secondary">{ t('contractVerificationFieldCompiler.pragmaSolidity') }</Code>
+          <span>. { t('contractVerificationFieldCompiler.useCompilerVersion') } </span>
+          <Code color="text_secondary">{ t('contractVerificationFieldCompiler.solcVersionCommand') }</Code>
+          <span> { t('contractVerificationFieldCompiler.checkCompilerVersion') }</span>
         </chakra.div>
       ) }
     </ContractVerificationFormRow>
