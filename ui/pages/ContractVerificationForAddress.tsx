@@ -77,7 +77,7 @@ const ContractVerificationForAddress = () => {
     }
 
     return {
-      label: t('contractVerificationForAddress.backToContract'),
+      label: t('contractVerification.backToContract'),
       url: appProps.referrer,
     };
   }, [ appProps.referrer, t ]);
@@ -85,7 +85,7 @@ const ContractVerificationForAddress = () => {
   return (
     <>
       <PageTitle
-        title={ t('contractVerificationForAddress.newSmartContractVerification') }
+        title={ t('contractVerification.newSmartContractVerification') }
         backLink={ backLink }
       />
       <AddressEntity
