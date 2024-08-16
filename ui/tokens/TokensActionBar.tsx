@@ -37,7 +37,7 @@ const TokensActionBar = ({
       w={{ base: '100%', lg: '360px' }}
       size="xs"
       onChange={ onSearchChange }
-      placeholder={ t('tokensActionBar.searchPlaceholder') } // 多言語化対応
+      placeholder={ t('tokensActionBar.searchPlaceholder') }
       initialValue={ searchTerm }
     />
   );

@@ -105,7 +105,7 @@ const SearchBarInput = (
               paddingRight: '36px',
             },
           }}
-          placeholder={ isMobile ? t('searchBarInput.mobilePlaceholder') : t('searchBarInput.desktopPlaceholder') } // 変更
+          placeholder={ isMobile ? t('searchBarInput.mobilePlaceholder') : t('searchBarInput.desktopPlaceholder') }
           onChange={ handleChange }
           border={ isHomepage ? 'none' : '2px solid' }
           borderColor={ useColorModeValue('blackAlpha.100', 'whiteAlpha.200') }

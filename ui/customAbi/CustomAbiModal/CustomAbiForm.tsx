@@ -109,7 +109,7 @@ const CustomAbiForm: React.FC<Props> = ({ data, onClose, setAlertVisible }) => {
         field={ field }
         error={ errors.contract_address_hash }
         bgColor="dialog_bg"
-        placeholder={ t('customAbiForm.contractAddressPlaceholder') } // 多言語化対応
+        placeholder={ t('customAbiForm.contractAddressPlaceholder') }
       />
     );
   }, [ errors, t ]);

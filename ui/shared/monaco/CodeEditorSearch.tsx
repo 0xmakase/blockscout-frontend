@@ -104,7 +104,7 @@ const CodeEditorSearch = ({ monaco, data, onFileSelect, isInputStuck, isActive, 
     return (
       <CoderEditorCollapseButton
         onClick={ handleToggleCollapseClick }
-        label={ expandedSections.length === 0 ? t('codeEditor.expandAll') : t('codeEditor.collapseAll') } // Translated text
+        label={ expandedSections.length === 0 ? t('codeEditor.expandAll') : t('codeEditor.collapseAll') }
         isDisabled={ searchResults.length === 0 }
         isCollapsed={ expandedSections.length === 0 }
       />
