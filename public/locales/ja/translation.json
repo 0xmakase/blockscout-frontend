@@ -824,6 +824,6 @@
         "useRegex": "正規表現を使用"
     },
     "tokensActionBar": {
-        "searchPlaceholder": "Token name or symbol"
+        "searchPlaceholder": "トークン名またはシンボル"
     }
 }
