@@ -833,6 +833,6 @@
         "useRegex": "Use Regular Expression"
     },
     "tokensActionBar": {
-        "searchPlaceholder": "トークン名またはシンボル"
+        "searchPlaceholder": "Token name or symbol"
     }
 }
