@@ -1,5 +1,6 @@
 import { Grid, GridItem, Skeleton } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type * as stats from '@blockscout/stats-types';
 import type { StatsInterval, StatsIntervalIds } from 'types/client/stats';
@@ -35,9 +36,10 @@ const StatsFilters = ({
   isLoading,
   initialFilterValue,
 }: Props) => {
+  const { t } = useTranslation();
   const sectionsList = [ {
     id: 'all',
-    title: 'All',
+    title: t('statsFilters.all'),
   }, ... (sections || []) ];
 
   return (
@@ -84,7 +86,7 @@ const StatsFilters = ({
           key={ initialFilterValue }
           isLoading={ isLoading }
           onChange={ onFilterInputChange }
-          placeholder="Find chart, metric..."
+          placeholder={ t('statsFilters.searchPlaceholder') }
           initialValue={ initialFilterValue }
         />
       </GridItem>

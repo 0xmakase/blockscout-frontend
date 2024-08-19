@@ -1,5 +1,6 @@
 import { Table, Tbody, Tr, Th, Link } from '@chakra-ui/react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type { VerifiedContract } from 'types/api/contracts';
 import type { VerifiedContractsSorting, VerifiedContractsSortingField, VerifiedContractsSortingValue } from 'types/api/verifiedContracts';
@@ -21,6 +22,7 @@ interface Props {
 }
 
 const VerifiedContractsTable = ({ data, sort, setSorting, isLoading }: Props) => {
+  const { t } = useTranslation();
   const sortIconTransform = sort?.includes('asc' as VerifiedContractsSorting['order']) ? 'rotate(-90deg)' : 'rotate(90deg)';
 
   const onSortToggle = React.useCallback((field: VerifiedContractsSortingField) => () => {
@@ -32,23 +34,23 @@ const VerifiedContractsTable = ({ data, sort, setSorting, isLoading }: Props) =>
     <Table variant="simple" size="sm" minW="915px">
       <Thead top={ ACTION_BAR_HEIGHT_DESKTOP }>
         <Tr>
-          <Th width="50%">Contract</Th>
+          <Th width="50%">{ t('verifiedContractsTable.contract') }</Th>
           <Th width="130px" isNumeric>
             <Link display="flex" alignItems="center" justifyContent="flex-end" onClick={ isLoading ? undefined : onSortToggle('balance') } columnGap={ 1 }>
               { sort?.includes('balance') && <IconSvg name="arrows/east" boxSize={ 4 } transform={ sortIconTransform }/> }
-                Balance { currencyUnits.ether }
+              { t('verifiedContractsTable.balance', { currency: currencyUnits.ether }) }
             </Link>
           </Th>
           <Th width="130px" isNumeric>
             <Link display="flex" alignItems="center" justifyContent="flex-end" onClick={ isLoading ? undefined : onSortToggle('txs_count') } columnGap={ 1 }>
               { sort?.includes('txs_count') && <IconSvg name="arrows/east" boxSize={ 4 } transform={ sortIconTransform }/> }
-                Txs
+              { t('verifiedContractsTable.txs') }
             </Link>
           </Th>
-          <Th width="50%">Compiler / version</Th>
-          <Th width="80px">Settings</Th>
-          <Th width="150px">Verified</Th>
-          <Th width="130px">License</Th>
+          <Th width="50%">{ t('verifiedContractsTable.compilerVersion') }</Th>
+          <Th width="80px">{ t('verifiedContractsTable.settings') }</Th>
+          <Th width="150px">{ t('verifiedContractsTable.verified') }</Th>
+          <Th width="130px">{ t('verifiedContractsTable.license') }</Th>
         </Tr>
       </Thead>
       <Tbody>
