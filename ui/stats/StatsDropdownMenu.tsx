@@ -57,7 +57,7 @@ export function StatsDropdownMenu<T extends string>({ items, selectedId, onSelec
               key={ item.id }
               value={ item.id }
             >
-              { t(`chartsAndStats.${ item.title.replace(/ /g, '_').toLowerCase() }`) }
+              { item.id === 'all' ? item.title : t(`chartsAndStats.${ item.title.replace(/ /g, '_').toLowerCase() }`) }
             </MenuItemOption>
           )) }
         </MenuOptionGroup>
