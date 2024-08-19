@@ -835,5 +835,18 @@
     },
     "tokensActionBar": {
         "searchPlaceholder": "Token name or symbol"
+    },
+    "statsFilters": {
+        "all": "All",
+        "searchPlaceholder": "Find chart, metric..."
+    },
+    "verifiedContractsTable": {
+        "contract": "Contract",
+        "balance": "Balance {{currency}}",
+        "txs": "Txs",
+        "compilerVersion": "Compiler / version",
+        "settings": "Settings",
+        "verified": "Verified",
+        "license": "License"
     }
 }

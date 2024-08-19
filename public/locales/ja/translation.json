@@ -827,5 +827,18 @@
     },
     "tokensActionBar": {
         "searchPlaceholder": "トークン名またはシンボル"
+    },
+    "statsFilters": {
+        "all": "すべて",
+        "searchPlaceholder": "チャートやメトリクスを検索..."
+    },
+    "verifiedContractsTable": {
+        "contract": "コントラクト",
+        "balance": "残高 {{currency}}",
+        "txs": "トランザクション",
+        "compilerVersion": "コンパイラ / バージョン",
+        "settings": "設定",
+        "verified": "検証済み",
+        "license": "ライセンス"
     }
 }
