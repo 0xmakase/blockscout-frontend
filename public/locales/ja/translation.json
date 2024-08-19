@@ -840,5 +840,8 @@
         "settings": "設定",
         "verified": "検証済み",
         "license": "ライセンス"
+    },
+    "filterButton": {
+        "filter": "フィルター"
     }
 }

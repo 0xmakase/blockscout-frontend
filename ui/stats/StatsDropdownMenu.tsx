@@ -40,7 +40,7 @@ export function StatsDropdownMenu<T extends string>({ items, selectedId, onSelec
             overflow="hidden"
             textOverflow="ellipsis"
           >
-            { selectedCategory?.title }
+            { selectedId === 'all' ? selectedCategory?.title : t(`chartsAndStats.${ selectedCategory?.title.replace(/ /g, '_').toLowerCase() }`) }
           </chakra.span>
           <IconSvg transform="rotate(-90deg)" ml="auto" name="arrows/east-mini" w={ 5 } h={ 5 }/>
         </Box>
