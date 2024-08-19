@@ -1,5 +1,6 @@
 import { Box, Button, MenuButton, MenuItemOption, MenuList, MenuOptionGroup, chakra } from '@chakra-ui/react';
 import React, { useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Menu from 'ui/shared/chakra/Menu';
 import IconSvg from 'ui/shared/IconSvg';
@@ -11,6 +12,7 @@ type Props<T extends string> = {
 }
 
 export function StatsDropdownMenu<T extends string>({ items, selectedId, onSelect }: Props<T>) {
+  const { t } = useTranslation();
   const selectedCategory = items.find(category => category.id === selectedId);
 
   const handleSelection = useCallback((id: string | Array<string>) => {
@@ -55,7 +57,7 @@ export function StatsDropdownMenu<T extends string>({ items, selectedId, onSelec
               key={ item.id }
               value={ item.id }
             >
-              { item.title }
+              { t(`chartsAndStats.${ item.title.replace(/ /g, '_').toLowerCase() }`) }
             </MenuItemOption>
           )) }
         </MenuOptionGroup>
