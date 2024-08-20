@@ -10,11 +10,6 @@ import FilterInput from 'ui/shared/filters/FilterInput';
 import { STATS_INTERVALS } from './constants';
 import StatsDropdownMenu from './StatsDropdownMenu';
 
-const intervalList = Object.keys(STATS_INTERVALS).map((id: string) => ({
-  id: id,
-  title: STATS_INTERVALS[id as StatsIntervalIds].title,
-})) as Array<StatsInterval>;
-
 type Props = {
   sections?: Array<stats.LineChartSection>;
   currentSection: string;
@@ -37,6 +32,10 @@ const StatsFilters = ({
   initialFilterValue,
 }: Props) => {
   const { t } = useTranslation();
+  const intervalList = Object.keys(STATS_INTERVALS).map((id: string) => ({
+    id: id,
+    title: id === 'all' ? t(STATS_INTERVALS[id as StatsIntervalIds].title) : STATS_INTERVALS[id as StatsIntervalIds].title,
+  })) as Array<StatsInterval>;
   const sectionsList = [ {
     id: 'all',
     title: t('statsFilters.all'),

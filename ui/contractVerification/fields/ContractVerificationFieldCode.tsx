@@ -2,6 +2,7 @@ import { FormControl, Textarea } from '@chakra-ui/react';
 import React from 'react';
 import type { ControllerRenderProps } from 'react-hook-form';
 import { useFormContext, Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import type { FormFields } from '../types';
 
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const ContractVerificationFieldCode = ({ isVyper }: Props) => {
+  const { t } = useTranslation();
   const { formState, control } = useFormContext<FormFields>();
 
   const renderControl = React.useCallback(({ field }: {field: ControllerRenderProps<FormFields, 'code'>}) => {
@@ -28,11 +30,11 @@ const ContractVerificationFieldCode = ({ isVyper }: Props) => {
           isDisabled={ formState.isSubmitting }
           required
         />
-        <InputPlaceholder text="Contract code"/>
+        <InputPlaceholder text={ t('contractVerificationFieldCode.codePlaceholder') }/>
         { error?.message && <FieldError message={ error?.message }/> }
       </FormControl>
     );
-  }, [ formState.errors, formState.isSubmitting ]);
+  }, [ formState.errors, formState.isSubmitting, t ]);
 
   return (
     <ContractVerificationFormRow>
@@ -42,8 +44,8 @@ const ContractVerificationFieldCode = ({ isVyper }: Props) => {
         render={ renderControl }
         rules={{ required: true }}
       />
-      { isVyper ? null : (
-        <span>If your code utilizes a library or inherits dependencies, we recommend using other verification methods instead.</span>
+      { !isVyper && (
+        <span>{ t('contractVerificationFieldCode.codeRecommendation') }</span>
       ) }
     </ContractVerificationFormRow>
   );

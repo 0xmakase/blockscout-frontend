@@ -162,7 +162,12 @@
         "new_verified_contracts": "新しい認証済みコントラクト",
         "new_verified_contracts_number_for_the_period": "期間中の新しい認証済みコントラクト数",
         "verified_contracts_growth": "認証済みコントラクトの成長",
-        "cumulative_number_verified_contracts_for_the_period": "期間中の累積認証済みコントラクト数"
+        "cumulative_number_verified_contracts_for_the_period": "期間中の累積認証済みコントラクト数",
+        "1_month": "1ヶ月",
+        "3_months": "3ヶ月",
+        "6_months": "6ヶ月",
+        "1_year": "1年",
+        "allTime": "全期間"
     },
     "numberWidget": {
         "average_block_time": "平均ブロック時間",
@@ -457,7 +462,8 @@
         "foundry": "Foundryを使用した検証",
         "file": "ファイル",
         "newSmartContractVerification": "新しいスマートコントラクトの検証",
-        "backToContract": "契約に戻る"
+        "backToContract": "契約に戻る",
+        "smartContractAddressPlaceholder": "スマートコントラクト / アドレス (0x...)"
     },
     "gasTrackerChart": {
         "title": "ガス価格の履歴",
@@ -805,14 +811,13 @@
         "createButton": "カスタムABIを作成"
     },
     "marketplace": {
-        "page_title": "DAppscout",
-        "submit_app": "アプリを提出",
-        "suggest_ideas": "アイデアを提案",
-        "find_app": "名前やキーワードでアプリを探す...",
-        "sort": "並び替え",
-        "contract_list": "契約リスト",
-        "back": "戻る",
-        "close": "閉じる"
+        "submitApp": "アプリを提出",
+        "suggestIdeas": "アイデアを提案",
+        "all": "すべて",
+        "title": "DAppscout",
+        "searchPlaceholder": "アプリ名またはキーワードで検索...",
+        "contractListModalTitle": "契約リスト",
+        "noContracts": "契約が見つかりません。"
     },
     "codeEditor": {
         "expandAll": "すべて展開",
@@ -843,5 +848,18 @@
     },
     "filterButton": {
         "filter": "フィルター"
+    },
+    "contractVerificationFieldCode": {
+        "codePlaceholder": "コントラクトコード",
+        "codeRecommendation": "コードがライブラリを利用していたり、依存関係を継承している場合は、他の検証方法を使用することをお勧めします。"
+    },
+    "contractVerificationFieldLibraryItem": {
+        "libraryNamePlaceholder": "ライブラリ名（.solファイル）",
+        "libraryAddressPlaceholder": "ライブラリアドレス (0x...)",
+        "contractLibrary": "コントラクトライブラリ {{index}}",
+        "delete": "削除",
+        "add": "追加",
+        "libraryNameDescription": "ソースファイル内で呼び出されるライブラリ名です。各コントラクトに対して最大10個のライブラリを追加できます。",
+        "libraryAddressDescription": "0x形式のライブラリアドレスです。生成されたjsonファイルまたはTruffleの出力に含まれています（Truffleを使用している場合）。"
     }
 }

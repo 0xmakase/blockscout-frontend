@@ -162,7 +162,12 @@
         "new_verified_contracts": "New verified contracts",
         "new_verified_contracts_number_for_the_period": "New verified contracts number for the period",
         "verified_contracts_growth": "Verified contracts growth",
-        "cumulative_number_verified_contracts_for_the_period": "Cumulative number verified contracts for the period"
+        "cumulative_number_verified_contracts_for_the_period": "Cumulative number verified contracts for the period",
+        "1_month": "1 month",
+        "3_months": "3 months",
+        "6_months": "6 months",
+        "1_year": "1 year",
+        "allTime": "All time"
     },
     "numberWidget": {
         "average_block_time": "Average block time",
@@ -465,7 +470,8 @@
         "foundry": "Verification through Foundry",
         "file": "file",
         "newSmartContractVerification": "New smart contract verification",
-        "backToContract": "Back to contract"
+        "backToContract": "Back to contract",
+        "smartContractAddressPlaceholder": "Smart contract / Address (0x...)"
     },
     "gasTrackerChart": {
         "title": "Gas price history",
@@ -813,14 +819,13 @@
         "createButton": "Create custom ABI"
     },
     "marketplace": {
-        "page_title": "DAppscout",
-        "submit_app": "Submit app",
-        "suggest_ideas": "Suggest ideas",
-        "find_app": "Find app by name or keyword...",
-        "sort": "Sort by",
-        "contract_list": "Contract List",
-        "back": "Back",
-        "close": "Close"
+        "submitApp": "Submit app",
+        "suggestIdeas": "Suggest ideas",
+        "all": "All",
+        "title": "DAppscout",
+        "searchPlaceholder": "Find app by name or keyword...",
+        "contractListModalTitle": "Contract List",
+        "noContracts": "No contracts found."
     },
     "codeEditor": {
         "expandAll": "Expand all",
@@ -851,5 +856,18 @@
     },
     "filterButton": {
         "filter": "Filter"
-    }      
+    },
+    "contractVerificationFieldCode": {
+        "codePlaceholder": "Contract code",
+        "codeRecommendation": "If your code utilizes a library or inherits dependencies, we recommend using other verification methods instead."
+    },
+    "contractVerificationFieldLibraryItem": {
+        "libraryNamePlaceholder": "Library name (.sol file)",
+        "libraryAddressPlaceholder": "Library address (0x...)",
+        "contractLibrary": "Contract library {{index}}",
+        "delete": "Delete",
+        "add": "Add",
+        "libraryNameDescription": "A library name called in the .sol file. Multiple libraries (up to 10) may be added for each contract.",
+        "libraryAddressDescription": "The 0x library address. This can be found in the generated json file or Truffle output (if using truffle)."
+    }
 }

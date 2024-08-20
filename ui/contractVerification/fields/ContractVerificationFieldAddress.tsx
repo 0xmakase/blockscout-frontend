@@ -32,10 +32,10 @@ const ContractVerificationFieldAddress = ({ isReadOnly }: Props) => {
           isDisabled={ formState.isSubmitting || isReadOnly }
           autoComplete="off"
         />
-        <InputPlaceholder text="Smart contract / Address (0x...)" error={ error }/>
+        <InputPlaceholder text={ t('contractVerification.smartContractAddressPlaceholder') } error={ error }/>
       </FormControl>
     );
-  }, [ formState.errors, formState.isSubmitting, isReadOnly ]);
+  }, [ formState.errors, formState.isSubmitting, isReadOnly, t ]);
 
   return (
     <>
