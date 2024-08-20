@@ -2,6 +2,7 @@ import { Flex, FormControl, IconButton, Input, Text } from '@chakra-ui/react';
 import React from 'react';
 import type { Control, ControllerRenderProps, FieldError } from 'react-hook-form';
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import type { FormFields } from '../types';
 
@@ -27,6 +28,7 @@ interface Props {
 }
 
 const ContractVerificationFieldLibraryItem = ({ control, index, fieldsLength, onAddFieldClick, onRemoveFieldClick, error, isDisabled }: Props) => {
+  const { t } = useTranslation();
   const ref = React.useRef<HTMLDivElement>(null);
 
   const renderNameControl = React.useCallback(({ field }: {field: ControllerRenderProps<FormFields, `libraries.${ number }.name`>}) => {
@@ -40,10 +42,10 @@ const ContractVerificationFieldLibraryItem = ({ control, index, fieldsLength, on
           maxLength={ 255 }
           autoComplete="off"
         />
-        <InputPlaceholder text="Library name (.sol file)" error={ error?.name }/>
+        <InputPlaceholder text={ t('contractVerificationFieldLibraryItem.libraryNamePlaceholder') } error={ error?.name }/>
       </FormControl>
     );
-  }, [ error?.name, isDisabled ]);
+  }, [ error?.name, isDisabled, t ]);
 
   const renderAddressControl = React.useCallback(({ field }: {field: ControllerRenderProps<FormFields, `libraries.${ number }.address`>}) => {
     return (
@@ -55,10 +57,10 @@ const ContractVerificationFieldLibraryItem = ({ control, index, fieldsLength, on
           required
           autoComplete="off"
         />
-        <InputPlaceholder text="Library address (0x...)" error={ error?.address }/>
+        <InputPlaceholder text={ t('contractVerificationFieldLibraryItem.libraryAddressPlaceholder') } error={ error?.address }/>
       </FormControl>
     );
-  }, [ error?.address, isDisabled ]);
+  }, [ error?.address, isDisabled, t ]);
 
   const handleAddButtonClick = React.useCallback(() => {
     onAddFieldClick(index);
@@ -76,11 +78,13 @@ const ContractVerificationFieldLibraryItem = ({ control, index, fieldsLength, on
     <>
       <ContractVerificationFormRow>
         <Flex alignItems="center" justifyContent="space-between" ref={ ref } mt={ index !== 0 ? 6 : 0 }>
-          <Text variant="secondary" fontSize="sm">Contract library { index + 1 }</Text>
+          <Text variant="secondary" fontSize="sm">
+            { t('contractVerificationFieldLibraryItem.contractLibrary', { index: index + 1 }) }
+          </Text>
           <Flex columnGap={ 5 }>
             { fieldsLength > 1 && (
               <IconButton
-                aria-label="delete"
+                aria-label={ t('contractVerificationFieldLibraryItem.delete') }
                 variant="outline"
                 w="30px"
                 h="30px"
@@ -91,7 +95,7 @@ const ContractVerificationFieldLibraryItem = ({ control, index, fieldsLength, on
             ) }
             { fieldsLength < LIMIT && (
               <IconButton
-                aria-label="add"
+                aria-label={ t('contractVerificationFieldLibraryItem.add') }
                 variant="outline"
                 w="30px"
                 h="30px"
@@ -111,9 +115,7 @@ const ContractVerificationFieldLibraryItem = ({ control, index, fieldsLength, on
           rules={{ required: true }}
         />
         { index === 0 ? (
-          <>
-            A library name called in the .sol file. Multiple libraries (up to 10) may be added for each contract.
-          </>
+          <Text>{ t('contractVerificationFieldLibraryItem.libraryNameDescription') }</Text>
         ) : null }
       </ContractVerificationFormRow>
       <ContractVerificationFormRow>
@@ -124,9 +126,7 @@ const ContractVerificationFieldLibraryItem = ({ control, index, fieldsLength, on
           rules={{ required: true, pattern: ADDRESS_REGEXP }}
         />
         { index === 0 ? (
-          <>
-              The 0x library address. This can be found in the generated json file or Truffle output (if using truffle).
-          </>
+          <Text>{ t('contractVerificationFieldLibraryItem.libraryAddressDescription') }</Text>
         ) : null }
       </ContractVerificationFormRow>
     </>

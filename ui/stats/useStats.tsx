@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
-import React, { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import type * as stats from '@blockscout/stats-types';
 import type { StatsIntervalIds } from 'types/client/stats';
@@ -17,8 +18,8 @@ function isChartNameMatches(q: string, chart: stats.LineChartInfo) {
 }
 
 export default function useStats() {
+  const { t } = useTranslation();
   const router = useRouter();
-
   const { data, isPlaceholderData, isError } = useApiQuery('stats_lines', {
     queryOptions: {
       placeholderData: STATS_CHARTS,
@@ -27,47 +28,52 @@ export default function useStats() {
 
   const [ currentSection, setCurrentSection ] = useState('all');
   const [ filterQuery, setFilterQuery ] = useState('');
-  const [ initialFilterQuery, setInitialFilterQuery ] = React.useState('');
+  const [ initialFilterQuery, setInitialFilterQuery ] = useState('');
   const [ interval, setInterval ] = useState<StatsIntervalIds>('oneMonth');
-  const sectionIds = useMemo(() => data?.sections?.map(({ id }) => id), [ data ]);
+  const [ translatedData, setTranslatedData ] = useState<typeof data>();
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (data && !isPlaceholderData && !isError) {
+      const translatedSections = data.sections.map((section) => ({
+        ...section,
+        title: t(`chartsAndStats.${ section.title.replace(/ /g, '_').toLowerCase() }`),
+        charts: section.charts.map((chart) => ({
+          ...chart,
+          title: t(`chartsAndStats.${ chart.title.replace(/ /g, '_').toLowerCase() }`),
+          description: t(`chartsAndStats.${ chart.description.replace(/ /g, '_').toLowerCase() }`),
+        })),
+      }));
+      setTranslatedData({ ...data, sections: translatedSections });
+    }
+  }, [ data, isPlaceholderData, isError, t ]);
+
+  const sectionIds = useMemo(() => translatedData?.sections?.map(({ id }) => id), [ translatedData ]);
+
+  useEffect(() => {
     if (!isPlaceholderData && !isError) {
       const chartId = getQueryParamString(router.query.chartId);
-      const chartName = data?.sections.map((section) => section.charts.find((chart) => chart.id === chartId)).filter(Boolean)[0]?.title;
+      const chartName = translatedData?.sections
+        .map((section) => section.charts.find((chart) => chart.id === chartId))
+        .filter(Boolean)[0]?.title;
       if (chartName) {
         setInitialFilterQuery(chartName);
         setFilterQuery(chartName);
         router.replace({ pathname: '/stats' }, undefined, { scroll: false });
       }
     }
-  // run only when data is loaded
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ isPlaceholderData ]);
+  }, [ isPlaceholderData, translatedData, router, isError ]);
 
-  const displayedCharts = React.useMemo(() => {
-    return data?.sections
-      ?.map((section) => {
-        const charts = section.charts.filter((chart) => isSectionMatches(section, currentSection) && isChartNameMatches(filterQuery, chart))
-          .map((chart) => {
-            // スペースをアンダースコアに変換し、全て小文字にする
-            const titleTranslationKey = `chartsAndStats.${ chart.title.replace(/ /g, '_').toLowerCase() }`;
-            const descriptionTranslationKey = `chartsAndStats.${ chart.description.replace(/ /g, '_').toLowerCase() }`;
-
-            return {
-              ...chart,
-              title: titleTranslationKey,
-              description: descriptionTranslationKey,
-            };
-          });
-        const sectionTitleKey = `chartsAndStats.${ section.title.replace(/ /g, '_').toLowerCase() }`;
-        return {
-          ...section,
-          title: sectionTitleKey,
-          charts,
-        };
-      }).filter((section) => section.charts.length > 0);
-  }, [ currentSection, data?.sections, filterQuery ]);
+  const displayedCharts = useMemo(() => {
+    return translatedData?.sections
+      ?.map((section) => ({
+        ...section,
+        charts: section.charts.filter((chart) =>
+          isSectionMatches(section, currentSection) &&
+          isChartNameMatches(filterQuery, chart),
+        ),
+      }))
+      .filter((section) => section.charts.length > 0);
+  }, [ currentSection, translatedData, filterQuery ]);
 
   const handleSectionChange = useCallback((newSection: string) => {
     setCurrentSection(newSection);
@@ -81,8 +87,8 @@ export default function useStats() {
     setFilterQuery(q);
   }, []);
 
-  return React.useMemo(() => ({
-    sections: data?.sections,
+  return useMemo(() => ({
+    sections: translatedData?.sections,
     sectionIds,
     isPlaceholderData,
     isError,
@@ -95,7 +101,7 @@ export default function useStats() {
     handleFilterChange,
     displayedCharts,
   }), [
-    data,
+    translatedData,
     sectionIds,
     isPlaceholderData,
     isError,
