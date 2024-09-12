@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useRouter } from 'next/router';
 import { useCallback, useMemo, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -34,6 +35,7 @@ export default function useStats() {
 
   useEffect(() => {
     if (data && !isPlaceholderData && !isError) {
+      console.log(data);
       const translatedSections = data.sections.map((section) => ({
         ...section,
         title: t(`chartsAndStats.${ section.title.replace(/ /g, '_').toLowerCase() }`),
