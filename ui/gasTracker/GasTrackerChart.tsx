@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Box, Flex, chakra, useBoolean } from '@chakra-ui/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -28,6 +29,8 @@ const GasTrackerChart = () => {
         const charts = section.charts
           .filter((chart) => chart.id === GAS_PRICE_CHART_ID)
           .map((chart) => {
+            console.log(chart.title);
+            console.log(chart.description);
             const titleTranslationKey = `chartsAndStats.${ chart.title.replace(/ /g, '_').toLowerCase() }`;
             const descriptionTranslationKey = `chartsAndStats.${ chart.description.replace(/ /g, '_').toLowerCase() }`;
 
