@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { Grid } from '@chakra-ui/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -31,8 +30,6 @@ const NumberWidgetsList = () => {
     >
       {
         data?.counters?.map(({ id, title, value, units, description }, index) => {
-          console.log(title);
-          console.log(description);
           // Create translation keys
           const titleKey = `numberWidget.${ title.replace(/ /g, '_').toLowerCase() }`;
           const descriptionKey = `numberWidget.${ description.replace(/ /g, '_').toLowerCase() }`;
