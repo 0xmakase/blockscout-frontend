@@ -4,11 +4,12 @@ import React from 'react';
 import { AddressHighlightProvider } from 'lib/contexts/addressHighlight';
 import * as addressMock from 'mocks/address/address';
 import * as implementationsMock from 'mocks/address/implementations';
+import * as metadataMock from 'mocks/metadata/address';
 import { test, expect } from 'playwright/lib';
 
 import AddressEntity from './AddressEntity';
 
-const iconSizes = [ 'md', 'lg' ];
+const iconSizes = [ 'md', 'lg' ] as const;
 
 test.use({ viewport: { width: 180, height: 140 } });
 
@@ -18,7 +19,7 @@ test.describe('icon size', () => {
       const component = await render(
         <AddressEntity
           address={ addressMock.withoutName }
-          iconSize={ size }
+          icon={{ size }}
         />,
       );
 
@@ -68,7 +69,7 @@ test.describe('proxy contract', () => {
   test('without implementation name', async({ render, page }) => {
     const component = await render(
       <AddressEntity
-        address={{ ...addressMock.contract, implementations: [ { address: addressMock.contract.implementations?.[0].address } ] }}
+        address={{ ...addressMock.contract, implementations: [ { address: addressMock.contract.implementations?.[0].address as string } ] }}
       />,
     );
 
@@ -80,7 +81,7 @@ test.describe('proxy contract', () => {
   test('without any name', async({ render, page }) => {
     const component = await render(
       <AddressEntity
-        address={{ ...addressMock.contract, name: undefined, implementations: [ { address: addressMock.contract.implementations?.[0].address } ] }}
+        address={{ ...addressMock.contract, name: undefined, implementations: [ { address: addressMock.contract.implementations?.[0].address as string } ] }}
       />,
     );
 
@@ -97,6 +98,18 @@ test.describe('proxy contract', () => {
     );
 
     await component.getByText(/eternal/i).hover();
+    await expect(page.getByText('Proxy contract')).toBeVisible();
+    await expect(page).toHaveScreenshot();
+  });
+
+  test('with name tag', async({ render, page }) => {
+    const component = await render(
+      <AddressEntity
+        address={{ ...addressMock.contract, metadata: { reputation: 1, tags: [ metadataMock.nameTag ] } }}
+      />,
+    );
+
+    await component.getByText(/quack/i).hover();
     await expect(page.getByText('Proxy contract')).toBeVisible();
     await expect(page).toHaveScreenshot();
   });

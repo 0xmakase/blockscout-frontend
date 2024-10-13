@@ -197,6 +197,8 @@
     "tabList": {
         "validated": "Validated",
         "mined": "Mined",
+        "posted": "Posted",
+        "sequenced": "Sequenced",
         "pending": "Pending",
         "blobTxns": "Blob txns",
         "watchlist": "Watch list",
@@ -328,6 +330,8 @@
         "reward": "Reward",
         "validator": "Validator",
         "miner": "Miner",
+        "poster": "Poster",
+        "sequencer": "Sequencer",
         "inThisBlock": "in this block"
     },
     "txInfo": {

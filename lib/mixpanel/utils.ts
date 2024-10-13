@@ -1,4 +1,5 @@
 import type { WalletType } from 'types/client/wallets';
+import type { ColorThemeId } from 'types/settings';
 
 export enum EventTypes {
   PAGE_VIEW = 'Page view',
@@ -31,6 +32,7 @@ Type extends EventTypes.PAGE_VIEW ?
   'Tab': string;
   'Page'?: string;
   'Color mode': 'light' | 'dark';
+  'Color theme': ColorThemeId | undefined;
 } :
 Type extends EventTypes.SEARCH_QUERY ? {
   'Search query': string;
@@ -114,6 +116,9 @@ Type extends EventTypes.PAGE_WIDGET ? (
     'Type': 'Address tag';
     'Info': string;
     'URL': string;
+  } | {
+    'Type': 'Share chart';
+    'Info': string;
   }
 ) :
 Type extends EventTypes.TX_INTERPRETATION_INTERACTION ? {

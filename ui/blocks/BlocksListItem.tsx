@@ -1,4 +1,4 @@
-import { Flex, Skeleton, Text, Box } from '@chakra-ui/react';
+import { Flex, Skeleton, Text, Box, Tooltip } from '@chakra-ui/react';
 import BigNumber from 'bignumber.js';
 import capitalize from 'lodash/capitalize';
 import { useTranslation } from 'next-i18next';
@@ -47,6 +47,11 @@ const BlocksListItem = ({ data, isLoading, enableTimeIncrement }: Props) => {
             noIcon
             fontWeight={ 600 }
           />
+          { data.celo?.is_epoch_block && (
+            <Tooltip label={ `Finalized epoch #${ data.celo.epoch_number }` }>
+              <IconSvg name="checkered_flag" boxSize={ 5 } p="1px" isLoading={ isLoading } flexShrink={ 0 }/>
+            </Tooltip>
+          ) }
         </Flex>
         <TimeAgoWithTooltip
           timestamp={ data.timestamp }

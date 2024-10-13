@@ -27,7 +27,7 @@ const TABS_HEIGHT = 88;
 
 interface Props {
   type?: BlockType;
-  query: QueryWithPagesResult<'blocks'>;
+  query: QueryWithPagesResult<'blocks'> | QueryWithPagesResult<'optimistic_l2_txn_batch_blocks'>;
   enableSocket?: boolean;
   top?: number;
 }

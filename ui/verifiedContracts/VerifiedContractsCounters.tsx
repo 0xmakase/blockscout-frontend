@@ -27,7 +27,8 @@ const VerifiedContractsCounters = () => {
         diff={ countersQuery.data.new_smart_contracts_24h }
         diffFormatted={ Number(countersQuery.data.new_smart_contracts_24h).toLocaleString() }
         isLoading={ countersQuery.isPlaceholderData }
-        href={ config.features.stats.isEnabled ? { pathname: '/stats', query: { chartId: 'contractsGrowth' } } : undefined }
+        // there is no stats for contracts growth for now
+        // href={ config.features.stats.isEnabled ? { pathname: '/stats/[id]', query: { id: 'contractsGrowth' } } : undefined }
       />
       <StatsWidget
         label={ t('verifiedContractsCounters.verifiedContracts') }
@@ -35,7 +36,7 @@ const VerifiedContractsCounters = () => {
         diff={ countersQuery.data.new_verified_smart_contracts_24h }
         diffFormatted={ Number(countersQuery.data.new_verified_smart_contracts_24h).toLocaleString() }
         isLoading={ countersQuery.isPlaceholderData }
-        href={ config.features.stats.isEnabled ? { pathname: '/stats', query: { chartId: 'verifiedContractsGrowth' } } : undefined }
+        href={ config.features.stats.isEnabled ? { pathname: '/stats/[id]', query: { id: 'verifiedContractsGrowth' } } : undefined }
       />
     </Box>
   );

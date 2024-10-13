@@ -1,4 +1,5 @@
-import { chakra, Skeleton } from '@chakra-ui/react';
+import { chakra, Skeleton, Tooltip } from '@chakra-ui/react';
+import capitalize from 'lodash/capitalize';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,8 +12,10 @@ import { useAppContext } from 'lib/contexts/app';
 import throwOnAbsentParamError from 'lib/errors/throwOnAbsentParamError';
 import throwOnResourceLoadError from 'lib/errors/throwOnResourceLoadError';
 import useIsMobile from 'lib/hooks/useIsMobile';
+import getNetworkValidationActionTextBy from 'lib/networks/getNetworkValidationActionTextBy';
 import getQueryParamString from 'lib/router/getQueryParamString';
 import BlockDetails from 'ui/block/BlockDetails';
+import BlockEpochRewards from 'ui/block/BlockEpochRewards';
 import BlockWithdrawals from 'ui/block/BlockWithdrawals';
 import useBlockBlobTxsQuery from 'ui/block/useBlockBlobTxsQuery';
 import useBlockQuery from 'ui/block/useBlockQuery';
@@ -20,6 +23,7 @@ import useBlockTxsQuery from 'ui/block/useBlockTxsQuery';
 import useBlockWithdrawalsQuery from 'ui/block/useBlockWithdrawalsQuery';
 import TextAd from 'ui/shared/ad/TextAd';
 import ServiceDegradationWarning from 'ui/shared/alerts/ServiceDegradationWarning';
+import Tag from 'ui/shared/chakra/Tag';
 import AddressEntity from 'ui/shared/entities/address/AddressEntity';
 import NetworkExplorers from 'ui/shared/NetworkExplorers';
 import PageTitle from 'ui/shared/Page/PageTitle';
@@ -94,7 +98,12 @@ const BlockPageContent = () => {
           </>
         ),
       } : null,
-  ].filter(Boolean)), [ blockBlobTxsQuery, blockQuery, blockTxsQuery, blockWithdrawalsQuery, hasPagination, t ]);
+    blockQuery.data?.celo?.is_epoch_block ? {
+      id: 'epoch_rewards',
+      title: 'Epoch rewards',
+      component: <BlockEpochRewards heightOrHash={ heightOrHash }/>,
+    } : null,
+  ].filter(Boolean)), [ blockBlobTxsQuery, blockQuery, blockTxsQuery, blockWithdrawalsQuery, hasPagination, heightOrHash, t ]);
 
   let pagination;
   if (tab === 'txs') {
@@ -139,9 +148,28 @@ const BlockPageContent = () => {
         return t('blockPageContent.block', { height: blockQuery.data?.height });
     }
   })();
+  const contentAfter = (() => {
+    if (!blockQuery.data?.celo) {
+      return null;
+    }
+
+    if (!blockQuery.data.celo.is_epoch_block) {
+      return (
+        <Tooltip label="Displays the epoch this block belongs to before the epoch is finalized" maxW="280px" textAlign="center">
+          <Tag>Epoch #{ blockQuery.data.celo.epoch_number }</Tag>
+        </Tooltip>
+      );
+    }
+
+    return (
+      <Tooltip label="Displays the epoch finalized by this block" maxW="280px" textAlign="center">
+        <Tag bgColor="celo" color="blackAlpha.800">Finalized epoch #{ blockQuery.data.celo.epoch_number }</Tag>
+      </Tooltip>
+    );
+  })();
   const titleSecondRow = (
     <>
-      { !config.UI.views.block.hiddenFields?.miner && (
+      { !config.UI.views.block.hiddenFields?.miner && blockQuery.data?.miner && (
         <Skeleton
           isLoaded={ !blockQuery.isPlaceholderData }
           fontFamily="heading"
@@ -151,9 +179,9 @@ const BlockPageContent = () => {
           fontWeight={ 500 }
         >
           <chakra.span flexShrink={ 0 }>
-            { config.chain.verificationType === 'validation' ? t('blockPageContent.validated_by') : t('blockPageContent.mined_by') }
+            { `${ capitalize(t(getNetworkValidationActionTextBy())) }` }
           </chakra.span>
-          <AddressEntity address={ blockQuery.data?.miner }/>
+          <AddressEntity address={ blockQuery.data.miner }/>
         </Skeleton>
       ) }
       <NetworkExplorers type="block" pathParam={ heightOrHash } ml={{ base: config.UI.views.block.hiddenFields?.miner ? 0 : 3, lg: 'auto' }}/>
@@ -166,6 +194,7 @@ const BlockPageContent = () => {
       <PageTitle
         title={ title }
         backLink={ backLink }
+        contentAfter={ contentAfter }
         secondRow={ titleSecondRow }
         isLoading={ blockQuery.isPlaceholderData }
       />

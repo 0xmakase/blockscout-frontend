@@ -45,7 +45,7 @@ const BlocksTable = ({ data, isLoading, top, page, showSocketInfo, socketInfoNum
       <Table variant="simple" minWidth="1040px" size="md" fontWeight={ 500 }>
         <Thead top={ top }>
           <Tr>
-            <Th width="125px">{ t('blocksTable.block') }</Th>
+            <Th width="150px">{ t('blocksTable.block') }</Th>
             <Th width="120px">{ t('blocksTable.sizeBytes') }</Th>
             { !config.UI.views.block.hiddenFields?.miner &&
             <Th width={ `${ VALIDATOR_COL_WEIGHT / widthBase * 100 }%` } minW="160px">{ capitalize(t(getNetworkValidatorTitle())) }</Th> }

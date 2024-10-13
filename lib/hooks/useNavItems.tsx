@@ -248,7 +248,7 @@ export default function useNavItems(): ReturnType {
         text: t('navbar.charts_stats'),
         nextRoute: { pathname: '/stats' as const },
         icon: 'stats',
-        isActive: pathname === '/stats',
+        isActive: pathname.startsWith('/stats'),
       } : null,
       apiNavItems.length > 0 && {
         text: t('navbar.api'),

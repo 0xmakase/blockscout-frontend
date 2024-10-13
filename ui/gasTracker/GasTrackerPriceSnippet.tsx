@@ -29,6 +29,7 @@ const GasTrackerPriceSnippet = ({ data, type, isLoading }: Props) => {
     average: useColorModeValue('gray.50', 'whiteAlpha.200'),
     slow: useColorModeValue('gray.50', 'whiteAlpha.200'),
   };
+  const borderColor = useColorModeValue('gray.200', 'whiteAlpha.300');
 
   return (
     <Box
@@ -38,6 +39,11 @@ const GasTrackerPriceSnippet = ({ data, type, isLoading }: Props) => {
       py={ 6 }
       w={{ lg: 'calc(100% / 3)' }}
       bgColor={ bgColors[type] }
+      _notLast={{
+        borderColor: borderColor,
+        borderRightWidth: { lg: '2px' },
+        borderBottomWidth: { base: '2px', lg: '0' },
+      }}
     >
       <Skeleton textStyle="h3" isLoaded={ !isLoading } w="fit-content">
         { t(`gasPrices.${ type }.title`) }

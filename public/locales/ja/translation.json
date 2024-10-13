@@ -197,6 +197,8 @@
     "tabList": {
         "validated": "認証済み",
         "mined": "マイニング済み",
+        "posted": "投稿済み",
+        "sequenced": "シーケンス済み",
         "pending": "保留中",
         "blobTxns": "Blob トランザクション",
         "watchlist": "ウォッチリスト",
@@ -328,6 +330,8 @@
         "reward": "報酬",
         "validator": "バリデータ",
         "miner": "マイナー",
+        "poster": "ポスター",
+        "sequencer": "シーケンサー",
         "inThisBlock": "in this block"
     },
     "txInfo": {
@@ -580,7 +584,7 @@
         "withdrawals": "出金",
         "back_to_blocks_list": "ブロックリストに戻る",
         "reorged_block": "再編成されたブロック #{{height}}",
-        "uncle_block": "叔父ブロック #{{height}}",
+        "uncle_block": "アンコールブロック #{{height}}",
         "block": "ブロック #{{height}}",
         "validated_by": "検証者",
         "mined_by": "採掘者"

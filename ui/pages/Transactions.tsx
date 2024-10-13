@@ -1,3 +1,4 @@
+import capitalize from 'lodash/capitalize';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +9,7 @@ import config from 'configs/app';
 import useHasAccount from 'lib/hooks/useHasAccount';
 import useIsMobile from 'lib/hooks/useIsMobile';
 import useNewTxsSocket from 'lib/hooks/useNewTxsSocket';
+import getNetworkValidationActionText from 'lib/networks/getNetworkValidationActionText';
 import getQueryParamString from 'lib/router/getQueryParamString';
 import { TX } from 'stubs/tx';
 import { generateListStub } from 'stubs/utils';
@@ -29,7 +31,7 @@ const TABS_HEIGHT = 88;
 
 const Transactions = () => {
   const { t } = useTranslation();
-  const verifiedTitle = config.chain.verificationType === 'validation' ? t('tabList.validated') : t('tabList.mined');
+  const verifiedTitle = capitalize(t(getNetworkValidationActionText()));
   const router = useRouter();
   const isMobile = useIsMobile();
   const tab = getQueryParamString(router.query.tab);

@@ -12,6 +12,7 @@ const TEMPLATE_MAP: Record<Route['pathname'], string> = {
   '/block/countdown': '%network_name% block countdown index',
   '/block/countdown/[height]': '%network_name% block %height% countdown',
   '/accounts': '%network_name% top accounts',
+  '/accounts/label/[slug]': '%network_name% addresses search by label',
   '/address/[hash]': '%network_name% address details for %hash%',
   '/verified-contracts': 'Verified %network_name% contracts lookup - %network_name% explorer',
   '/contract-verification': '%network_name% verify contract',
@@ -22,6 +23,7 @@ const TEMPLATE_MAP: Record<Route['pathname'], string> = {
   '/apps': '%network_name% DApps - Explore top apps',
   '/apps/[id]': '%network_name% marketplace app',
   '/stats': '%network_name% stats - %network_name% network insights',
+  '/stats/[id]': '%network_name% stats - %id% chart',
   '/api-docs': '%network_name% API docs - %network_name% developer tools',
   '/graphiql': 'GraphQL for %network_name% - %network_name% data query',
   '/search-results': '%network_name% search result for %q%',
@@ -54,6 +56,7 @@ const TEMPLATE_MAP: Record<Route['pathname'], string> = {
   '/login': '%network_name% login',
   '/sprite': '%network_name% SVG sprite',
   '/api/metrics': '%network_name% node API prometheus metrics',
+  '/api/monitoring/invalid-api-schema': '%network_name% node API prometheus metrics',
   '/api/log': '%network_name% node API request log',
   '/api/media-type': '%network_name% node API media type',
   '/api/proxy': '%network_name% node API proxy',
@@ -70,6 +73,7 @@ const TEMPLATE_MAP_ENHANCED: Partial<Record<Route['pathname'], string>> = {
   '/token/[hash]/instance/[id]': '%network_name% token instance for %symbol%',
   '/apps/[id]': '%network_name% - %app_name%',
   '/address/[hash]': '%network_name% address details for %domain_name%',
+  '/stats/[id]': '%title% chart on %network_name%',
 };
 
 export function make(pathname: Route['pathname'], isEnriched = false) {

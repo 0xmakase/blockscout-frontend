@@ -27,8 +27,7 @@ const AddressesTable = ({ items, totalSupply, pageStartIndex, top, isLoading }: 
       <Thead top={ top }>
         <Tr>
           <Th width="64px">{ t('addressesTable.rank') }</Th>
-          <Th width={ hasPercentage ? '30%' : '40%' }>{ t('addressesTable.address') }</Th>
-          <Th width="20%" pl={ 10 }>{ t('addressesTable.publicTag') }</Th>
+          <Th width={ hasPercentage ? '50%' : '60%' }>{ t('addressesTable.address') }</Th>
           <Th width={ hasPercentage ? '20%' : '25%' } isNumeric>{ `${ t('addressesTable.balance') } ${ currencyUnits.ether }` }</Th>
           { hasPercentage && <Th width="15%" isNumeric>{ t('addressesTable.percentage') }</Th> }
           <Th width="15%" isNumeric>{ t('addressesTable.txnCount') }</Th>

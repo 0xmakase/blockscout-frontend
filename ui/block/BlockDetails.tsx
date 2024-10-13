@@ -16,9 +16,11 @@ import getBlockReward from 'lib/block/getBlockReward';
 import { GWEI, WEI, WEI_IN_GWEI, ZERO } from 'lib/consts';
 import getArbitrumVerificationStepStatus from 'lib/getArbitrumVerificationStepStatus';
 import { space } from 'lib/html-entities';
+import getNetworkValidationActionTextBy from 'lib/networks/getNetworkValidationActionText';
 import getNetworkValidatorTitle from 'lib/networks/getNetworkValidatorTitle';
 import getQueryParamString from 'lib/router/getQueryParamString';
 import { currencyUnits } from 'lib/units';
+import OptimisticL2TxnBatchDA from 'ui/shared/batch/OptimisticL2TxnBatchDA';
 import BlockGasUsed from 'ui/shared/block/BlockGasUsed';
 import CopyToClipboard from 'ui/shared/CopyToClipboard';
 import * as DetailsInfoItem from 'ui/shared/DetailsInfoItem';
@@ -38,6 +40,7 @@ import Utilization from 'ui/shared/Utilization/Utilization';
 import VerificationSteps from 'ui/shared/verificationSteps/VerificationSteps';
 import ZkSyncL2TxnBatchHashesInfo from 'ui/txnBatches/zkSyncL2/ZkSyncL2TxnBatchHashesInfo';
 
+import BlockDetailsBaseFeeCelo from './details/BlockDetailsBaseFeeCelo';
 import BlockDetailsBlobInfo from './details/BlockDetailsBlobInfo';
 import type { BlockQuery } from './useBlockQuery';
 
@@ -116,13 +119,7 @@ const BlockDetails = ({ query }: Props) => {
     );
   })();
 
-  const verificationTitle = (() => {
-    if (rollupFeature.isEnabled && rollupFeature.type === 'zkEvm') {
-      return t('blockDetails.sequencedBy');
-    }
-
-    return config.chain.verificationType === 'validation' ? t('blockDetails.validatedBy') : t('blockDetails.minedBy');
-  })();
+  const verificationTitle = `${ capitalize(t(getNetworkValidationActionTextBy())) }`;
 
   const txsNum = (() => {
     const blockTxsNum = (
@@ -214,6 +211,28 @@ const BlockDetails = ({ query }: Props) => {
             { data.arbitrum.batch_number ?
               <BatchEntityL2 isLoading={ isPlaceholderData } number={ data.arbitrum.batch_number }/> :
               <Skeleton isLoaded={ !isPlaceholderData }>Pending</Skeleton> }
+          </DetailsInfoItem.Value>
+        </>
+      ) }
+
+      { rollupFeature.isEnabled && rollupFeature.type === 'optimistic' && data.optimism && !config.UI.views.block.hiddenFields?.batch && (
+        <>
+          <DetailsInfoItem.Label
+            hint={ t('blockDetails.batchNumberHint') }
+            isLoading={ isPlaceholderData }
+          >
+            { t('blockDetails.batchNumber') }
+          </DetailsInfoItem.Label>
+          <DetailsInfoItem.Value columnGap={ 3 }>
+            { data.optimism.internal_id ?
+              <BatchEntityL2 isLoading={ isPlaceholderData } number={ data.optimism.internal_id }/> :
+              <Skeleton isLoaded={ !isPlaceholderData }>Pending</Skeleton> }
+            { data.optimism.batch_data_container && (
+              <OptimisticL2TxnBatchDA
+                container={ data.optimism.batch_data_container }
+                isLoading={ isPlaceholderData }
+              />
+            ) }
           </DetailsInfoItem.Value>
         </>
       ) }
@@ -400,6 +419,8 @@ const BlockDetails = ({ query }: Props) => {
       }
 
       <DetailsInfoItemDivider/>
+
+      { data.celo?.base_fee && <BlockDetailsBaseFeeCelo data={ data.celo.base_fee }/> }
 
       <DetailsInfoItem.Label
         hint={ t('blockDetails.gasUsedHint') }

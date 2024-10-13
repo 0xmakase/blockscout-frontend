@@ -3,6 +3,7 @@ import {
   Flex,
   Grid,
   Skeleton,
+  Tooltip,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
@@ -15,6 +16,7 @@ import getBlockTotalReward from 'lib/block/getBlockTotalReward';
 import getNetworkValidatorTitle from 'lib/networks/getNetworkValidatorTitle';
 import AddressEntity from 'ui/shared/entities/address/AddressEntity';
 import BlockEntity from 'ui/shared/entities/block/BlockEntity';
+import IconSvg from 'ui/shared/IconSvg';
 import TimeAgoWithTooltip from 'ui/shared/TimeAgoWithTooltip';
 
 type Props = {
@@ -48,6 +50,11 @@ const LatestBlocksItem = ({ block, isLoading }: Props) => {
           fontWeight={ 500 }
           mr="auto"
         />
+        { block.celo?.is_epoch_block && (
+          <Tooltip label={ `Finalized epoch #${ block.celo.epoch_number }` }>
+            <IconSvg name="checkered_flag" boxSize={ 5 } p="1px" ml={ 2 } isLoading={ isLoading } flexShrink={ 0 }/>
+          </Tooltip>
+        ) }
         <TimeAgoWithTooltip
           timestamp={ block.timestamp }
           enableIncrement={ !isLoading }
