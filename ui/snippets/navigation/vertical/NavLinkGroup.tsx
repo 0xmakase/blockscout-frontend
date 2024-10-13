@@ -56,6 +56,7 @@ const NavLinkGroup = ({ item, isCollapsed }: Props) => {
               <Text
                 { ...styleProps.textProps }
                 ml={ 3 }
+                fontSize={ item.text.toLowerCase().includes('ブロックチェーン') ? '13px' : 'inherit' } // ブロックチェーンの場合のみフォントサイズを小さくしてデザインを調整
               >
                 { item.text }
               </Text>
