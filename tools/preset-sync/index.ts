@@ -10,15 +10,20 @@ const PRESETS = {
   eth: 'https://eth.blockscout.com',
   eth_goerli: 'https://eth-goerli.blockscout.com',
   eth_sepolia: 'https://eth-sepolia.blockscout.com',
+  garnet: 'https://explorer.garnetchain.com',
+  filecoin: 'https://filecoin.blockscout.com',
   gnosis: 'https://gnosis.blockscout.com',
   optimism: 'https://optimism.blockscout.com',
   optimism_celestia: 'https://opcelestia-raspberry.gelatoscout.com',
   optimism_sepolia: 'https://optimism-sepolia.blockscout.com',
   polygon: 'https://polygon.blockscout.com',
   rootstock_testnet: 'https://rootstock-testnet.blockscout.com',
+  scroll_sepolia: 'https://scroll-sepolia.blockscout.com',
+  shibarium: 'https://www.shibariumscan.io',
   stability_testnet: 'https://stability-testnet.blockscout.com',
   zkevm: 'https://zkevm.blockscout.com',
   zksync: 'https://zksync.blockscout.com',
+  zilliqa_prototestnet: 'https://zilliqa-prototestnet.blockscout.com',
   zora: 'https://explorer.zora.energy',
   // main === staging
   main: 'https://eth-sepolia.k8s-dev.blockscout.com',
@@ -73,7 +78,7 @@ function updateFileContent(envsEntries: Array<[ string, string ]>, presetId: key
   const content =
     `# Set of ENVs for ${ chainName } network explorer\n` +
     '# ' + explorerUrl + '\n' +
-    `# This is an auto-generated file. To update all values, run "yarn preset:sync --name=${ presetId }"\n` +
+    `# This is an auto-generated file. To update all values, run "yarn dev:preset:sync --name=${ presetId }"\n` +
     '\n' +
     '# Local ENVs\n' +
     localEnvsContent + '\n' +

@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import type { RoutedTab } from 'ui/shared/Tabs/types';
 
 import config from 'configs/app';
-import useHasAccount from 'lib/hooks/useHasAccount';
 import useIsMobile from 'lib/hooks/useIsMobile';
 import useNewTxsSocket from 'lib/hooks/useNewTxsSocket';
 import getNetworkValidationActionText from 'lib/networks/getNetworkValidationActionText';
@@ -17,6 +16,7 @@ import PageTitle from 'ui/shared/Page/PageTitle';
 import Pagination from 'ui/shared/pagination/Pagination';
 import useQueryWithPages from 'ui/shared/pagination/useQueryWithPages';
 import RoutedTabs from 'ui/shared/Tabs/RoutedTabs';
+import useIsAuth from 'ui/snippets/auth/useIsAuth';
 import TxsStats from 'ui/txs/TxsStats';
 import TxsWatchlist from 'ui/txs/TxsWatchlist';
 import TxsWithFrontendSorting from 'ui/txs/TxsWithFrontendSorting';
@@ -90,7 +90,7 @@ const Transactions = () => {
 
   const { num, socketAlert } = useNewTxsSocket();
 
-  const hasAccount = useHasAccount();
+  const isAuth = useIsAuth();
 
   const tabs: Array<RoutedTab> = [
     {
@@ -131,7 +131,7 @@ const Transactions = () => {
         />
       ),
     },
-    hasAccount ? {
+    isAuth ? {
       id: 'watchlist',
       title: t('tabList.watchlist'),
       component: <TxsWatchlist query={ txsWatchlistQuery }/>,

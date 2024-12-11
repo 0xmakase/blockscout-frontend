@@ -20,7 +20,7 @@ import AddressMudTablesTable from './AddressMudTablesTable';
 type Props = {
   scrollRef?: React.RefObject<HTMLDivElement>;
   isQueryEnabled?: boolean;
-}
+};
 
 const AddressMudTables = ({ scrollRef, isQueryEnabled = true }: Props) => {
   const router = useRouter();

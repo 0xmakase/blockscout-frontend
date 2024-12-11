@@ -25,7 +25,7 @@ const TxInternalsTable = ({ data, sort, onSortToggle, top, isLoading }: Props) =
 
   return (
     <AddressHighlightProvider>
-      <Table variant="simple" size="sm">
+      <Table>
         <Thead top={ top }>
           <Tr>
             <Th width="28%">{ t('txInternalsTable.type') }</Th>

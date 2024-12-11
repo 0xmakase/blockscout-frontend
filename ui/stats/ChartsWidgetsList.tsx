@@ -21,7 +21,7 @@ type Props = {
   isPlaceholderData: boolean;
   charts?: Array<stats.LineChartSection>;
   interval: StatsIntervalIds;
-}
+};
 
 const ChartsWidgetsList = ({ filterQuery, isError, isPlaceholderData, charts, interval, initialFilterQuery }: Props) => {
   const { t } = useTranslation(); // 翻訳フックを追加

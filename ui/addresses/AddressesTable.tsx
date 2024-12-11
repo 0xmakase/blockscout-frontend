@@ -23,7 +23,7 @@ const AddressesTable = ({ items, totalSupply, pageStartIndex, top, isLoading }: 
   const { t } = useTranslation();
   const hasPercentage = !totalSupply.eq(ZERO);
   return (
-    <Table variant="simple" size="sm">
+    <Table>
       <Thead top={ top }>
         <Tr>
           <Th width="64px">{ t('addressesTable.rank') }</Th>

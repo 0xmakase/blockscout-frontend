@@ -5,12 +5,10 @@ import { useTranslation } from 'react-i18next';
 import type { NavItemInternal, NavItem, NavGroupItem } from 'types/client/navigation';
 
 import config from 'configs/app';
-import UserAvatar from 'ui/shared/UserAvatar';
 
 interface ReturnType {
   mainNavItems: Array<NavItem | NavGroupItem>;
   accountNavItems: Array<NavItem>;
-  profileItem: NavItem;
 }
 
 export function isGroupItem(item: NavItem | NavGroupItem): item is NavGroupItem {
@@ -111,7 +109,12 @@ export default function useNavItems(): ReturnType {
 
     const rollupFeature = config.features.rollup;
 
-    if (rollupFeature.isEnabled && (rollupFeature.type === 'optimistic' || rollupFeature.type === 'arbitrum' || rollupFeature.type === 'zkEvm')) {
+    if (rollupFeature.isEnabled && (
+      rollupFeature.type === 'optimistic' ||
+      rollupFeature.type === 'arbitrum' ||
+      rollupFeature.type === 'zkEvm' ||
+      rollupFeature.type === 'scroll'
+    )) {
       blockchainNavItems = [
         [
           txs,
@@ -122,7 +125,7 @@ export default function useNavItems(): ReturnType {
           blocks,
           rollupTxnBatches,
           rollupDisputeGames,
-          rollupFeature.type === 'optimistic' ? rollupOutputRoots : undefined,
+          rollupFeature.outputRootsEnabled ? rollupOutputRoots : undefined,
         ].filter(Boolean),
         [
           userOps,
@@ -181,6 +184,21 @@ export default function useNavItems(): ReturnType {
       ].filter(Boolean);
     }
 
+    const tokensNavItems = [
+      {
+        text: 'Tokens',
+        nextRoute: { pathname: '/tokens' as const },
+        icon: 'token',
+        isActive: pathname === '/tokens' || pathname.startsWith('/token/'),
+      },
+      {
+        text: 'Token transfers',
+        nextRoute: { pathname: '/token-transfers' as const },
+        icon: 'token-transfers',
+        isActive: pathname === '/token-transfers',
+      },
+    ];
+
     const apiNavItems: Array<NavItem> = [
       config.features.restApiDocs.isEnabled ? {
         text: t('navbar.rest_api'),
@@ -234,9 +252,9 @@ export default function useNavItems(): ReturnType {
       },
       {
         text: t('navbar.tokens'),
-        nextRoute: { pathname: '/tokens' as const },
         icon: 'token',
-        isActive: pathname.startsWith('/token'),
+        isActive: tokensNavItems.flat().some(item => isInternalItem(item) && item.isActive),
+        subItems: tokensNavItems,
       },
       config.features.marketplace.isEnabled ? {
         text: t('navbar.dapps'),
@@ -297,13 +315,6 @@ export default function useNavItems(): ReturnType {
       },
     ].filter(Boolean);
 
-    const profileItem = {
-      text: t('navbar.my_profile'),
-      nextRoute: { pathname: '/auth/profile' as const },
-      iconComponent: UserAvatar,
-      isActive: pathname === '/auth/profile',
-    };
-
-    return { mainNavItems, accountNavItems, profileItem };
+    return { mainNavItems, accountNavItems };
   }, [ t, pathname ]);
 }

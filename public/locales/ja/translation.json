@@ -611,7 +611,8 @@
         "eip1559": "(EIP-1559)",
         "eip4844": "(EIP-4844)",
         "nonce": "ナンス",
-        "position": "位置"
+        "position": "位置",
+        "queueIndex": "キューインデックス"
     },
     "indexingBlocksAlert": {
         "title": "{{ratio}}%のブロックがインデックスされています{{nbsp}}– 現在、このチェーンをインデックス中です。一部のカウントが正確でない可能性があります。",

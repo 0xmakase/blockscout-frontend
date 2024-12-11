@@ -27,7 +27,7 @@ type Props = {
   setSorting: (val?: TokensSortingValue) => void;
   isLoading?: boolean;
   top?: number;
-}
+};
 
 const TokensTable = ({ items, page, isLoading, sorting, setSorting, top }: Props) => {
   const { t } = useTranslation();

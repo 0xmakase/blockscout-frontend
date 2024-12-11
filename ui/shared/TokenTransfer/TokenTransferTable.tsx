@@ -36,7 +36,7 @@ const TokenTransferTable = ({
 
   return (
     <AddressHighlightProvider>
-      <Table variant="simple" size="sm" minW="950px">
+      <Table minW="950px">
         <Thead top={ top }>
           <Tr>
             { showTxInfo && <Th width="44px"></Th> }
@@ -59,7 +59,7 @@ const TokenTransferTable = ({
           ) }
           { data.map((item, index) => (
             <TokenTransferTableItem
-              key={ item.tx_hash + item.block_hash + item.log_index + (isLoading ? index : '') }
+              key={ item.transaction_hash + item.block_hash + item.log_index + (isLoading ? index : '') }
               { ...item }
               baseAddress={ baseAddress }
               showTxInfo={ showTxInfo }

@@ -35,8 +35,8 @@ import type { ChainIndicatorId, HeroBannerButtonState, HeroBannerConfig, HomeSta
 import { type NetworkVerificationTypeEnvs, type NetworkExplorer, type FeaturedNetwork, NETWORK_GROUPS } from '../../../types/networks';
 import { COLOR_THEME_IDS } from '../../../types/settings';
 import type { FontFamily } from '../../../types/ui';
-import type { AddressViewId } from '../../../types/views/address';
-import { ADDRESS_VIEWS_IDS, IDENTICON_TYPES } from '../../../types/views/address';
+import type { AddressFormat, AddressViewId } from '../../../types/views/address';
+import { ADDRESS_FORMATS, ADDRESS_VIEWS_IDS, IDENTICON_TYPES } from '../../../types/views/address';
 import { BLOCK_FIELDS_IDS } from '../../../types/views/block';
 import type { BlockFieldId } from '../../../types/views/block';
 import type { NftMarketplaceItem } from '../../../types/views/nft';
@@ -243,6 +243,14 @@ const marketplaceSchema = yup
         // eslint-disable-next-line max-len
         otherwise: (schema) => schema.max(-1, 'NEXT_PUBLIC_MARKETPLACE_RATING_AIRTABLE_BASE_ID cannot not be used without NEXT_PUBLIC_MARKETPLACE_ENABLED'),
       }),
+    NEXT_PUBLIC_MARKETPLACE_GRAPH_LINKS_URL: yup
+      .string()
+      .when('NEXT_PUBLIC_MARKETPLACE_ENABLED', {
+        is: true,
+        then: (schema) => schema,
+        // eslint-disable-next-line max-len
+        otherwise: (schema) => schema.max(-1, 'NEXT_PUBLIC_MARKETPLACE_GRAPH_LINKS_URL cannot not be used without NEXT_PUBLIC_MARKETPLACE_ENABLED'),
+      }),
   });
 
 const beaconChainSchema = yup
@@ -278,6 +286,55 @@ const rollupSchema = yup
         is: (value: string) => value === 'optimistic',
         then: (schema) => schema.test(urlTest).required(),
         otherwise: (schema) => schema.max(-1, 'NEXT_PUBLIC_ROLLUP_L2_WITHDRAWAL_URL can be used only if NEXT_PUBLIC_ROLLUP_TYPE is set to \'optimistic\' '),
+      }),
+    NEXT_PUBLIC_ROLLUP_OUTPUT_ROOTS_ENABLED: yup
+      .boolean()
+      .when('NEXT_PUBLIC_ROLLUP_TYPE', {
+        is: 'optimistic',
+        then: (schema) => schema,
+        otherwise: (schema) => schema.test(
+          'not-exist',
+          'NEXT_PUBLIC_ROLLUP_OUTPUT_ROOTS_ENABLED can only be used if NEXT_PUBLIC_ROLLUP_TYPE is set to \'optimistic\' ',
+          value => value === undefined,
+        ),
+      }),
+    NEXT_PUBLIC_ROLLUP_PARENT_CHAIN_NAME: yup
+      .string()
+      .when('NEXT_PUBLIC_ROLLUP_TYPE', {
+        is: 'arbitrum',
+        then: (schema) => schema,
+        otherwise: (schema) => schema.test(
+          'not-exist',
+          'NEXT_PUBLIC_ROLLUP_PARENT_CHAIN_NAME can only be used if NEXT_PUBLIC_ROLLUP_TYPE is set to \'arbitrum\' ',
+          value => value === undefined,
+        ),
+      }),
+    NEXT_PUBLIC_ROLLUP_HOMEPAGE_SHOW_LATEST_BLOCKS: yup
+      .boolean()
+      .when('NEXT_PUBLIC_ROLLUP_TYPE', {
+        is: (value: string) => value,
+        then: (schema) => schema,
+        otherwise: (schema) => schema.test(
+          'not-exist',
+          'NEXT_PUBLIC_ROLLUP_HOMEPAGE_SHOW_LATEST_BLOCKS cannot not be used if NEXT_PUBLIC_ROLLUP_TYPE is not defined',
+          value => value === undefined,
+        ),
+      }),
+  });
+
+const celoSchema = yup
+  .object()
+  .shape({
+    NEXT_PUBLIC_CELO_ENABLED: yup.boolean(),
+    NEXT_PUBLIC_CELO_L2_UPGRADE_BLOCK: yup
+      .string()
+      .when('NEXT_PUBLIC_CELO_ENABLED', {
+        is: (value: boolean) => value,
+        then: (schema) => schema.min(0).optional(),
+        otherwise: (schema) => schema.max(
+          -1,
+          'NEXT_PUBLIC_CELO_L2_UPGRADE_BLOCK cannot not be used if NEXT_PUBLIC_CELO_ENABLED is not set to "true"',
+        ),
       }),
   });
 
@@ -315,6 +372,7 @@ const adsBannerSchema = yup
     NEXT_PUBLIC_AD_ADBUTLER_CONFIG_MOBILE: adButlerConfigSchema,
   });
 
+// DEPRECATED
 const sentrySchema = yup
   .object()
   .shape({
@@ -332,20 +390,6 @@ const sentrySchema = yup
         is: (value: string) => Boolean(value),
         then: (schema) => schema,
       }),
-    NEXT_PUBLIC_APP_INSTANCE: yup
-      .string()
-      .when('NEXT_PUBLIC_SENTRY_DSN', {
-        is: (value: string) => Boolean(value),
-        then: (schema) => schema,
-        otherwise: (schema) => schema.max(-1, 'NEXT_PUBLIC_APP_INSTANCE cannot not be used without NEXT_PUBLIC_SENTRY_DSN'),
-      }),
-    NEXT_PUBLIC_APP_ENV: yup
-      .string()
-      .when('NEXT_PUBLIC_SENTRY_DSN', {
-        is: (value: string) => Boolean(value),
-        then: (schema) => schema,
-        otherwise: (schema) => schema.max(-1, 'NEXT_PUBLIC_APP_ENV cannot not be used without NEXT_PUBLIC_SENTRY_DSN'),
-      }),
   });
 
 const accountSchema = yup
@@ -356,7 +400,7 @@ const accountSchema = yup
       .string()
       .when('NEXT_PUBLIC_IS_ACCOUNT_SUPPORTED', {
         is: (value: boolean) => value,
-        then: (schema) => schema.required(),
+        then: (schema) => schema,
         otherwise: (schema) => schema.max(-1, 'NEXT_PUBLIC_AUTH0_CLIENT_ID cannot not be used if NEXT_PUBLIC_IS_ACCOUNT_SUPPORTED is not set to "true"'),
       }),
     NEXT_PUBLIC_AUTH_URL: yup
@@ -370,7 +414,7 @@ const accountSchema = yup
       .string()
       .when('NEXT_PUBLIC_IS_ACCOUNT_SUPPORTED', {
         is: (value: boolean) => value,
-        then: (schema) => schema.test(urlTest).required(),
+        then: (schema) => schema.test(urlTest),
         otherwise: (schema) => schema.max(-1, 'NEXT_PUBLIC_LOGOUT_URL cannot not be used if NEXT_PUBLIC_IS_ACCOUNT_SUPPORTED is not set to "true"'),
       }),
   });
@@ -511,6 +555,13 @@ const deFiDropdownItemSchema: yup.ObjectSchema<DeFiDropdownItem> = yup
     return Boolean(value.dappId) || Boolean(value.url);
   }) as yup.ObjectSchema<DeFiDropdownItem>;
 
+const multichainProviderConfigSchema: yup.ObjectSchema<MultichainProviderConfig> = yup.object({
+  name: yup.string().required(),
+  url_template: yup.string().required(),
+  logo: yup.string().required(),
+  dapp_id: yup.string(),
+});
+
 const schema = yup
   .object()
   .noUnknown(true, (params) => {
@@ -528,6 +579,8 @@ const schema = yup
     NEXT_PUBLIC_APP_HOST: yup.string().required(),
     NEXT_PUBLIC_APP_PROTOCOL: yup.string().oneOf(protocols),
     NEXT_PUBLIC_APP_PORT: yup.number().positive().integer(),
+    NEXT_PUBLIC_APP_ENV: yup.string(),
+    NEXT_PUBLIC_APP_INSTANCE: yup.string(),
 
     // 2. Blockchain parameters
     NEXT_PUBLIC_NETWORK_NAME: yup.string().required(),
@@ -632,6 +685,19 @@ const schema = yup
       .json()
       .of(yup.string<BlockFieldId>().oneOf(BLOCK_FIELDS_IDS)),
     NEXT_PUBLIC_VIEWS_ADDRESS_IDENTICON_TYPE: yup.string().oneOf(IDENTICON_TYPES),
+    NEXT_PUBLIC_VIEWS_ADDRESS_FORMAT: yup
+      .array()
+      .transform(replaceQuotes)
+      .json()
+      .of(yup.string<AddressFormat>().oneOf(ADDRESS_FORMATS)),
+    NEXT_PUBLIC_VIEWS_ADDRESS_BECH_32_PREFIX: yup
+      .string()
+      .when('NEXT_PUBLIC_VIEWS_ADDRESS_FORMAT', {
+        is: (value: Array<AddressFormat> | undefined) => value && value.includes('bech32'),
+        then: (schema) => schema.required().min(1).max(83),
+        otherwise: (schema) => schema.max(-1, 'NEXT_PUBLIC_VIEWS_ADDRESS_BECH_32_PREFIX is required if NEXT_PUBLIC_VIEWS_ADDRESS_FORMAT contains "bech32"'),
+      }),
+
     NEXT_PUBLIC_VIEWS_ADDRESS_HIDDEN_VIEWS: yup
       .array()
       .transform(replaceQuotes)
@@ -668,6 +734,7 @@ const schema = yup
       .transform(replaceQuotes)
       .json()
       .of(nftMarketplaceSchema),
+    NEXT_PUBLIC_HELIA_VERIFIED_FETCH_ENABLED: yup.boolean(),
 
     //     e. misc
     NEXT_PUBLIC_NETWORK_EXPLORERS: yup
@@ -749,18 +816,10 @@ const schema = yup
     NEXT_PUBLIC_HAS_USER_OPS: yup.boolean(),
     NEXT_PUBLIC_METASUITES_ENABLED: yup.boolean(),
     NEXT_PUBLIC_MULTICHAIN_BALANCE_PROVIDER_CONFIG: yup
-      .mixed()
-      .test('shape', 'Invalid schema were provided for NEXT_PUBLIC_MULTICHAIN_BALANCE_PROVIDER_CONFIG, it should have name and url template', (data) => {
-        const isUndefined = data === undefined;
-        const valueSchema = yup.object<MultichainProviderConfig>().transform(replaceQuotes).json().shape({
-          name: yup.string().required(),
-          url_template: yup.string().required(),
-          logo: yup.string(),
-          dapp_id: yup.string(),
-        });
-
-        return isUndefined || valueSchema.isValidSync(data);
-      }),
+      .array()
+      .transform(replaceQuotes)
+      .json()
+      .of(multichainProviderConfigSchema),
     NEXT_PUBLIC_GAS_REFUEL_PROVIDER_CONFIG: yup
       .mixed()
       .test('shape', 'Invalid schema were provided for NEXT_PUBLIC_GAS_REFUEL_PROVIDER_CONFIG, it should have name and url template', (data) => {
@@ -818,13 +877,17 @@ const schema = yup
 
         return isUndefined || valueSchema.isValidSync(data);
       }),
+    NEXT_PUBLIC_REWARDS_SERVICE_API_HOST: yup.string().test(urlTest),
+    NEXT_PUBLIC_XSTAR_SCORE_URL: yup.string().test(urlTest),
 
     // 6. External services envs
     NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: yup.string(),
-    NEXT_PUBLIC_RE_CAPTCHA_APP_SITE_KEY: yup.string(),
+    NEXT_PUBLIC_RE_CAPTCHA_APP_SITE_KEY: yup.string(), // DEPRECATED
+    NEXT_PUBLIC_RE_CAPTCHA_V3_APP_SITE_KEY: yup.string(),
     NEXT_PUBLIC_GOOGLE_ANALYTICS_PROPERTY_ID: yup.string(),
     NEXT_PUBLIC_MIXPANEL_PROJECT_TOKEN: yup.string(),
     NEXT_PUBLIC_GROWTH_BOOK_CLIENT_KEY: yup.string(),
+    NEXT_PUBLIC_ROLLBAR_CLIENT_TOKEN: yup.string(),
 
     // Misc
     NEXT_PUBLIC_USE_NEXT_JS_PROXY: yup.boolean(),
@@ -833,6 +896,7 @@ const schema = yup
   .concat(adsBannerSchema)
   .concat(marketplaceSchema)
   .concat(rollupSchema)
+  .concat(celoSchema)
   .concat(beaconChainSchema)
   .concat(bridgedTokensSchema)
   .concat(sentrySchema);

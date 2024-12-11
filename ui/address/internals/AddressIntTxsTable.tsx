@@ -21,7 +21,7 @@ const AddressIntTxsTable = ({ data, currentAddress, isLoading }: Props) => {
 
   return (
     <AddressHighlightProvider>
-      <Table variant="simple" size="sm">
+      <Table>
         <Thead top={ 68 }>
           <Tr>
             <Th width="15%">{ t('addressIntTxsTable.parentTxnHash') }</Th>

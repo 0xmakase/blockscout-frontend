@@ -11,7 +11,6 @@ import type { RoutedTab } from 'ui/shared/Tabs/types';
 
 import config from 'configs/app';
 import useApiQuery, { getResourceKey } from 'lib/api/useApiQuery';
-import useContractTabs from 'lib/hooks/useContractTabs';
 import useIsMobile from 'lib/hooks/useIsMobile';
 import * as metadata from 'lib/metadata';
 import getQueryParamString from 'lib/router/getQueryParamString';
@@ -24,6 +23,8 @@ import { getTokenHoldersStub } from 'stubs/token';
 import { generateListStub } from 'stubs/utils';
 import AddressContract from 'ui/address/AddressContract';
 import AddressCsvExportLink from 'ui/address/AddressCsvExportLink';
+import useContractTabs from 'ui/address/contract/useContractTabs';
+import { CONTRACT_TAB_IDS } from 'ui/address/contract/utils';
 import TextAd from 'ui/shared/ad/TextAd';
 import IconSvg from 'ui/shared/IconSvg';
 import Pagination from 'ui/shared/pagination/Pagination';
@@ -171,7 +172,7 @@ const TokenPageContent = () => {
     {
       id: 'token_transfers',
       title: t('tokenPage.tokenTransfers'),
-      component: <TokenTransfer transfersQuery={ transfersQuery } token={ tokenQuery.data } shouldRender={ !isLoading }/>,
+      component: <TokenTransfer transfersQuery={ transfersQuery } tokenQuery={ tokenQuery } shouldRender={ !isLoading }/>,
     },
     {
       id: 'holders',
@@ -193,7 +194,7 @@ const TokenPageContent = () => {
         return t('tokenPage.contract');
       },
       component: <AddressContract tabs={ contractTabs.tabs } isLoading={ contractTabs.isLoading } shouldRender={ !isLoading }/>,
-      subTabs: contractTabs.tabs.map(tab => tab.id),
+      subTabs: CONTRACT_TAB_IDS,
     } : undefined,
   ].filter(Boolean);
 

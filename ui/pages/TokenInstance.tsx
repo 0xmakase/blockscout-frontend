@@ -29,7 +29,7 @@ import TokenInstanceMetadata from 'ui/tokenInstance/TokenInstanceMetadata';
 import TokenInstanceMetadataFetcher from 'ui/tokenInstance/TokenInstanceMetadataFetcher';
 import TokenInstancePageTitle from 'ui/tokenInstance/TokenInstancePageTitle';
 
-export type TokenTabs = 'token_transfers' | 'holders'
+export type TokenTabs = 'token_transfers' | 'holders';
 
 const TokenInstanceContent = () => {
   const { t } = useTranslation();
@@ -99,7 +99,7 @@ const TokenInstanceContent = () => {
     {
       id: 'token_transfers',
       title: t('tokenInstanceContent.tokenTransfers'),
-      component: <TokenTransfer transfersQuery={ transfersQuery } tokenId={ id } token={ tokenQuery.data } shouldRender={ !isLoading }/>,
+      component: <TokenTransfer transfersQuery={ transfersQuery } tokenId={ id } tokenQuery={ tokenQuery } shouldRender={ !isLoading }/>,
     },
     shouldFetchHolders ?
       { id: 'holders', title: t('tokenInstanceContent.holders'), component:

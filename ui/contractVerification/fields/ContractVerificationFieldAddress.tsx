@@ -1,13 +1,10 @@
-import { FormControl, Input, chakra } from '@chakra-ui/react';
+import { chakra } from '@chakra-ui/react';
 import React from 'react';
-import type { ControllerRenderProps } from 'react-hook-form';
-import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import type { FormFields } from '../types';
 
-import { ADDRESS_REGEXP, ADDRESS_LENGTH } from 'lib/validations/address';
-import InputPlaceholder from 'ui/shared/InputPlaceholder';
+import FormFieldAddress from 'ui/shared/forms/fields/FormFieldAddress';
 
 import ContractVerificationFormRow from '../ContractVerificationFormRow';
 
@@ -17,26 +14,6 @@ interface Props {
 
 const ContractVerificationFieldAddress = ({ isReadOnly }: Props) => {
   const { t } = useTranslation();
-  const { formState, control } = useFormContext<FormFields>();
-
-  const renderControl = React.useCallback(({ field }: {field: ControllerRenderProps<FormFields, 'address'>}) => {
-    const error = 'address' in formState.errors ? formState.errors.address : undefined;
-
-    return (
-      <FormControl variant="floating" id={ field.name } isRequired size={{ base: 'md', lg: 'lg' }}>
-        <Input
-          { ...field }
-          required
-          isInvalid={ Boolean(error) }
-          maxLength={ ADDRESS_LENGTH }
-          isDisabled={ formState.isSubmitting || isReadOnly }
-          autoComplete="off"
-        />
-        <InputPlaceholder text={ t('contractVerification.smartContractAddressPlaceholder') } error={ error }/>
-      </FormControl>
-    );
-  }, [ formState.errors, formState.isSubmitting, isReadOnly, t ]);
-
   return (
     <>
       <ContractVerificationFormRow>
@@ -45,11 +22,12 @@ const ContractVerificationFieldAddress = ({ isReadOnly }: Props) => {
         </chakra.span>
       </ContractVerificationFormRow>
       <ContractVerificationFormRow>
-        <Controller
+        <FormFieldAddress<FormFields>
           name="address"
-          control={ control }
-          render={ renderControl }
-          rules={{ required: true, pattern: ADDRESS_REGEXP }}
+          isRequired
+          placeholder="Smart contract / Address (0x...)"
+          isReadOnly={ isReadOnly }
+          size={{ base: 'md', lg: 'lg' }}
         />
       </ContractVerificationFormRow>
     </>

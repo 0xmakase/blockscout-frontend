@@ -18,7 +18,7 @@ const TokenHoldersTable = ({ data, token, top, isLoading }: Props) => {
   const { t } = useTranslation();
 
   return (
-    <Table variant="simple" size="sm" layout="auto">
+    <Table layout="auto">
       <Thead top={ top }>
         <Tr>
           <Th>{ t('tokenHoldersTable.holder') }</Th>

@@ -22,7 +22,7 @@ import TimeAgoWithTooltip from 'ui/shared/TimeAgoWithTooltip';
 type Props = {
   block: Block;
   isLoading?: boolean;
-}
+};
 
 const LatestBlocksItem = ({ block, isLoading }: Props) => {
   const { t } = useTranslation();
@@ -69,7 +69,7 @@ const LatestBlocksItem = ({ block, isLoading }: Props) => {
       </Flex>
       <Grid gridGap={ 2 } templateColumns="auto minmax(0, 1fr)" fontSize="sm">
         <Skeleton isLoaded={ !isLoading }>{ t('blocksTable.txn') }</Skeleton>
-        <Skeleton isLoaded={ !isLoading } color="text_secondary"><span>{ block.tx_count }</span></Skeleton>
+        <Skeleton isLoaded={ !isLoading } color="text_secondary"><span>{ block.transaction_count }</span></Skeleton>
 
         { !config.features.rollup.isEnabled && !config.UI.views.block.hiddenFields?.total_reward && (
           <>

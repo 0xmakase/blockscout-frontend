@@ -17,7 +17,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { scroller, Element } from 'react-scroll';
 
-import { ARBITRUM_L2_TX_BATCH_STATUSES } from 'types/api/arbitrumL2';
+import { SCROLL_L2_BLOCK_STATUSES } from 'types/api/scrollL2';
 import type { Transaction } from 'types/api/transaction';
 import { ZKEVM_L2_TX_STATUSES } from 'types/api/transaction';
 import { ZKSYNC_L2_TX_BATCH_STATUSES } from 'types/api/zkSyncL2';
@@ -26,8 +26,8 @@ import { route } from 'nextjs-routes';
 
 import config from 'configs/app';
 import { WEI, WEI_IN_GWEI } from 'lib/consts';
-import getArbitrumVerificationStepStatus from 'lib/getArbitrumVerificationStepStatus';
 import getNetworkValidatorTitle from 'lib/networks/getNetworkValidatorTitle';
+import * as arbitrum from 'lib/rollups/arbitrum';
 import { MESSAGE_DESCRIPTIONS } from 'lib/tx/arbitrumMessageStatusDescription';
 import getConfirmationDuration from 'lib/tx/getConfirmationDuration';
 import { currencyUnits } from 'lib/units';
@@ -64,6 +64,8 @@ import TxRevertReason from 'ui/tx/details/TxRevertReason';
 import TxAllowedPeekers from 'ui/tx/TxAllowedPeekers';
 import TxSocketAlert from 'ui/tx/TxSocketAlert';
 import ZkSyncL2TxnBatchHashesInfo from 'ui/txnBatches/zkSyncL2/ZkSyncL2TxnBatchHashesInfo';
+
+import TxInfoScrollFees from './TxInfoScrollFees';
 
 const rollupFeature = config.features.rollup;
 
@@ -169,7 +171,8 @@ const TxInfo = ({ data, isLoading, socketStatus }: Props) => {
         isLoading={ isLoading }
       >
         {
-          rollupFeature.isEnabled && (rollupFeature.type === 'zkEvm' || rollupFeature.type === 'zkSync' || rollupFeature.type === 'arbitrum') ?
+          rollupFeature.isEnabled &&
+          (rollupFeature.type === 'zkEvm' || rollupFeature.type === 'zkSync' || rollupFeature.type === 'arbitrum' || rollupFeature.type === 'scroll') ?
             t('txInfo.l2_status_and_method') :
             t('txInfo.status_and_method')
         }
@@ -241,9 +244,9 @@ const TxInfo = ({ data, isLoading, socketStatus }: Props) => {
           </DetailsInfoItem.Label>
           <DetailsInfoItem.Value>
             <VerificationSteps
-              currentStep={ data.arbitrum.status }
-              currentStepPending={ getArbitrumVerificationStepStatus(data.arbitrum) === 'pending' }
-              steps={ ARBITRUM_L2_TX_BATCH_STATUSES }
+              currentStep={ arbitrum.VERIFICATION_STEPS_MAP[data.arbitrum.status] }
+              currentStepPending={ arbitrum.getVerificationStepStatus(data.arbitrum) === 'pending' }
+              steps={ arbitrum.verificationSteps }
               isLoading={ isLoading }
             />
           </DetailsInfoItem.Value>
@@ -284,11 +287,11 @@ const TxInfo = ({ data, isLoading, socketStatus }: Props) => {
         { t('txInfo.block') }
       </DetailsInfoItem.Label>
       <DetailsInfoItem.Value>
-        { data.block === null ?
+        { data.block_number === null ?
           <Text>{ t('txInfo.pending') }</Text> : (
             <BlockEntity
               isLoading={ isLoading }
-              number={ data.block }
+              number={ data.block_number }
               noIcon
             />
           ) }
@@ -298,6 +301,12 @@ const TxInfo = ({ data, isLoading, socketStatus }: Props) => {
             <Skeleton isLoaded={ !isLoading } color="text_secondary">
               <span>{ t('txInfo.block_confirmations', { count: data.confirmations }) }</span>
             </Skeleton>
+          </>
+        ) }
+        { data.scroll?.l2_block_status && (
+          <>
+            <TextSeparator color="gray.500"/>
+            <VerificationSteps steps={ SCROLL_L2_BLOCK_STATUSES } currentStep={ data.scroll.l2_block_status } isLoading={ isLoading }/>
           </>
         ) }
       </DetailsInfoItem.Value>
@@ -664,6 +673,20 @@ const TxInfo = ({ data, isLoading, socketStatus }: Props) => {
         </>
       ) }
 
+      { data.scroll?.l1_gas_used !== undefined && (
+        <>
+          <DetailsInfoItem.Label
+            hint="Total gas used on L1"
+            isLoading={ isLoading }
+          >
+            L1 Gas used
+          </DetailsInfoItem.Label>
+          <DetailsInfoItem.Value>
+            <Skeleton isLoaded={ !isLoading }>{ BigNumber(data.scroll?.l1_gas_used || 0).toFormat() }</Skeleton>
+          </DetailsInfoItem.Value>
+        </>
+      ) }
+
       { !config.UI.views.tx.hiddenFields?.gas_fees &&
             (data.base_fee_per_gas || data.max_fee_per_gas || data.max_priority_fee_per_gas) && (
         <>
@@ -765,6 +788,7 @@ const TxInfo = ({ data, isLoading, socketStatus }: Props) => {
           ) }
         </>
       ) }
+      <TxInfoScrollFees data={ data } isLoading={ isLoading }/>
 
       <GridItem colSpan={{ base: undefined, lg: 2 }}>
         <Element name="TxInfo__cutLink">
@@ -868,7 +892,7 @@ const TxInfo = ({ data, isLoading, socketStatus }: Props) => {
             </>
           ) }
 
-          <TxDetailsOther nonce={ data.nonce } type={ data.type } position={ data.position }/>
+          <TxDetailsOther nonce={ data.nonce } type={ data.type } position={ data.position } queueIndex={ data.scroll?.queue_index }/>
 
           <DetailsInfoItem.Label
             hint={ t('txInfo.raw_input_hint') }
@@ -876,7 +900,7 @@ const TxInfo = ({ data, isLoading, socketStatus }: Props) => {
             { t('txInfo.raw_input') }
           </DetailsInfoItem.Label>
           <DetailsInfoItem.Value>
-            <RawInputData hex={ data.raw_input }/>
+            <RawInputData hex={ data.raw_input } defaultDataType={ data.zilliqa?.is_scilla ? 'UTF-8' : 'Hex' }/>
           </DetailsInfoItem.Value>
 
           { data.decoded_input && (

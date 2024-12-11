@@ -19,14 +19,19 @@ on:
             - eth
             - eth_sepolia
             - eth_goerli
+            - filecoin
             - optimism
             - optimism_celestia
             - optimism_sepolia
             - polygon
             - rootstock
+            - scroll_sepolia
+            - shibarium
             - stability
-            - zkevm
+            - zkevm 
+            - zilliqa_prototestnet
             - zksync
+            - zora
 
 jobs:
   make_slug:

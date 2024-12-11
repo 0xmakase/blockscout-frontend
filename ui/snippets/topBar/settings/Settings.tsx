@@ -4,6 +4,7 @@ import React from 'react';
 import Popover from 'ui/shared/chakra/Popover';
 import IconSvg from 'ui/shared/IconSvg';
 
+import SettingsAddressFormat from './SettingsAddressFormat';
 import SettingsColorTheme from './SettingsColorTheme';
 import SettingsIdentIcon from './SettingsIdentIcon';
 import SettingsLangChange from './SettingsLangChange';
@@ -31,6 +32,7 @@ const Settings = () => {
           <SettingsLangChange onSelect={ onClose }/>
           <Box borderColor="divider" borderWidth="1px" my={ 3 }/>
           <SettingsIdentIcon/>
+          <SettingsAddressFormat/>
         </PopoverBody>
       </PopoverContent>
     </Popover>

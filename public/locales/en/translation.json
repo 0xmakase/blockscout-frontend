@@ -619,7 +619,8 @@
         "eip1559": "(EIP-1559)",
         "eip4844": "(EIP-4844)",
         "nonce": "Nonce",
-        "position": "Position"
+        "position": "Position",
+        "queueIndex": "Queue index"
     },
     "indexingBlocksAlert": {
         "title": "{{ratio}}% Blocks Indexed{{nbsp}}– We're indexing this chain right now. Some of the counts may be inaccurate.",
